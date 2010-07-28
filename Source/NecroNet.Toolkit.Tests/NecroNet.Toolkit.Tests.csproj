@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{26D76C63-0165-4CEB-AED9-2E43C2F45394}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NecroNet.Toolkit.Tests</RootNamespace>
+    <AssemblyName>NecroNet.Toolkit.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\..\Dependencies\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.5.4.10098, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
+    <Reference Include="PagedList, Version=1.1.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EntityFrameworkTests\FullTextSearchTests.cs" />
+    <Compile Include="EntityFrameworkTests\UnitOfWorkTests.cs" />
+    <Compile Include="Fakes\EntityWithId.cs" />
+    <Compile Include="Helpers\BrokenRepository.cs" />
+    <Compile Include="Helpers\FakeObjectContextFactory.cs" />
+    <Compile Include="Helpers\ITestPersonRepository.cs" />
+    <Compile Include="EntityFrameworkTests\RepositoryTests.cs" />
+    <Compile Include="Fakes\FakeObjectContext.cs" />
+    <Compile Include="Fakes\FakeObjectSet.cs" />
+    <Compile Include="Fakes\Person.cs" />
+    <Compile Include="Helpers\Movie.cs" />
+    <Compile Include="Helpers\MovieTestDataProvider.cs" />
+    <Compile Include="Helpers\TestPersonRepository.cs" />
+    <Compile Include="MailTests\MailBotTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UtilityTests\DynamicLinqTests.cs" />
+    <Compile Include="UtilityTests\GuardTests.cs" />
+    <Compile Include="UtilityTests\LocalDataTests.cs" />
+    <Compile Include="UtilityTests\SessionUtilityTest.cs" />
+    <Compile Include="UtilityTests\SlugTests.cs" />
+    <Compile Include="UtilityTests\SortedPagedListTests.cs" />
+    <Compile Include="UtilityTests\StringExtensionsTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NecroNet.Toolkit\NecroNet.Toolkit.csproj">
+      <Project>{8F3540C7-8881-42A4-AE8C-83AFD12647E7}</Project>
+      <Name>NecroNet.Toolkit</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
