@@ -15,7 +15,7 @@ namespace NecroNet.Toolkit.Mail
 		private static readonly NecroNetToolkitMailConfigurationSection _config;
 		private int _queuedMails;
 		private bool _disposed;
-
+//a
 		private SmtpClient _smtpClient;
 		private SmtpClient SmtpClient
 		{
