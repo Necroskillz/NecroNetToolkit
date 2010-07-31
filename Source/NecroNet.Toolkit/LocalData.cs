@@ -6,9 +6,9 @@ namespace NecroNet.Toolkit
 {
 	public static class Local
 	{
-		private static ILocalData _data = new LocalData();
+		private static ILocalDataProvider _data = new LocalDataProvider();
 
-		public static ILocalData Data
+		public static ILocalDataProvider Data
 		{
 			get
 			{
@@ -16,12 +16,12 @@ namespace NecroNet.Toolkit
 			}
 		}
 
-		public static void ChangeContext(ILocalData localData)
+		public static void ChangeContext(ILocalDataProvider dataProvider)
 		{
-			_data = localData;
+			_data = dataProvider;
 		}
 
-		internal class LocalData : ILocalData
+		public class LocalDataProvider : ILocalDataProvider
 		{
 			[ThreadStatic]
 			private static Hashtable _localData;

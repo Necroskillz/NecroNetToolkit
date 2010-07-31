@@ -51,6 +51,7 @@
     <Compile Include="EntityFrameworkTests\FullTextSearchTests.cs" />
     <Compile Include="EntityFrameworkTests\UnitOfWorkTests.cs" />
     <Compile Include="Fakes\EntityWithId.cs" />
+    <Compile Include="Fakes\FakeLocalDataProvider.cs" />
     <Compile Include="Helpers\BrokenRepository.cs" />
     <Compile Include="Helpers\FakeObjectContextFactory.cs" />
     <Compile Include="Helpers\ITestPersonRepository.cs" />
@@ -66,7 +67,7 @@
     <Compile Include="UtilityTests\DynamicLinqTests.cs" />
     <Compile Include="UtilityTests\GuardTests.cs" />
     <Compile Include="UtilityTests\LocalDataTests.cs" />
-    <Compile Include="UtilityTests\SessionUtilityTest.cs" />
+    <Compile Include="UtilityTests\SessionDataTest.cs" />
     <Compile Include="UtilityTests\SlugTests.cs" />
     <Compile Include="UtilityTests\SortedPagedListTests.cs" />
     <Compile Include="UtilityTests\StringExtensionsTests.cs" />

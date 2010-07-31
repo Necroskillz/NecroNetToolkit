@@ -60,11 +60,10 @@
     <Compile Include="EntityFramework\UnitOfWork\UnitOfWorkFactory.cs" />
     <Compile Include="EntityFramework\UnitOfWork\UnitOfWorkImplementor.cs" />
     <Compile Include="Guard.cs" />
-    <Compile Include="ISessionUtility.cs" />
     <Compile Include="Mail\Config\HostElement.cs" />
     <Compile Include="Mvc\Html\HtmlHelperExtensions.cs" />
     <Compile Include="Mvc\Http404Exception.cs" />
-    <Compile Include="ILocalData.cs" />
+    <Compile Include="ILocalDataProvider.cs" />
     <Compile Include="ISortedPagedList.cs" />
     <Compile Include="LocalData.cs" />
     <Compile Include="Mvc\Handle404Attribute.cs" />
@@ -82,7 +81,7 @@
     <Compile Include="EntityFramework\Repositories\EntitySetNameAttribute.cs" />
     <Compile Include="EntityFramework\Repositories\IRepository.cs" />
     <Compile Include="EntityFramework\Repositories\UltimateEntityRepositoryBase.cs" />
-    <Compile Include="SessionUtility.cs" />
+    <Compile Include="SessionData.cs" />
     <Compile Include="Slug.cs" />
     <Compile Include="SortDirection.cs" />
     <Compile Include="SortedPagedList.cs" />

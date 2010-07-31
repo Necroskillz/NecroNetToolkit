@@ -3,6 +3,7 @@ using System.Collections;
 using System.IO;
 using System.Reflection;
 using System.Web;
+using NecroNet.Toolkit.Tests.Fakes;
 using NUnit.Framework;
 
 namespace NecroNet.Toolkit.Tests.UtilityTests
@@ -13,36 +14,12 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 		private const string Key = "Key";
 		private static readonly object Obj = new object();
 
-		private class FakeLocalData : ILocalData
-		{
-			public object this[object key]
-			{
-				get { throw new Exception(); }
-				set { throw new Exception(); }
-			}
-
-			public int Count
-			{
-				get { throw new Exception(); }
-			}
-
-			public void Clear()
-			{
-				throw new Exception();
-			}
-
-			public bool Contains(object key)
-			{
-				throw new Exception();
-			}
-		}
-
 		[Test]
 		public void LocalData_ShouldStoreDataInLocalHashtableWhenNotRunningInWeb()
 		{
 			Local.Data[Key] = Obj;
 
-			var fieldInfo = typeof (Local.LocalData).GetField("_localData", BindingFlags.Static | BindingFlags.NonPublic);
+			var fieldInfo = typeof (Local.LocalDataProvider).GetField("_localData", BindingFlags.Static | BindingFlags.NonPublic);
 			var hashtable = fieldInfo.GetValue(Local.Data) as Hashtable;
 
 			Assert.That(hashtable, Is.Not.Null);
@@ -61,7 +38,7 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 
 			Local.Data[Key] = Obj;
 
-			var fieldInfo = typeof (Local.LocalData).GetField("LocalDataHashtableKey", BindingFlags.NonPublic | BindingFlags.Static);
+			var fieldInfo = typeof (Local.LocalDataProvider).GetField("LocalDataHashtableKey", BindingFlags.NonPublic | BindingFlags.Static);
 			var hashtableKey = fieldInfo.GetValue(Local.Data);
 			var hashtable = HttpContext.Current.Items[hashtableKey] as Hashtable;
 
@@ -110,11 +87,11 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 		[Test]
 		public void LocalData_ChangeContext_ShouldChangeImplementationOfLocalData()
 		{
-			Local.ChangeContext(new FakeLocalData());
+			Local.ChangeContext(new FakeLocalDataProvider());
 
 			Assert.That(() => Local.Data.Count, Throws.Exception);
 
-			Local.ChangeContext(new Local.LocalData());
+			Local.ChangeContext(new Local.LocalDataProvider());
 		}
 	}
 }

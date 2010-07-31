@@ -1,6 +1,6 @@
 ﻿namespace NecroNet.Toolkit
 {
-	public interface ILocalData
+	public interface ILocalDataProvider
 	{
 		object this[object key] { get; set; }
 		int Count { get; }
