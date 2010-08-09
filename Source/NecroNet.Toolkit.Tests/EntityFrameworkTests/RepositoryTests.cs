@@ -231,9 +231,9 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		}
 
 		[Test]
-		public void DescendantOfUltimateEntityRepositoryBaseOfPerson_GetPagedList_ShouldReturnPageOfPeople()
+		public void DescendantOfUltimateEntityRepositoryBaseOfPerson_GetPage_ShouldReturnPageOfPeople()
 		{
-			IPagedList<Person> people = _personRepository.GetPagedList(1, 5);
+			IPagedList<Person> people = _personRepository.GetPage(1, 5, p => p.Id);
 
 			Assert.That(people, Has.Count.EqualTo(5));
 			Assert.That(people.PageIndex, Is.EqualTo(1));
@@ -248,7 +248,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		[Test]
 		public void DescendantOfUltimateEntityRepositoryBaseOfPerson_GetPagedListWithExpressionParameter_ShoudReturnPageOfPeopleThatSatisfySpecifiedCondition()
 		{
-			IPagedList<Person> people = _personRepository.GetPagedList(p => p.Id < 10, 1, 3);
+			IPagedList<Person> people = _personRepository.GetPage(p => p.Id < 10, 1, 3, p=>p.Id);
 
 			Assert.That(people, Has.Count.EqualTo(3));
 			Assert.That(people.PageIndex, Is.EqualTo(1));

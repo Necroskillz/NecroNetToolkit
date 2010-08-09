@@ -50,30 +50,45 @@ namespace NecroNet.Toolkit.EntityFramework
 			return EntitySet.ToList();
 		}
 
-		public virtual IPagedList<TEntity> GetPagedList(int index, int pageSize)
-		{
-			return EntitySet.ToPagedList(index, pageSize);
-		}
-
-		public virtual ISortedPagedList<TEntity> GetSortedPagedList(int index, int pageSize, string sortKey,
-		                                                            string sortDirection)
-		{
-			return EntitySet.ToSortedPagedList(index, pageSize, sortKey, sortDirection);
-		}
-
 		public virtual IList<TEntity> GetList(Expression<Func<TEntity, bool>> predicate)
 		{
 			return EntitySet.Where(predicate).ToList();
 		}
 
+		public IPagedList<TEntity> GetPage<TKey>(int index, int pageSize, Expression<Func<TEntity, TKey>> orderBySelector, bool ascending)
+		{
+			return ascending
+					? EntitySet.OrderBy(orderBySelector).ToPagedList(index, pageSize)
+					: EntitySet.OrderByDescending(orderBySelector).ToPagedList(index, pageSize);
+		}
+
+		public IPagedList<TEntity> GetPage<TKey>(Expression<Func<TEntity, bool>> predicate, int index, int pageSize, Expression<Func<TEntity, TKey>> orderBySelector, bool ascending)
+		{
+			return ascending
+					? EntitySet.Where(predicate).OrderBy(orderBySelector).ToPagedList(index, pageSize)
+					: EntitySet.Where(predicate).OrderByDescending(orderBySelector).ToPagedList(index, pageSize);
+		}
+
+		[Obsolete("This method has a bug when skipping records with entity framework and was replaced by GetPage<TKey>")]
 		public virtual IPagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> predicate, int index, int pageSize)
 		{
 			return EntitySet.Where(predicate).ToPagedList(index, pageSize);
 		}
 
+		[Obsolete("This method has a bug when skipping records with entity framework and was replaced by GetPage<TKey>")]		public virtual IPagedList<TEntity> GetPagedList(int index, int pageSize)
+		{
+			return EntitySet.ToPagedList(index, pageSize);
+		}
+
+		public virtual ISortedPagedList<TEntity> GetSortedPagedList(int index, int pageSize, string sortKey,
+																	string sortDirection)
+		{
+			return EntitySet.ToSortedPagedList(index, pageSize, sortKey, sortDirection);
+		}
+
 		public virtual ISortedPagedList<TEntity> GetSortedPagedList(Expression<Func<TEntity, bool>> predicate,
-		                                                            int index, int pageSize, string sortKey,
-		                                                            string sortDirection)
+																	int index, int pageSize, string sortKey,
+																	string sortDirection)
 		{
 			return EntitySet.Where(predicate).ToSortedPagedList(index, pageSize, sortKey, sortDirection);
 		}
@@ -89,20 +104,20 @@ namespace NecroNet.Toolkit.EntityFramework
 		}
 
 		public virtual IEnumerable<TEntity> GetEnumerable<TKey>(Expression<Func<TEntity, bool>> predicate,
-		                                                        Expression<Func<TEntity, TKey>> keySelector,
-		                                                        bool ascending = true)
+																Expression<Func<TEntity, TKey>> keySelector,
+																bool ascending = true)
 		{
 			return ascending
-			       	? EntitySet.Where(predicate).OrderBy(keySelector).AsEnumerable()
-			       	: EntitySet.Where(predicate).OrderByDescending(keySelector).AsEnumerable();
+					? EntitySet.Where(predicate).OrderBy(keySelector).AsEnumerable()
+					: EntitySet.Where(predicate).OrderByDescending(keySelector).AsEnumerable();
 		}
 
 		public virtual IEnumerable<TEntity> GetEnumerable<TKey>(Expression<Func<TEntity, TKey>> keySelector,
-		                                                        bool ascending = true)
+																bool ascending = true)
 		{
 			return ascending
-			       	? EntitySet.OrderBy(keySelector).AsEnumerable()
-			       	: EntitySet.OrderByDescending(keySelector).AsEnumerable();
+					? EntitySet.OrderBy(keySelector).AsEnumerable()
+					: EntitySet.OrderByDescending(keySelector).AsEnumerable();
 		}
 
 		public virtual TEntity Get(Expression<Func<TEntity, bool>> predicate)

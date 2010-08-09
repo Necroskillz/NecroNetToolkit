@@ -16,12 +16,18 @@ namespace NecroNet.Toolkit.EntityFramework
 		                                         Expression<Func<TEntity, TKey>> keySelector, bool ascending = true);
 
 		IList<TEntity> GetList();
-		IPagedList<TEntity> GetPagedList(int index, int pageSize);
-		ISortedPagedList<TEntity> GetSortedPagedList(int index, int pageSize, string sortKey, string sortDirection);
-
 		IList<TEntity> GetList(Expression<Func<TEntity, bool>> predicate);
+
+		IPagedList<TEntity> GetPage<TKey>(int index, int pageSize, Expression<Func<TEntity, TKey>> orderBySelector, bool ascending = true);
+		IPagedList<TEntity> GetPage<TKey>(Expression<Func<TEntity, bool>> predicate, int index, int pageSize, Expression<Func<TEntity, TKey>> orderBySelector, bool ascending = true);
+
+		[Obsolete("This method has a bug when skipping records with entity framework and was replaced by GetPage<TKey>")]
+		IPagedList<TEntity> GetPagedList(int index, int pageSize);
+
+		[Obsolete("This method has a bug when skipping records with entity framework and was replaced by GetPage<TKey>")]
 		IPagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> predicate, int index, int pageSize);
 
+		ISortedPagedList<TEntity> GetSortedPagedList(int index, int pageSize, string sortKey, string sortDirection);
 		ISortedPagedList<TEntity> GetSortedPagedList(Expression<Func<TEntity, bool>> predicate, int index, int pageSize,
 		                                             string sortKey, string sortDirection);
 

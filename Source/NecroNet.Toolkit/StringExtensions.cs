@@ -8,6 +8,11 @@ namespace NecroNet.Toolkit
 	{
 		public static string ToSlug(this string s, char delimiter)
 		{
+			if (string.IsNullOrEmpty(s))
+			{
+				return s;
+			}
+
 			var builder = new StringBuilder();
 			bool next = false;
 
