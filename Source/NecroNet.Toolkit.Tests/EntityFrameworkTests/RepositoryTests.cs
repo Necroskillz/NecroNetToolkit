@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using NecroNet.Toolkit.EntityFramework.Repositories;
 using NecroNet.Toolkit.Tests.Fakes;
 using NecroNet.Toolkit.Tests.Helpers;
 using NUnit.Framework;
@@ -310,6 +311,19 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 			{
 				Assert.That(person.Id, Is.LessThan(10));
 			}
+		}
+
+		[Test]
+		public void DescendantOfUltimateEntityRepositoryBaseOfPerson_IncludeWithExpressionParameter_ShouldCorrectlyEncodePropertyPath()
+		{
+			_personRepository.WithInclude(p => p.Cat.Color).WithInclude(p => p.Firstname);
+			var queryConfig = Local.Data["QueryConfig.Key"] as QueryConfig;
+
+			var include1 = queryConfig.Includes[0];
+			var include2 = queryConfig.Includes[1];
+
+			Assert.That(include1, Is.EqualTo("Cat.Color"));
+			Assert.That(include2, Is.EqualTo("Firstname"));
 		}
 	}
 }

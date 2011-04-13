@@ -21,7 +21,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\NecroNet.Toolkit.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -50,8 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CookiesData.cs" />
     <Compile Include="Dynamic.cs" />
     <Compile Include="EntityFramework\ObjectContextExtensions.cs" />
+    <Compile Include="EntityFramework\Repositories\QueryConfig.cs" />
     <Compile Include="EntityFramework\UnitOfWork\IObjectContext.cs" />
     <Compile Include="EntityFramework\UnitOfWork\IObjectContextFactory.cs" />
     <Compile Include="EntityFramework\UnitOfWork\IUnitOfWork.cs" />

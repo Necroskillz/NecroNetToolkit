@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using PagedList;
 
@@ -14,6 +15,8 @@ namespace NecroNet.Toolkit.EntityFramework
 
 		IEnumerable<TEntity> GetEnumerable<TKey>(Expression<Func<TEntity, bool>> predicate,
 		                                         Expression<Func<TEntity, TKey>> keySelector, bool ascending = true);
+
+		IQueryable<TEntity> GetQueryable();
 
 		IList<TEntity> GetList();
 		IList<TEntity> GetList(Expression<Func<TEntity, bool>> predicate);
@@ -41,5 +44,10 @@ namespace NecroNet.Toolkit.EntityFramework
 
 		int Count(Expression<Func<TEntity, bool>> predicate);
 		int Count();
+
+		IRepository<TEntity> WithInclude<TProperty>(Expression<Func<TEntity, TProperty>> includeSelector);
+		IRepository<TEntity> WithInclude(string include);
+
+		void Clear();
 	}
 }

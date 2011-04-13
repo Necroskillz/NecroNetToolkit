@@ -16,11 +16,11 @@ namespace NecroNet.Toolkit
 			var builder = new StringBuilder();
 			bool next = false;
 
-			foreach(char c in s)
+			foreach (char c in s)
 			{
-				if(builder.Length == 0)
+				if (builder.Length == 0)
 				{
-					if(!char.IsLetterOrDigit(c))
+					if (!char.IsLetterOrDigit(c))
 					{
 						continue;
 					}
@@ -28,13 +28,13 @@ namespace NecroNet.Toolkit
 				}
 				else
 				{
-					if(!char.IsLetterOrDigit(c))
+					if (!char.IsLetterOrDigit(c))
 					{
 						next = true;
 						continue;
 					}
 
-					if(next)
+					if (next)
 					{
 						builder.Append(delimiter);
 						builder.Append(char.ToLowerInvariant(c));
@@ -54,13 +54,13 @@ namespace NecroNet.Toolkit
 		{
 			var builder = new StringBuilder();
 
-			foreach(string item in source)
+			foreach (string item in source)
 			{
 				builder.Append(item);
 				builder.Append(delimiter);
 			}
 
-			if(builder.Length > 0)
+			if (builder.Length > 0)
 			{
 				builder.Remove(builder.Length - delimiter.Length, delimiter.Length);
 			}
