@@ -38,6 +38,16 @@
             <param name="searchProperties">Properties to check for matches.</param>
             <returns>Query that matches specified search parameters.</returns>
         </member>
+        <member name="M:NecroNet.Toolkit.Slug.Generate(System.String)">
+            <summary>
+            Generates a 'slug' from string. Slugs are used for nice web page url parameters. e.g: 'NecroNet Toolkit is awesome!!' becomes 'necronet-toolkit-is-awesome'.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Slug.Generate(System.String,System.Int32)">
+            <summary>
+            Generates a 'slug' from string and appends specified id. Slugs are used for nice web page url parameters. e.g: 'NecroNet Toolkit is awesome!!' becomes 'necronet-toolkit-is-awesome-&lt;id&gt;'.
+            </summary>
+        </member>
         <member name="M:NecroNet.Toolkit.Mail.IMailBot.SendHtmlMail(System.String,System.String,System.String,System.Object)">
             <summary>
             Sends an email with html body and specified subject to a single recipient.
@@ -97,6 +107,23 @@
         <member name="E:NecroNet.Toolkit.Mail.IMailBot.SendingCompleted">
             <summary>
             Event, that fires when sending of a single email is completed. Fires once for every email.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.StringExtensions.ToSlug(System.String,System.Char)">
+            <summary>
+            Converts string to 'slug', used in web page urls. Removes all symbols, converts to lowercase and replaces white spaces with specified delimiter.
+            </summary>
+            <param name="delimiter">The delimiter to replace white spaces with.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.StringExtensions.ToCsv(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Converts a a set of strings to csv format, delimited by specified delimiter.
+            </summary>
+            <param name="delimiter">The separator.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.StringExtensions.IsNumeric(System.String)">
+            <summary>
+            Determines whether this string is a number (i.e. can be converted to double)
             </summary>
         </member>
         <member name="M:NecroNet.Toolkit.EntityFramework.UnitOfWork.Setup(System.Type)">
