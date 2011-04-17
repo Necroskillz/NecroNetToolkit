@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using NecroNet.Toolkit.EntityFramework.Repositories;
+using NecroNet.Toolkit.EntityFramework;
 using NecroNet.Toolkit.Tests.Fakes;
 using NecroNet.Toolkit.Tests.Helpers;
 using NUnit.Framework;

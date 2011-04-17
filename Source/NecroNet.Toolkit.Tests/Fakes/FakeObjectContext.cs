@@ -9,7 +9,7 @@ namespace NecroNet.Toolkit.Tests.Fakes
 
 		public IObjectSet<Person> People
 		{
-			get { return _people ?? (_people = new FakeObjectSet<Person>()); }
+			get { return _people ?? (_people = new FakeObjectSet<Person>(null)); }
 		}
 
 		public void Dispose()

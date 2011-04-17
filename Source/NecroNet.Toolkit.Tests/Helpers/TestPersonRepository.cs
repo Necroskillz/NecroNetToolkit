@@ -8,7 +8,7 @@ using NecroNet.Toolkit.Tests.Fakes;
 namespace NecroNet.Toolkit.Tests.Helpers
 {
 	[EntitySetName("People")]
-	public class TestPersonRepository : UltimateEntityRepositoryBase<FakeObjectContext, Person>, ITestPersonRepository
+	public class TestPersonRepository : EdmRepositoryBase<FakeObjectContext, Person>, ITestPersonRepository
 	{
 		private FakeObjectContext _objectContext;
 

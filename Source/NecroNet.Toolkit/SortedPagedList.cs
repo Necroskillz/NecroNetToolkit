@@ -60,6 +60,27 @@ namespace NecroNet.Toolkit
 
 		public string SortDirection { get; private set; }
 		public string SortKey { get; private set; }
+
+		public int FirstItemOnPage
+		{
+			get
+			{
+				return PageIndex * PageSize + 1;
+			}
+		}
+
+		public int LastItemOnPage
+		{
+			get
+			{
+				int numberOfLastItemOnPage = FirstItemOnPage + PageSize - 1;
+				if (numberOfLastItemOnPage > TotalItemCount)
+				{
+					numberOfLastItemOnPage = TotalItemCount;
+				}
+				return numberOfLastItemOnPage;
+			}
+		}
 	}
 
 	public static class Pagination

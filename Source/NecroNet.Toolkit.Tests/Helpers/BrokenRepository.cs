@@ -7,7 +7,7 @@ using NecroNet.Toolkit.Tests.Fakes;
 
 namespace NecroNet.Toolkit.Tests.Helpers
 {
-	public class BrokenRepositoryNoSetNameAttribute : UltimateEntityRepositoryBase<FakeObjectContext, EntityWithId>
+	public class BrokenRepositoryNoSetNameAttribute : EdmRepositoryBase<FakeObjectContext, EntityWithId>
 	{
 		private FakeObjectContext _objectContext;
 
@@ -21,7 +21,7 @@ namespace NecroNet.Toolkit.Tests.Helpers
 	}
 
 	[EntitySetName("Xyz")]
-	public class BrokenRepositoryInvalidEntitySetName : UltimateEntityRepositoryBase<FakeObjectContext, EntityWithId>
+	public class BrokenRepositoryInvalidEntitySetName : EdmRepositoryBase<FakeObjectContext, EntityWithId>
 	{
 		private FakeObjectContext _objectContext;
 

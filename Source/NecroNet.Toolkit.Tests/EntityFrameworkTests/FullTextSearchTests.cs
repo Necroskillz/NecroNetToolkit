@@ -11,8 +11,6 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 	[TestFixture]
 	public class FullTextSearchTests
 	{
-		
-
 		private List<Movie> _movies;
 		private IQueryable<Movie> _movieQuery;
 
