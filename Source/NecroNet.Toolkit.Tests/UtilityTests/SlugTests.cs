@@ -9,7 +9,23 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 	[TestFixture]
 	public class SlugTests
 	{
-		private const string Title = "Some testing title";
+		private const string Title = "Some | testing ! title -";
+
+		[Test]
+		public void Slug_Generate_ShouldReturnNullWhenInputStringIsNull()
+		{
+			var slug = Slug.Generate(null);
+
+			Assert.That(slug, Is.Null);
+		}
+
+		[Test]
+		public void Slug_Generate_ShouldReturnEmptyStringWhenInputStringIsEmpty()
+		{
+			var slug = Slug.Generate(string.Empty);
+
+			Assert.That(slug, Is.Empty);
+		}
 
 		[Test]
 		public void Slug_Generate_ShouldGenerateLowercaseUrlSlugSeparatedByDashes()

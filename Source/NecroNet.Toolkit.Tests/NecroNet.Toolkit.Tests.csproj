@@ -76,6 +76,7 @@
     <Compile Include="Helpers\TestPersonRepository.cs" />
     <Compile Include="MailTests\MailBotTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UtilityTests\CookiesDataTests.cs" />
     <Compile Include="UtilityTests\DynamicLinqTests.cs" />
     <Compile Include="UtilityTests\GuardTests.cs" />
     <Compile Include="UtilityTests\LocalDataTests.cs" />

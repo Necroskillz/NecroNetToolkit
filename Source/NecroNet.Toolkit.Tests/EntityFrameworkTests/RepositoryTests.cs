@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NecroNet.Toolkit.EntityFramework;
@@ -317,7 +318,8 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		public void DescendantOfUltimateEntityRepositoryBaseOfPerson_IncludeWithExpressionParameter_ShouldCorrectlyEncodePropertyPath()
 		{
 			_personRepository.WithInclude(p => p.Cat.Color).WithInclude(p => p.Firstname);
-			var queryConfig = Local.Data["QueryConfig.Key"] as QueryConfig;
+			var key = typeof(UltimateEntityRepositoryBase<>).MakeGenericType(new[] { typeof(Person) }).GetField("QueryConfigKey", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(_personRepository);
+			var queryConfig = Local.Data[key] as QueryConfig;
 
 			var include1 = queryConfig.Includes[0];
 			var include2 = queryConfig.Includes[1];

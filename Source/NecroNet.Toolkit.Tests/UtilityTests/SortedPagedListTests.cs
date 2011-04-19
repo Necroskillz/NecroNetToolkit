@@ -54,5 +54,21 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 
 			Assert.That(list.PageIndex + 1, Is.EqualTo(list.PageNumber));
 		}
+
+		[Test]
+		public void SortedPagedList_FirstItemOnPage_ShouldReturnOneBaseIndexOfFirstItem()
+		{
+			var list = new SortedPagedList<Movie>(_movieQuery, 1, 3, "Name", SortDirection.Asc);
+
+			Assert.That(list.FirstItemOnPage, Is.EqualTo(4));
+		}
+
+		[Test]
+		public void SortedPagedList_LastItemOnPage_ShouldReturnOneBaseIndexOfLastItem()
+		{
+			var list = new SortedPagedList<Movie>(_movieQuery, 1, 3, "Name", SortDirection.Asc);
+
+			Assert.That(list.LastItemOnPage, Is.EqualTo(5));
+		}
 	}
 }

@@ -17,6 +17,7 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 	public class SessionDataTest
 	{
 		public const string Key = "Key";
+		private static readonly object Obj = new object();
 
 		[SetUp]
 		public void SetUp()
@@ -91,6 +92,14 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 			Session.Data.Clear();
 
 			Assert.That(Session.Data.Count, Is.EqualTo(0));
+		}
+
+		[Test]
+		public void LocalData_Contains_ShouldReturnTrueIfHashtableContainsSpecifiedKey()
+		{
+			Session.Data[Key] = Obj;
+
+			Assert.That(Session.Data.Contains(Key));
 		}
 
 		[Test]

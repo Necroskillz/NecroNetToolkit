@@ -33,21 +33,19 @@ namespace NecroNet.Toolkit.EntityFramework
 									: typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
 										.Where(p => p.PropertyType == typeof(string) && searchProperties.Contains(p.Name));
 
-			Expression orExpressions = null;
-
 			var searchKeyParts = exactMatch ? new[] { searchKey } : searchKey.Split(' ');
 
-			foreach(var property in publicProperties)
-			{
-				Expression nameProperty = Expression.Property(parameter, property);
-				foreach(var searchKeyPart in searchKeyParts)
-				{
-					Expression searchKeyExpression = Expression.Constant(searchKeyPart);
-					Expression callContainsMethod = Expression.Call(nameProperty, containsMethod, searchKeyExpression);
-
-					orExpressions = orExpressions == null ? callContainsMethod : Expression.Or(orExpressions, callContainsMethod);
-				}
-			}
+			var orExpressions = (from property in publicProperties
+			                     select Expression.Property(parameter, property)
+			                     into nameProperty
+			                     from searchKeyPart in searchKeyParts
+			                     let searchKeyExpression = Expression.Constant(searchKeyPart)
+			                     select Expression.Call(nameProperty, containsMethod, (Expression) searchKeyExpression)).
+				Aggregate<Expression, Expression>(null,
+				                                  (current, callContainsMethod) =>
+				                                  current == null
+				                                  	? callContainsMethod
+				                                  	: Expression.Or(current, callContainsMethod));
 
 			if(orExpressions == null) return null;
 

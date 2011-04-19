@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NecroNetToolkit</id>
-    <version>0.1</version>
+    <version>0.2</version>
     <authors>Necros</authors>
     <owners>Necros</owners>
     <licenseUrl>http://creativecommons.org/licenses/by/3.0/</licenseUrl>
@@ -12,6 +12,7 @@
     <tags>ASP.NET MVC MVC3 EF</tags>
     <dependencies>
       <dependency id="PagedList" version="1.2.1.0" />
+	  <dependency id="EntityFramework" version="4.1" />
     </dependencies>
   </metadata>
 </package>

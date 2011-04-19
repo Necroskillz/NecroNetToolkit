@@ -15,9 +15,9 @@ namespace NecroNet.Toolkit.EntityFramework
 	public abstract class UltimateEntityRepositoryBase<TEntity> : IRepository<TEntity>
 		where TEntity : class
 	{
-		private const string QueryConfigKey = "QueryConfig.Key";
+		private readonly object QueryConfigKey = new object();
 
-		private static QueryConfig QueryConfig
+		private QueryConfig QueryConfig
 		{
 			get
 			{

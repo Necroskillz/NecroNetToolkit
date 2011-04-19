@@ -30,6 +30,7 @@ namespace NecroNet.Toolkit.Mvc.Html
 			return helper.Submit(text, null);
 		}
 
+		[Obsolete("Use standard Html.Raw instead.")]
 		public static MvcHtmlString Markup(this HtmlHelper helper, string html)
 		{
 			return MvcHtmlString.Create(html);
