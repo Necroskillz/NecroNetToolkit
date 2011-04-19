@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NecroNet.Toolkit.Data
 {
-	public class MemoryRepositoryBase<TEntity> : UltimateRepositoryBase<TEntity> where TEntity: class
+	public class MemoryRepository<TEntity> : UltimateRepositoryBase<TEntity> where TEntity: class
 	{
 		private readonly List<TEntity> _data = new List<TEntity>();
 

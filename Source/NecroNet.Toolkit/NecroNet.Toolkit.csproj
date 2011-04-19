@@ -76,7 +76,7 @@
     <Compile Include="CookiesData.cs" />
     <Compile Include="Data\Repositories\Base\IEntityOperator.cs" />
     <Compile Include="Data\Repositories\Memory\MemoryEntityOperator.cs" />
-    <Compile Include="Data\Repositories\Memory\MemoryRepositoryBase.cs" />
+    <Compile Include="Data\Repositories\Memory\MemoryRepository.cs" />
     <Compile Include="Dynamic.cs" />
     <Compile Include="Data\ObjectContextExtensions.cs" />
     <Compile Include="Data\Repositories\CodeFirst\CodeFirstRepositoryBase.cs" />
@@ -150,6 +150,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetPath) ..\..\..\..\Bin  &amp; copy $(TargetPath) ..\..\..\..\NuGet\lib</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
