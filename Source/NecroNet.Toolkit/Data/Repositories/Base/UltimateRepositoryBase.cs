@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Data.Objects;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 using System.Web.Mvc;
 using PagedList;
 
-namespace NecroNet.Toolkit.EntityFramework
+namespace NecroNet.Toolkit.Data
 {
-	public abstract class UltimateEntityRepositoryBase<TEntity> : IRepository<TEntity>
+	public abstract class UltimateRepositoryBase<TEntity> : IRepository<TEntity>
 		where TEntity : class
 	{
 		private readonly object QueryConfigKey = new object();
@@ -31,7 +26,7 @@ namespace NecroNet.Toolkit.EntityFramework
 			}
 		}
 
-		internal abstract EntityOperatorBase<TEntity> Operator { get; } 
+		protected abstract IEntityOperator<TEntity> Operator { get; } 
 
 		public IQueryable<TEntity> GetQueryable()
 		{

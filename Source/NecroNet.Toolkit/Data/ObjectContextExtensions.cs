@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace NecroNet.Toolkit.EntityFramework
+namespace NecroNet.Toolkit.Data
 {
 	public static class ObjectContextExtensions
 	{

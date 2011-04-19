@@ -6,16 +6,16 @@ using System.Data.Objects;
 using System.Linq;
 using System.Text;
 
-namespace NecroNet.Toolkit.EntityFramework
+namespace NecroNet.Toolkit.Data
 {
-	public abstract class CodeFirstRepositoryBase<TDbContext, TEntity> : UltimateEntityRepositoryBase<TEntity>
+	public abstract class CodeFirstRepositoryBase<TDbContext, TEntity> : UltimateRepositoryBase<TEntity>
 		where TDbContext: DbContext, IObjectContext
 		where TEntity : class
 	{
 		protected abstract TDbContext DbContext { get; }
 
-		private EntityOperatorBase<TEntity> _operator;
-		internal override EntityOperatorBase<TEntity> Operator
+		private IEntityOperator<TEntity> _operator;
+		protected override IEntityOperator<TEntity> Operator
 		{
 			get
 			{

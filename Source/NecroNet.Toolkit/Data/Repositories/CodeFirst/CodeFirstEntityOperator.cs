@@ -1,32 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Objects;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 
-namespace NecroNet.Toolkit.EntityFramework
+namespace NecroNet.Toolkit.Data
 {
-	internal class EdmEntityOperator<TEntity> : EntityOperatorBase<TEntity> where TEntity:class
+	internal class CodeFirstEntityOperator<TEntity> : EntityOperatorBase<TEntity, IDbSet<TEntity>> where TEntity:class
 	{
-		private readonly Func<IObjectSet<TEntity>> _getObjectSet;
-
-		public EdmEntityOperator(Func<IObjectSet<TEntity>> getObjectSet)
+		public CodeFirstEntityOperator(Func<IDbSet<TEntity>> getStore) : base(getStore)
 		{
-			_getObjectSet = getObjectSet;
 		}
 
 		public override void AddEntity(TEntity entity)
 		{
-			_getObjectSet().AddObject(entity);
+			GetStore().Add(entity);
 		}
 
 		public override void RemoveEntity(TEntity entity)
 		{
-			_getObjectSet().DeleteObject(entity);
+			GetStore().Remove(entity);
 		}
 
 		public override IQueryable<TEntity> GetConfiguredQuery(QueryConfig config)
 		{
-			var query = _getObjectSet().AsQueryable();
+			var query = GetStore().AsQueryable();
 			query = config.Includes.Aggregate(query, (current, include) => current.Include(include));
 
 			config.Reset();
@@ -36,7 +35,7 @@ namespace NecroNet.Toolkit.EntityFramework
 
 		public override IQueryable<TEntity> GetQuery()
 		{
-			return _getObjectSet();
+			return GetStore();
 		}
 	}
 }

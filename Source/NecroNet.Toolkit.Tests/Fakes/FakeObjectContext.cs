@@ -1,5 +1,5 @@
 ﻿using System.Data.Objects;
-using NecroNet.Toolkit.EntityFramework;
+using NecroNet.Toolkit.Data;
 
 namespace NecroNet.Toolkit.Tests.Fakes
 {

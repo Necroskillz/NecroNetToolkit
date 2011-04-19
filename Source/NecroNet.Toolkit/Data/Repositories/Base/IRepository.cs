@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using PagedList;
 
-namespace NecroNet.Toolkit.EntityFramework
+namespace NecroNet.Toolkit.Data
 {
 	public interface IRepository<TEntity>
 		where TEntity : class

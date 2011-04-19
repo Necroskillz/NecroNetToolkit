@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NecroNet.Toolkit.EntityFramework
+namespace NecroNet.Toolkit.Data
 {
 	public interface IUnitOfWork : IDisposable
 	{

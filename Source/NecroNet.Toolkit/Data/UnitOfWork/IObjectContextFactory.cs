@@ -1,4 +1,4 @@
-﻿namespace NecroNet.Toolkit.EntityFramework
+﻿namespace NecroNet.Toolkit.Data
 {
 	/// <summary>
 	/// Defines a method for creating object context.

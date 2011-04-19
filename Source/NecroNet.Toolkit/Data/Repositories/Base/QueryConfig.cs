@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NecroNet.Toolkit.EntityFramework
+namespace NecroNet.Toolkit.Data
 {
-	internal class QueryConfig
+	public class QueryConfig
 	{
 		public IList<string> Includes { get; set; }
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using NecroNet.Toolkit.Tests.Helpers;
 using NUnit.Framework;
-using NecroNet.Toolkit.EntityFramework;
+using NecroNet.Toolkit.Data;
 
 namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 {

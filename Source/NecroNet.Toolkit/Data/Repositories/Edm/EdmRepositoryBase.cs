@@ -5,9 +5,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace NecroNet.Toolkit.EntityFramework
+namespace NecroNet.Toolkit.Data
 {
-	public abstract class EdmRepositoryBase<TObjectContext, TEntity> : UltimateEntityRepositoryBase<TEntity>
+	public abstract class EdmRepositoryBase<TObjectContext, TEntity> : UltimateRepositoryBase<TEntity>
 		where TObjectContext : IObjectContext
 		where TEntity : class
 	{
@@ -58,8 +58,8 @@ namespace NecroNet.Toolkit.EntityFramework
 			}
 		}
 
-		private EntityOperatorBase<TEntity> _operator;
-		internal override EntityOperatorBase<TEntity> Operator
+		private IEntityOperator<TEntity> _operator;
+		protected override IEntityOperator<TEntity> Operator
 		{
 			get
 			{

@@ -84,6 +84,7 @@
     <Compile Include="UtilityTests\SlugTests.cs" />
     <Compile Include="UtilityTests\SortedPagedListTests.cs" />
     <Compile Include="UtilityTests\StringExtensionsTests.cs" />
+    <Compile Include="xx\Class1.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NecroNet.Toolkit\NecroNet.Toolkit.csproj">
