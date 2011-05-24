@@ -49,5 +49,7 @@ namespace NecroNet.Toolkit.Data
 		IRepository<TEntity> WithInclude(string include);
 
 		void Clear();
+
+		void Update(TEntity entity);
 	}
 }

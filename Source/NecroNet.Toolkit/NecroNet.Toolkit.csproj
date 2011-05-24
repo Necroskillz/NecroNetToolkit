@@ -62,6 +62,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -95,6 +96,7 @@
     <Compile Include="Data\UnitOfWork\UnitOfWorkImplementor.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="Mail\Config\HostElement.cs" />
+    <Compile Include="Mvc\ActionResults\RssResult.cs" />
     <Compile Include="Mvc\Html\HtmlHelperExtensions.cs" />
     <Compile Include="Mvc\Http404Exception.cs" />
     <Compile Include="ILocalDataProvider.cs" />

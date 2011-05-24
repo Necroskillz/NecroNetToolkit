@@ -164,6 +164,14 @@ namespace NecroNet.Toolkit.Data
 			return this;
 		}
 
-		public abstract void Clear();
+		public virtual void Clear()
+		{
+			RemoveRange(i => true);
+		}
+
+		public virtual void Update(TEntity entity)
+		{
+			throw new NotSupportedException();
+		}
 	}
 }

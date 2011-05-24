@@ -39,6 +39,7 @@ namespace NecroNet.Toolkit.Mvc
 			filterContext.ExceptionHandled = true;
 			filterContext.HttpContext.Response.Clear();
 			filterContext.HttpContext.Response.StatusCode = 404;
+			filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
 		}
 	}
 }
