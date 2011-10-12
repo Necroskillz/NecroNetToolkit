@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 
 namespace NecroNet.Toolkit.Mail
@@ -13,8 +14,16 @@ namespace NecroNet.Toolkit.Mail
 		event EventHandler<EmailSendingCompletedEventArgs> SendingCompleted;
 
 		/// <summary>
+		/// Sends a custom email message.
+		/// </summary>
+		/// <param name="message">The message to send.</param>
+		/// <param name="loadConfigValues">Whether to overwrite message attributes with values from web.config</param>
+		void SendMail(MailMessage message, bool loadConfigValues = false);
+
+		/// <summary>
 		/// Sends an email with html body and specified subject to a single recipient.
 		/// Body is rendered by using asp.net mvc view and a model. (some restrictions apply)
+		/// Uses .ascx view format.
 		/// </summary>
 		/// <param name="to">Address of the recipient.</param>
 		/// <param name="subject">Subject of the email message.</param>
@@ -25,12 +34,35 @@ namespace NecroNet.Toolkit.Mail
 		/// <summary>
 		/// Sends an email with html body and specified subject to a multiple recipients.
 		/// Body is rendered by using asp.net mvc view and a model. (some restrictions apply)
+		/// Uses .ascx view format.
 		/// </summary>
 		/// <param name="to">Addresses of recipients.</param>
 		/// <param name="subject">Subject of the email message.</param>
 		/// <param name="templateView">Partial view (.ascx) used to render email body.</param>
 		/// <param name="model">Model for the specified view.</param>
 		void SendMassHtmlMail(IEnumerable<string> to, string subject, string templateView, object model);
+
+		/// <summary>
+		/// Sends an email with html body and specified subject to a single recipient.
+		/// Body is rendered by using asp.net mvc view and a model. (some restrictions apply)
+		/// Uses razor view format.
+		/// </summary>
+		/// <param name="to">Address of the recipient.</param>
+		/// <param name="subject">Subject of the email message.</param>
+		/// <param name="templateView">Partial view (.cshtml) used to render email body.</param>
+		/// <param name="model">Model for the specified view.</param>
+		void SendRazorMail<TModel>(string to, string subject, string templateView, TModel model);
+
+		/// <summary>
+		/// Sends an email with html body and specified subject to a multiple recipients.
+		/// Body is rendered by using asp.net mvc view and a model. (some restrictions apply)
+		/// Uses razor view format.
+		/// </summary>
+		/// <param name="to">Addresses of recipients.</param>
+		/// <param name="subject">Subject of the email message.</param>
+		/// <param name="templateView">Partial view (.cshtml) used to render email body.</param>
+		/// <param name="model">Model for the specified view.</param>
+		void SendMassRazorMail<TModel>(IEnumerable<string> to, string subject, string templateView, TModel model);
 
 		/// <summary>
 		/// Sends an email with text body and specified subject to a single recipient.
