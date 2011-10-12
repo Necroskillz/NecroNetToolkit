@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="CookiesData.cs" />
     <Compile Include="Data\Repositories\Base\IEntityOperator.cs" />
+    <Compile Include="Data\Repositories\Edm\POCO\EdmRepositoryBase.cs" />
     <Compile Include="Data\Repositories\Memory\MemoryEntityOperator.cs" />
     <Compile Include="Data\Repositories\Memory\MemoryRepository.cs" />
     <Compile Include="Dynamic.cs" />

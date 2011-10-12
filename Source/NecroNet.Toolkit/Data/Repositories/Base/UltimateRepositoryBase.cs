@@ -12,7 +12,7 @@ namespace NecroNet.Toolkit.Data
 	{
 		private readonly object QueryConfigKey = new object();
 
-		private QueryConfig QueryConfig
+		internal QueryConfig QueryConfig
 		{
 			get
 			{
