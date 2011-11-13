@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NecroNetToolkit</id>
-    <version>0.2.1.1</version>
+    <version>0.2.2</version>
     <authors>Necros</authors>
     <owners>Necros</owners>
     <licenseUrl>http://creativecommons.org/licenses/by/3.0/</licenseUrl>

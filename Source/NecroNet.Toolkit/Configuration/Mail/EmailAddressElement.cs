@@ -5,9 +5,9 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 
-namespace NecroNet.Toolkit.Mail
+namespace NecroNet.Toolkit.Configuration
 {
-	public class EmailAddressElement : ConfigurationElement
+	internal class EmailAddressElement : ConfigurationElement
 	{
 		[ConfigurationProperty("address", IsRequired = true, DefaultValue = "null")]
 		[RegexStringValidator(@"^(\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)|(null)$")]

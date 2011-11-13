@@ -4,9 +4,9 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 
-namespace NecroNet.Toolkit.Mail
+namespace NecroNet.Toolkit.Configuration
 {
-	public class EncodingElement : ConfigurationElement
+	internal class EncodingElement : ConfigurationElement
 	{
 		[ConfigurationProperty("subject", IsRequired = false, DefaultValue = "UTF-8")]
 		public string Subject

@@ -63,6 +63,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -74,10 +75,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\NecroNetToolkitConfigurationManager.cs" />
+    <Compile Include="Configuration\NecroNetToolkitConfigurationSection.cs" />
     <Compile Include="CookiesData.cs" />
     <Compile Include="Data\Repositories\Base\IEntityOperator.cs" />
     <Compile Include="Data\Repositories\Memory\MemoryEntityOperator.cs" />
     <Compile Include="Data\Repositories\Memory\MemoryRepository.cs" />
+    <Compile Include="Configuration\UnitOfWork\NecroNetToolkitUnitOfWorkConfigurationElement.cs" />
+    <Compile Include="Configuration\UnitOfWork\TransactionElement.cs" />
+    <Compile Include="Data\UnitOfWork\GenericTransaction.cs" />
+    <Compile Include="Data\UnitOfWork\ITransaction.cs" />
     <Compile Include="Dynamic.cs" />
     <Compile Include="Data\ObjectContextExtensions.cs" />
     <Compile Include="Data\Repositories\CodeFirst\CodeFirstRepositoryBase.cs" />
@@ -95,7 +102,7 @@
     <Compile Include="Data\UnitOfWork\UnitOfWorkFactory.cs" />
     <Compile Include="Data\UnitOfWork\UnitOfWorkImplementor.cs" />
     <Compile Include="Guard.cs" />
-    <Compile Include="Mail\Config\HostElement.cs" />
+    <Compile Include="Configuration\Mail\HostElement.cs" />
     <Compile Include="Mvc\ActionResults\RssResult.cs" />
     <Compile Include="Mvc\Html\HtmlHelperExtensions.cs" />
     <Compile Include="Mvc\Http404Exception.cs" />
@@ -104,9 +111,9 @@
     <Compile Include="LocalData.cs" />
     <Compile Include="Mvc\Handle404Attribute.cs" />
     <Compile Include="Mvc\LowercaseRoute.cs" />
-    <Compile Include="Mail\Config\EmailAddressElement.cs" />
-    <Compile Include="Mail\Config\EncodingElement.cs" />
-    <Compile Include="Mail\Config\NecroNetToolkitMailConfigurationSection.cs" />
+    <Compile Include="Configuration\Mail\EmailAddressElement.cs" />
+    <Compile Include="Configuration\Mail\EncodingElement.cs" />
+    <Compile Include="Configuration\Mail\NecroNetToolkitMailConfigurationElement.cs" />
     <Compile Include="Mail\EmailSendingCompletedEventArgs.cs" />
     <Compile Include="Mail\IMailBot.cs" />
     <Compile Include="Mail\MailBot.cs" />
@@ -151,6 +158,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy $(TargetPath) ..\..\..\..\Bin  &amp; copy $(TargetPath) ..\..\..\..\NuGet\lib</PostBuildEvent>
