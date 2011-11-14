@@ -6,10 +6,10 @@ namespace NecroNet.Toolkit
 {
 	internal static class Dynamic
 	{
-		public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> source, string property)
-		{
-			return ApplyOrder(source, property, "OrderBy");
-		}
+        public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> source, string property)
+        {
+            return ApplyOrder(source, property, "OrderBy");
+        }
 
 		public static IOrderedQueryable<T> OrderByDescending<T>(this IQueryable<T> source, string property)
 		{

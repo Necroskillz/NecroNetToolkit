@@ -33,6 +33,7 @@ using <#= ns #>;
 
 namespace <#= DefaultNamespace #>
 {
+<# if(!OmitEdmx) { #>
 <# foreach (ObjectContextInfo contextInfo in ObjectContextInfos) { #>
 	public abstract partial class <#= contextInfo.TypeName #>RepositoryBase<TEntity> : Edm<#= IsPOCO ? "POCO" : string.Empty #>RepositoryBase<<#= contextInfo.TypeName #>, TEntity>
 		where TEntity : class
@@ -56,6 +57,7 @@ namespace <#= DefaultNamespace #>
 	public partial class <#= entitySetInfo.TypeName #>Repository : <#= contextInfo.TypeName #>RepositoryBase<<#= entitySetInfo.TypeName #>>, I<#= entitySetInfo.TypeName #>Repository
 	{
 	}
+<# } #>
 <# } #>
 <# } #>
 
@@ -143,7 +145,12 @@ private void RecurseFindElements(CodeElements codeElements)
 	        	var info = new ObjectContextInfo();
 				info.TypeName = c.Name;
 				info.EntitySets = FindDbSets(c);
-				CodeFirstInfos.Add(info);
+				
+				if(info.EntitySets.Count > 0)
+				{
+					CodeFirstInfos.Add(info);
+				}
+				
 				if(CurrentNamespace != null && !Namespaces.Contains(CurrentNamespace)) Namespaces.Add(CurrentNamespace);
 	    	}
 	    }
