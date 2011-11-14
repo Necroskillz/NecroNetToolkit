@@ -4,9 +4,9 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 
-namespace NecroNet.Toolkit.Mail
+namespace NecroNet.Toolkit.Configuration
 {
-	public class HostElement : ConfigurationElement
+	internal class HostElement : ConfigurationElement
 	{
 		[ConfigurationProperty("useSsl", IsRequired = false, DefaultValue = false)]
 		public bool UseSsl

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Transactions;
 
 namespace NecroNet.Toolkit.Data
 {
@@ -8,5 +9,10 @@ namespace NecroNet.Toolkit.Data
 		/// Persists all updates to the data source.
 		/// </summary>
 		void Flush();
+
+		/// <summary>
+		/// Begins a transaction by creating a transaction scope.
+		/// </summary>
+		ITransaction BeginTransaction(TransactionScopeOption? scopeOption = null, IsolationLevel? isolationLevel = null, int? timeout = null);
 	}
 }

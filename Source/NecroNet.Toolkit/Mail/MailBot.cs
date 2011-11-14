@@ -8,13 +8,14 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.UI;
+using NecroNet.Toolkit.Configuration;
 using RazorEngine;
 
 namespace NecroNet.Toolkit.Mail
 {
 	public class MailBot : IMailBot
 	{
-		private static readonly NecroNetToolkitMailConfigurationSection _config;
+		private static readonly NecroNetToolkitMailConfigurationElement _config;
 		private int _queuedMails;
 		private bool _disposed;
 
@@ -38,10 +39,12 @@ namespace NecroNet.Toolkit.Mail
 
 		static MailBot()
 		{
-			_config = ConfigurationManager.GetSection("necroNetToolkit.Mail") as NecroNetToolkitMailConfigurationSection;
+			NecroNetToolkitConfigurationManager.EnsureConfig();
+
+			_config = NecroNetToolkitConfigurationManager.Configuration.Mail;
 			if(_config == null)
 			{
-				throw new ConfigurationErrorsException("Configuration section 'necroNetToolkit.Mail' was not found.");
+				throw new ConfigurationErrorsException("Configuration element 'mail' in section 'necroNetToolkit' was not found.");
 			}
 		}
 

@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Transactions;
 using NecroNet.Toolkit.Data;
 using NecroNet.Toolkit.Tests.Fakes;
 using NecroNet.Toolkit.Tests.Helpers;

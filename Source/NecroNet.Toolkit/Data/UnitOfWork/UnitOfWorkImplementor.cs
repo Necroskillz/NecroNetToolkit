@@ -1,4 +1,7 @@
-﻿namespace NecroNet.Toolkit.Data
+﻿using System;
+using System.Transactions;
+
+namespace NecroNet.Toolkit.Data
 {
 	public class UnitOfWorkImplementor : IUnitOfWorkImplementor
 	{
@@ -20,6 +23,11 @@
 		public void Flush()
 		{
 			_context.SaveChanges();
+		}
+
+		public ITransaction BeginTransaction(TransactionScopeOption? scopeOption, IsolationLevel? isolationLevel, int? timeout)
+		{
+			return new GenericTransaction(scopeOption, isolationLevel, timeout);
 		}
 	}
 }
