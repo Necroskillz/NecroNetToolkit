@@ -1,6 +1,6 @@
 ﻿<#+
 
 	static bool IsPOCO = false;
-	static bool OmitEdmx = true;
+	static bool OmitEdmx = false;
 	
 #>
