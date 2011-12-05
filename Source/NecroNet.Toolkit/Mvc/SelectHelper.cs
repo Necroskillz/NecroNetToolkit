@@ -46,7 +46,7 @@ namespace NecroNet.Toolkit.Mvc
 			                let value = valueFunc(item)
 			                select
 			                	new SelectListItem
-			                		{Text = textFunc(item), Value = value.ToString(), Selected = value == selectedValue});
+			                		{Text = textFunc(item), Value = value.ToString(), Selected = value.Equals(selectedValue)});
 
 			return result;
 		}
