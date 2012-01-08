@@ -7,7 +7,7 @@ namespace NecroNet.Toolkit.Data
 {
 	public abstract class EntityOperatorBase<TEntity, TDataStore> : IEntityOperator<TEntity>
 	{
-		protected Func<TDataStore> GetStore;
+		protected readonly Func<TDataStore> GetStore;
 
 		protected EntityOperatorBase(Func<TDataStore> getStore)
 		{

@@ -4,7 +4,7 @@ namespace NecroNet.Toolkit.Data
 {
 	public class UnitOfWorkFactory : IUnitOfWorkFactory
 	{
-		public static object ContextKey = new object();
+		private static readonly object ContextKey = new object();
 
 		internal UnitOfWorkFactory(Type objectContextFactoryType)
 		{

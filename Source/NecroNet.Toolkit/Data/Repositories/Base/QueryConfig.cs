@@ -7,7 +7,7 @@ namespace NecroNet.Toolkit.Data
 {
 	public class QueryConfig
 	{
-		public IList<string> Includes { get; set; }
+		public IList<string> Includes { get; private set; }
 
 		public QueryConfig()
 		{

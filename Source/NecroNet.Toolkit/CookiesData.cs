@@ -25,7 +25,7 @@ namespace NecroNet.Toolkit
 
 		public class CookiesDataProvider : ILocalDataProvider
 		{
-			public HttpCookieCollection OutgoingCookies
+			private HttpCookieCollection OutgoingCookies
 			{
 				get
 				{
@@ -33,7 +33,7 @@ namespace NecroNet.Toolkit
 				}
 			}
 
-			public HttpCookieCollection IncommingCookies
+			private HttpCookieCollection IncommingCookies
 			{
 				get
 				{

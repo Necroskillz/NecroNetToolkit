@@ -12,7 +12,7 @@ namespace NecroNet.Toolkit.Data
 	{
 		private readonly object QueryConfigKey = new object();
 
-		internal QueryConfig QueryConfig
+		private QueryConfig QueryConfig
 		{
 			get
 			{
@@ -45,6 +45,9 @@ namespace NecroNet.Toolkit.Data
 
 		public IPagedList<TEntity> GetPage<TKey>(int index, int pageSize, Expression<Func<TEntity, TKey>> orderBySelector, bool ascending)
 		{
+			// convert to pageNumber
+			index++;
+
 			return ascending
 					? Operator.GetConfiguredQuery(QueryConfig).OrderBy(orderBySelector).ToPagedList(index, pageSize)
 					: Operator.GetConfiguredQuery(QueryConfig).OrderByDescending(orderBySelector).ToPagedList(index, pageSize);
@@ -52,21 +55,12 @@ namespace NecroNet.Toolkit.Data
 
 		public IPagedList<TEntity> GetPage<TKey>(Expression<Func<TEntity, bool>> predicate, int index, int pageSize, Expression<Func<TEntity, TKey>> orderBySelector, bool ascending)
 		{
+			// convert to pageNumber
+			index++;
+
 			return ascending
 					? Operator.GetConfiguredQuery(QueryConfig).Where(predicate).OrderBy(orderBySelector).ToPagedList(index, pageSize)
 					: Operator.GetConfiguredQuery(QueryConfig).Where(predicate).OrderByDescending(orderBySelector).ToPagedList(index, pageSize);
-		}
-
-		[Obsolete("This method has a bug when skipping records with entity framework and was replaced by GetPage<TKey>")]
-		public virtual IPagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> predicate, int index, int pageSize)
-		{
-			return Operator.GetConfiguredQuery(QueryConfig).Where(predicate).ToPagedList(index, pageSize);
-		}
-
-		[Obsolete("This method has a bug when skipping records with entity framework and was replaced by GetPage<TKey>")]
-		public virtual IPagedList<TEntity> GetPagedList(int index, int pageSize)
-		{
-			return Operator.GetConfiguredQuery(QueryConfig).ToPagedList(index, pageSize);
 		}
 
 		public virtual ISortedPagedList<TEntity> GetSortedPagedList(int index, int pageSize, string sortKey,
@@ -126,7 +120,7 @@ namespace NecroNet.Toolkit.Data
 
 		public virtual void Remove(Expression<Func<TEntity, bool>> predicate)
 		{
-			var item = Operator.GetQuery().Where(predicate).FirstOrDefault();
+			var item = Operator.GetQuery().FirstOrDefault(predicate);
 			Operator.RemoveEntity(item);
 		}
 

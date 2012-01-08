@@ -9,13 +9,10 @@ namespace NecroNet.Toolkit.Mvc
 	public static class SelectHelper
 	{
 		public static IList<SelectListItem> ToSelectItemList<T>(this IEnumerable<T> data,
-		                                                        Expression<Func<T, string>> textSelector,
-		                                                        Expression<Func<T, object>> valueSelector,
+		                                                        Func<T, string> textSelector,
+		                                                        Func<T, object> valueSelector,
 		                                                        bool nullLine = false, string nullLineText = "--")
 		{
-			var textFunc = textSelector.Compile();
-			var valueFunc = valueSelector.Compile();
-
 			var result = new List<SelectListItem>();
 
 			if(nullLine)
@@ -23,18 +20,16 @@ namespace NecroNet.Toolkit.Mvc
 				result.Add(new SelectListItem {Text = nullLineText, Value = string.Empty});
 			}
 
-			result.AddRange(data.Select(item => new SelectListItem {Text = textFunc(item), Value = valueFunc(item).ToString()}));
+			result.AddRange(data.Select(item => new SelectListItem { Text = textSelector(item), Value = valueSelector(item).ToString() }));
 
 			return result;
 		}
 
-		public static IList<SelectListItem> ToSelectItemList<T>(this IEnumerable<T> data,
-		                                                        Expression<Func<T, string>> textSelector,
-		                                                        Expression<Func<T, object>> valueSelector,
-																object selectedValue, bool nullLine = false, string nullLineText = "--")
+		public static IList<SelectListItem> ToSelectItemList<T, TValue>(this IEnumerable<T> data,
+																		Func<T, string> textSelector,
+																		Func<T, TValue> valueSelector,
+																		TValue selectedValue, bool nullLine = false, string nullLineText = "--")
 		{
-			var textFunc = textSelector.Compile();
-			var valueFunc = valueSelector.Compile();
 			var result = new List<SelectListItem>();
 
 			if(nullLine)
@@ -43,10 +38,9 @@ namespace NecroNet.Toolkit.Mvc
 			}
 
 			result.AddRange(from item in data
-			                let value = valueFunc(item)
+							let value = valueSelector(item)
 			                select
-			                	new SelectListItem
-			                		{Text = textFunc(item), Value = value.ToString(), Selected = value.Equals(selectedValue)});
+			                	new SelectListItem { Text = textSelector(item), Value = value.ToString(), Selected = value.Equals(selectedValue) });
 
 			return result;
 		}

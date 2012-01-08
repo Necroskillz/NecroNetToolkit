@@ -4,56 +4,14 @@
         <name>NecroNet.Toolkit</name>
     </assembly>
     <members>
-        <member name="M:NecroNet.Toolkit.Slug.Generate(System.String)">
-            <summary>
-            Generates a 'slug' from string. Slugs are used for nice web page url parameters. e.g: 'NecroNet Toolkit is awesome!!' becomes 'necronet-toolkit-is-awesome'.
-            </summary>
-        </member>
-        <member name="M:NecroNet.Toolkit.Slug.Generate(System.String,System.Int32)">
-            <summary>
-            Generates a 'slug' from string and appends specified id. Slugs are used for nice web page url parameters. e.g: 'NecroNet Toolkit is awesome!!' becomes 'necronet-toolkit-is-awesome-&lt;id&gt;'.
-            </summary>
-        </member>
-        <member name="M:NecroNet.Toolkit.Data.UnitOfWork.Setup(System.Type)">
-            <summary>
-            Sets up unit of work with factory type that can create object context (<see cref="T:NecroNet.Toolkit.Data.IObjectContextFactory"/>).
-            </summary>
-            <param name="objectContextFactoryType"><see cref="T:NecroNet.Toolkit.Data.IObjectContextFactory"/> you want to use for creating object contexts.</param>
-        </member>
-        <member name="M:NecroNet.Toolkit.Data.UnitOfWork.Start">
-            <summary>
-            Starts a unit of work.
-            </summary>
-            <returns>Unit of work scope object.</returns>
-        </member>
-        <member name="P:NecroNet.Toolkit.Data.UnitOfWork.Current">
-            <summary>
-            Gets currently active unit of work.
-            </summary>
-        </member>
-        <member name="P:NecroNet.Toolkit.Data.UnitOfWork.IsStarted">
-            <summary>
-            Gets whether a unit of work has been started, and have not yet been disposed.
-            </summary>
-        </member>
-        <member name="P:NecroNet.Toolkit.Data.UnitOfWork.CurrentContext">
-            <summary>
-            Gets current underlying object context.
-            </summary>
-        </member>
         <member name="M:NecroNet.Toolkit.Data.IUnitOfWork.Flush">
             <summary>
             Persists all updates to the data source.
             </summary>
         </member>
-        <member name="T:NecroNet.Toolkit.Data.IObjectContextFactory">
+        <member name="M:NecroNet.Toolkit.Data.IUnitOfWork.BeginTransaction(System.Nullable{System.Transactions.TransactionScopeOption},System.Nullable{System.Transactions.IsolationLevel},System.Nullable{System.Int32})">
             <summary>
-            Defines a method for creating object context.
-            </summary>
-        </member>
-        <member name="M:NecroNet.Toolkit.Data.IObjectContextFactory.CreateObjectContext">
-            <summary>
-            Creates a object context.
+            Begins a transaction by creating a transaction scope.
             </summary>
         </member>
         <member name="T:NecroNet.Toolkit.ISortedPagedList`1">
@@ -74,6 +32,165 @@
             <param name="exactMatch">Specifies if only the whole word or every single word should be searched.</param>
             <param name="searchProperties">Properties to check for matches.</param>
             <returns>Query that matches specified search parameters.</returns>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetEnumerable">
+            <summary>
+            Gets collection of entities as emumerable.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetEnumerable(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets collection of entities filtered by specified predicate as emumerable.
+            </summary>
+            <param name="predicate">Predicate used to filter the collection</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetEnumerable``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean)">
+            <summary>
+            Gets collection of entities ordered by specified key in specified direction as emumerable.
+            </summary>
+            <typeparam name="TKey">Type of property used for ordering</typeparam>
+            <param name="keySelector">Selector of property used for ordering</param>
+            <param name="ascending">Sort order, true for ascending, false for descending</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetEnumerable``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean)">
+            <summary>
+            Gets collection of entities filtered by specified predicate, ordered by specified key in specified direction as emumerable.
+            </summary>
+            <typeparam name="TKey">Type of property used for ordering</typeparam>
+            <param name="predicate">Predicate used to filter the collection</param>
+            <param name="keySelector">Selector of property used for ordering</param>
+            <param name="ascending">Sort order, true for ascending, false for descending</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetQueryable">
+            <summary>
+            Gets query of entities.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetList">
+            <summary>
+            Gets a list of entities.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets a list of entities filtered by specified predicate.
+            </summary>
+            <param name="predicate">Predicate used to filter the collection</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetPage``1(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean)">
+            <summary>
+            Gets a paged list of entities ordered by specified key in specified direction.
+            </summary>
+            <typeparam name="TKey">Type of property used for ordering</typeparam>
+            <param name="index">Zero based index of current page</param>
+            <param name="pageSize">The amount of items on a page</param>
+            <param name="orderBySelector">Selector of property used for ordering</param>
+            <param name="ascending">Sort order, true for ascending, false for descending</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetPage``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean)">
+            <summary>
+            Gets a paged list of entities filtered by specified predicate, ordered by specified key in specified direction.
+            </summary>
+            <typeparam name="TKey">Type of property used for ordering</typeparam>
+            <param name="predicate">Predicate used to filter the collection</param>
+            <param name="index">Zero based index of current page</param>
+            <param name="pageSize">The amount of items on a page</param>
+            <param name="orderBySelector">Selector of property used for ordering</param>
+            <param name="ascending">Sort order, true for ascending, false for descending</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetSortedPagedList(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Gets sorted, paged list of entities.
+            </summary>
+            <param name="index">Zero based index of current page</param>
+            <param name="pageSize">The amount of items on a page</param>
+            <param name="sortKey">Name of the property to sort by</param>
+            <param name="sortDirection">Sort direction (use constants in <see cref="T:NecroNet.Toolkit.SortDirection"/>)</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetSortedPagedList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Gets sorted, paged list of entities filtered by specified predicate.
+            </summary>
+            <param name="predicate">Predicate used to filter the collection</param>
+            <param name="index">Zero based index of current page</param>
+            <param name="pageSize">The amount of items on a page</param>
+            <param name="sortKey">Name of the property to sort by</param>
+            <param name="sortDirection">Sort direction (use constants in <see cref="T:NecroNet.Toolkit.SortDirection"/>)</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Get(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets a single entity that matches specified predicate.
+            </summary>
+            <param name="predicate">Predicate indentifying the entity</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Add(`0)">
+            <summary>
+            Adds specified entity to the repository.
+            </summary>
+            <param name="entity">The entity to be added</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Remove(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Removes single entity that matches specified predicate from the repository.
+            </summary>
+            <param name="predicate">Predicate indentifying the entity</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Remove(`0)">
+            <summary>
+            Removes specified entity from the repository.
+            </summary>
+            <param name="entity">The entity to be removed</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.RemoveRange(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Removes all entities that match specified predicate from the repository.
+            </summary>
+            <param name="predicate">Predicate indentifying the entities</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Count(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets the count of all entitites that match specified predicate in the repository.
+            </summary>
+            <param name="predicate">Predicate indentifying the entities</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Count">
+            <summary>
+            Gets the count of all entitites in the repository.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.WithInclude``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Registers an include (eager load) of specified property for the next query.
+            </summary>
+            <typeparam name="TProperty">Type of property to include</typeparam>
+            <param name="includeSelector">Selector of property to include</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.WithInclude(System.String)">
+            <summary>
+            Registers an include (eager load) of specified property for the next query.
+            </summary>
+            <param name="include">Name of property to include</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Clear">
+            <summary>
+            Removes all entities from the repository.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Update(`0)">
+            <summary>
+            Marks the specified property as updated. (this method may not be supported by all types of repository, e.g. if entities are self tracking)
+            </summary>
+            <param name="entity">The updated entity</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Slug.Generate(System.String)">
+            <summary>
+            Generates a 'slug' from string. Slugs are used for nice web page url parameters. e.g: 'NecroNet Toolkit is awesome!!' becomes 'necronet-toolkit-is-awesome'.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Slug.Generate(System.String,System.Int32)">
+            <summary>
+            Generates a 'slug' from string and appends specified id. Slugs are used for nice web page url parameters. e.g: 'NecroNet Toolkit is awesome!!' becomes 'necronet-toolkit-is-awesome-&lt;id&gt;'.
+            </summary>
         </member>
         <member name="M:NecroNet.Toolkit.Mail.IMailBot.SendMail(System.Net.Mail.MailMessage,System.Boolean)">
             <summary>
@@ -167,21 +284,78 @@
             Event, that fires when sending of a single email is completed. Fires once for every email.
             </summary>
         </member>
+        <member name="M:NecroNet.Toolkit.Guard.IsNotNull(System.Object,System.String,System.String)">
+            <summary>
+            Checks if value of object is null. If it is, throws <see cref="T:System.ArgumentException"/>.
+            </summary>
+            <param name="value">The object to check</param>
+            <param name="parameterName">Name to identify the parameter</param>
+            <param name="exceptionMessage">Message to pass to the exception</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Guard.IsNotNullOrEmpty(System.String,System.String,System.String)">
+            <summary>
+            Checks if string is null or empty. If it is, throws <see cref="T:System.ArgumentException"/>.
+            </summary>
+            <param name="value">The string to check</param>
+            <param name="parameterName">Name to identify the parameter</param>
+            <param name="exceptionMessage">Message to pass to the exception</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Guard.IsNot404(System.Object)">
+            <summary>
+            Checks if value of object is null. If it is, throws <see cref="T:NecroNet.Toolkit.Mvc.Http404Exception"/>.
+            </summary>
+            <param name="value">The object to check</param>
+        </member>
         <member name="M:NecroNet.Toolkit.StringExtensions.ToSlug(System.String,System.Char)">
             <summary>
             Converts string to 'slug', used in web page urls. Removes all symbols, converts to lowercase and replaces white spaces with specified delimiter.
             </summary>
-            <param name="delimiter">The delimiter to replace white spaces with.</param>
         </member>
         <member name="M:NecroNet.Toolkit.StringExtensions.ToCsv(System.Collections.Generic.IEnumerable{System.String},System.String)">
             <summary>
-            Converts a a set of strings to csv format, delimited by specified delimiter.
+            Converts a set of strings to csv format, delimited by specified delimiter.
             </summary>
-            <param name="delimiter">The separator.</param>
         </member>
         <member name="M:NecroNet.Toolkit.StringExtensions.IsNumeric(System.String)">
             <summary>
             Determines whether this string is a number (i.e. can be converted to double)
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.UnitOfWork.Setup(System.Type)">
+            <summary>
+            Sets up unit of work with factory type that can create object context (<see cref="T:NecroNet.Toolkit.Data.IObjectContextFactory"/>).
+            </summary>
+            <param name="objectContextFactoryType"><see cref="T:NecroNet.Toolkit.Data.IObjectContextFactory"/> you want to use for creating object contexts.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.UnitOfWork.Start">
+            <summary>
+            Starts a unit of work.
+            </summary>
+            <returns>Unit of work scope object.</returns>
+        </member>
+        <member name="P:NecroNet.Toolkit.Data.UnitOfWork.Current">
+            <summary>
+            Gets currently active unit of work.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Data.UnitOfWork.IsStarted">
+            <summary>
+            Gets whether a unit of work has been started, and have not yet been disposed.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Data.UnitOfWork.CurrentContext">
+            <summary>
+            Gets current underlying object context.
+            </summary>
+        </member>
+        <member name="T:NecroNet.Toolkit.Data.IObjectContextFactory">
+            <summary>
+            Defines a method for creating object context.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IObjectContextFactory.CreateObjectContext">
+            <summary>
+            Creates a object context.
             </summary>
         </member>
     </members>

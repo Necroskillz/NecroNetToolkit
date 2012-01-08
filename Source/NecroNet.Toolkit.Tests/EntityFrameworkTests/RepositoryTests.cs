@@ -238,7 +238,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 			IPagedList<Person> people = _personRepository.GetPage(1, 5, p => p.Id);
 
 			Assert.That(people, Has.Count.EqualTo(5));
-			Assert.That(people.PageIndex, Is.EqualTo(1));
+			Assert.That(people.PageNumber, Is.EqualTo(2));
 
 			int id = 6;
 			foreach(var person in people)
@@ -253,7 +253,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 			IPagedList<Person> people = _personRepository.GetPage(p => p.Id < 10, 1, 3, p=>p.Id);
 
 			Assert.That(people, Has.Count.EqualTo(3));
-			Assert.That(people.PageIndex, Is.EqualTo(1));
+			Assert.That(people.PageNumber, Is.EqualTo(2));
 
 			int id = 4;
 			foreach(var person in people)
@@ -269,7 +269,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 
 			Assert.That(people, Has.Count.EqualTo(5));
 			Assert.That(people, Is.Ordered.By("Firstname"));
-			Assert.That(people.PageIndex, Is.EqualTo(2));
+			Assert.That(people.PageNumber, Is.EqualTo(3));
 		}
 
 		[Test]
@@ -279,7 +279,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 
 			Assert.That(people, Has.Count.EqualTo(5));
 			Assert.That(people, Is.Ordered.By("Firstname").Descending);
-			Assert.That(people.PageIndex, Is.EqualTo(2));
+			Assert.That(people.PageNumber, Is.EqualTo(3));
 		}
 
 		[Test]
@@ -289,7 +289,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 
 			Assert.That(people, Has.Count.EqualTo(4));
 			Assert.That(people, Is.Ordered.By("Firstname"));
-			Assert.That(people.PageIndex, Is.EqualTo(1));
+			Assert.That(people.PageNumber, Is.EqualTo(2));
 			Assert.That(people.IsLastPage, Is.True);
 
 			foreach(var person in people)
@@ -305,7 +305,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 
 			Assert.That(people, Has.Count.EqualTo(4));
 			Assert.That(people, Is.Ordered.By("Firstname").Descending);
-			Assert.That(people.PageIndex, Is.EqualTo(1));
+			Assert.That(people.PageNumber, Is.EqualTo(2));
 			Assert.That(people.IsLastPage, Is.True);
 
 			foreach(var person in people)
