@@ -17,17 +17,17 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		[TestFixtureSetUp]
 		public void FixtureSetUp()
 		{
-			UnitOfWork.Setup(typeof(FakeObjectContextFactory));
+			UnitOfWork.Register<FakeObjectContext, FakeObjectContextFactory>();
 		}
 
 		[Test]
 		public void UnitOfWork_Start_ShouldStartUnitOfWork()
 		{
-			using(var uow = UnitOfWork.Start())
+			using(var uow = UnitOfWork.Start<FakeObjectContext>())
 			{
 				Assert.That(uow, Is.Not.Null);
-				Assert.That(UnitOfWork.IsStarted);
-				Assert.That(uow, Is.SameAs(UnitOfWork.Current));
+				Assert.That(UnitOfWork.IsStarted<FakeObjectContext>());
+				Assert.That(uow, Is.SameAs(UnitOfWork.GetCurrent<FakeObjectContext>()));
 			}
 		}
 

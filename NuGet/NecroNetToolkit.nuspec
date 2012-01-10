@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NecroNetToolkit</id>
-    <version>0.2.4.1</version>
+    <version>0.2.5</version>
 
     <authors>Necros</authors>
     <owners>Necros</owners>
@@ -12,7 +12,7 @@
     <description>NecroNetToolkit is a set of tools that simplify and help with development of smaller projects based on ASP.NET MVC and Entity Framework.</description>
     <tags>ASP.NET MVC MVC3 EF</tags>
     <dependencies>
-	<dependency id="PagedList" version="1.2.1.0" />
+	<dependency id="PagedList" version="1.10" />
 	<dependency id="EntityFramework" version="4.1" />
 	<dependency id="RazorEngine" version="2.1" />
     </dependencies>
