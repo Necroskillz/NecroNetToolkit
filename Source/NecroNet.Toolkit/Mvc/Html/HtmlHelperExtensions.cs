@@ -30,17 +30,11 @@ namespace NecroNet.Toolkit.Mvc.Html
 			return helper.Submit(text, null);
 		}
 
-		[Obsolete("Use standard Html.Raw instead.")]
-		public static MvcHtmlString Markup(this HtmlHelper helper, string html)
-		{
-			return MvcHtmlString.Create(html);
-		}
-
 		public static MvcHtmlString SimpleLabelFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression)
 		{
-			var property = ((MemberExpression)expression.Body).Member;
-			var displayNameAttribute = property.GetCustomAttributes(typeof(DisplayNameAttribute), false).FirstOrDefault();
-			string text = displayNameAttribute == null ? property.Name : ((DisplayNameAttribute)displayNameAttribute).DisplayName;
+			var metadata = ModelMetadata.FromLambdaExpression(expression, helper.ViewData);
+
+			var text = metadata.DisplayName ?? metadata.PropertyName;
 
 			return helper.SimpleLabel(text);
 		}
@@ -54,7 +48,9 @@ namespace NecroNet.Toolkit.Mvc.Html
 
 		public static MvcHtmlString RadioGroupFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> items)
 		{
-			var name = ((MemberExpression)expression.Body).Member.Name;
+			var property = ExpressionHelper.GetExpressionText(expression);
+			var name = helper.ViewData.TemplateInfo.GetFullHtmlFieldName(property);
+
 			var div = new TagBuilder("div");
 			div.MergeAttribute("id", name);
 
@@ -71,6 +67,13 @@ namespace NecroNet.Toolkit.Mvc.Html
 				if(item.Selected)
 				{
 					radio.MergeAttribute("checked", "checked");
+				}
+				else
+				{
+					if(radio.Attributes.ContainsKey("checked"))
+					{
+						radio.Attributes.Remove("checked");
+					}
 				}
 
 				builder.Append(radio.ToString());

@@ -15,7 +15,7 @@ namespace NecroNet.Toolkit.Data
 		IEnumerable<TEntity> GetEnumerable();
 
 		/// <summary>
-		/// Gets collection of entities filtered by specified predicate as emumerable.
+		/// Gets collection of entities filtered by specified pageNumber as emumerable.
 		/// </summary>
 		/// <param name="predicate">Predicate used to filter the collection</param>
 		IEnumerable<TEntity> GetEnumerable(Expression<Func<TEntity, bool>> predicate);
@@ -29,7 +29,7 @@ namespace NecroNet.Toolkit.Data
 		IEnumerable<TEntity> GetEnumerable<TKey>(Expression<Func<TEntity, TKey>> keySelector, bool ascending = true);
 
 		/// <summary>
-		/// Gets collection of entities filtered by specified predicate, ordered by specified key in specified direction as emumerable.
+		/// Gets collection of entities filtered by specified pageNumber, ordered by specified key in specified direction as emumerable.
 		/// </summary>
 		/// <typeparam name="TKey">Type of property used for ordering</typeparam>
 		/// <param name="predicate">Predicate used to filter the collection</param>
@@ -49,7 +49,7 @@ namespace NecroNet.Toolkit.Data
 		IList<TEntity> GetList();
 
 		/// <summary>
-		/// Gets a list of entities filtered by specified predicate.
+		/// Gets a list of entities filtered by specified pageNumber.
 		/// </summary>
 		/// <param name="predicate">Predicate used to filter the collection</param>
 		IList<TEntity> GetList(Expression<Func<TEntity, bool>> predicate);
@@ -58,45 +58,45 @@ namespace NecroNet.Toolkit.Data
 		/// Gets a paged list of entities ordered by specified key in specified direction.
 		/// </summary>
 		/// <typeparam name="TKey">Type of property used for ordering</typeparam>
-		/// <param name="index">Zero based index of current page</param>
+		/// <param name="pageNumber">Number of current page</param>
 		/// <param name="pageSize">The amount of items on a page</param>
 		/// <param name="orderBySelector">Selector of property used for ordering</param>
 		/// <param name="ascending">Sort order, true for ascending, false for descending</param>
-		IPagedList<TEntity> GetPage<TKey>(int index, int pageSize, Expression<Func<TEntity, TKey>> orderBySelector, bool ascending = true);
+		IPagedList<TEntity> GetPage<TKey>(int pageNumber, int pageSize, Expression<Func<TEntity, TKey>> orderBySelector, bool ascending = true);
 
 		/// <summary>
-		/// Gets a paged list of entities filtered by specified predicate, ordered by specified key in specified direction.
+		/// Gets a paged list of entities filtered by specified pageNumber, ordered by specified key in specified direction.
 		/// </summary>
 		/// <typeparam name="TKey">Type of property used for ordering</typeparam>
 		/// <param name="predicate">Predicate used to filter the collection</param>
-		/// <param name="index">Zero based index of current page</param>
+		/// <param name="pageNumber">Number of current page</param>
 		/// <param name="pageSize">The amount of items on a page</param>
 		/// <param name="orderBySelector">Selector of property used for ordering</param>
 		/// <param name="ascending">Sort order, true for ascending, false for descending</param>
-		IPagedList<TEntity> GetPage<TKey>(Expression<Func<TEntity, bool>> predicate, int index, int pageSize, Expression<Func<TEntity, TKey>> orderBySelector, bool ascending = true);
+		IPagedList<TEntity> GetPage<TKey>(Expression<Func<TEntity, bool>> predicate, int pageNumber, int pageSize, Expression<Func<TEntity, TKey>> orderBySelector, bool ascending = true);
 
 		/// <summary>
 		/// Gets sorted, paged list of entities.
 		/// </summary>
-		/// <param name="index">Zero based index of current page</param>
+		/// <param name="pageNumber">Number of current page</param>
 		/// <param name="pageSize">The amount of items on a page</param>
 		/// <param name="sortKey">Name of the property to sort by</param>
 		/// <param name="sortDirection">Sort direction (use constants in <see cref="SortDirection"/>)</param>
-		ISortedPagedList<TEntity> GetSortedPagedList(int index, int pageSize, string sortKey, string sortDirection);
+		ISortedPagedList<TEntity> GetSortedPagedList(int pageNumber, int pageSize, string sortKey, string sortDirection);
 
 		/// <summary>
-		/// Gets sorted, paged list of entities filtered by specified predicate.
+		/// Gets sorted, paged list of entities filtered by specified pageNumber.
 		/// </summary>
-		/// <param name="predicate">Predicate used to filter the collection</param>
-		/// <param name="index">Zero based index of current page</param>
+		/// <param name="pageNumber">Predicate used to filter the collection</param>
+		/// <param name="index">Number of current page</param>
 		/// <param name="pageSize">The amount of items on a page</param>
 		/// <param name="sortKey">Name of the property to sort by</param>
 		/// <param name="sortDirection">Sort direction (use constants in <see cref="SortDirection"/>)</param>
-		ISortedPagedList<TEntity> GetSortedPagedList(Expression<Func<TEntity, bool>> predicate, int index, int pageSize,
+		ISortedPagedList<TEntity> GetSortedPagedList(Expression<Func<TEntity, bool>> pageNumber, int index, int pageSize,
 		                                             string sortKey, string sortDirection);
 
 		/// <summary>
-		/// Gets a single entity that matches specified predicate.
+		/// Gets a single entity that matches specified pageNumber.
 		/// </summary>
 		/// <param name="predicate">Predicate indentifying the entity</param>
 		TEntity Get(Expression<Func<TEntity, bool>> predicate);
@@ -108,7 +108,7 @@ namespace NecroNet.Toolkit.Data
 		void Add(TEntity entity);
 
 		/// <summary>
-		/// Removes single entity that matches specified predicate from the repository.
+		/// Removes single entity that matches specified pageNumber from the repository.
 		/// </summary>
 		/// <param name="predicate">Predicate indentifying the entity</param>
 		void Remove(Expression<Func<TEntity, bool>> predicate);
@@ -120,13 +120,13 @@ namespace NecroNet.Toolkit.Data
 		void Remove(TEntity entity);
 
 		/// <summary>
-		/// Removes all entities that match specified predicate from the repository.
+		/// Removes all entities that match specified pageNumber from the repository.
 		/// </summary>
 		/// <param name="predicate">Predicate indentifying the entities</param>
 		void RemoveRange(Expression<Func<TEntity, bool>> predicate);
 
 		/// <summary>
-		/// Gets the count of all entitites that match specified predicate in the repository.
+		/// Gets the count of all entitites that match specified pageNumber in the repository.
 		/// </summary>
 		/// <param name="predicate">Predicate indentifying the entities</param>
 		int Count(Expression<Func<TEntity, bool>> predicate);

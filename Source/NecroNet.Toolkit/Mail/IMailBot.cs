@@ -27,9 +27,9 @@ namespace NecroNet.Toolkit.Mail
 		/// </summary>
 		/// <param name="to">Address of the recipient.</param>
 		/// <param name="subject">Subject of the email message.</param>
-		/// <param name="templateView">Partial view (.ascx) used to render email body.</param>
+		/// <param name="templateViewName">Name of partial view used to render email body.</param>
 		/// <param name="model">Model for the specified view.</param>
-		void SendHtmlMail(string to, string subject, string templateView, object model);
+		void SendHtmlMail(string to, string subject, string templateViewName, object model);
 
 		/// <summary>
 		/// Sends an email with html body and specified subject to a multiple recipients.
@@ -38,31 +38,9 @@ namespace NecroNet.Toolkit.Mail
 		/// </summary>
 		/// <param name="to">Addresses of recipients.</param>
 		/// <param name="subject">Subject of the email message.</param>
-		/// <param name="templateView">Partial view (.ascx) used to render email body.</param>
+		/// <param name="templateViewName">Name of partial view used to render email body.</param>
 		/// <param name="model">Model for the specified view.</param>
-		void SendMassHtmlMail(IEnumerable<string> to, string subject, string templateView, object model);
-
-		/// <summary>
-		/// Sends an email with html body and specified subject to a single recipient.
-		/// Body is rendered by using asp.net mvc view and a model. (some restrictions apply)
-		/// Uses razor view format.
-		/// </summary>
-		/// <param name="to">Address of the recipient.</param>
-		/// <param name="subject">Subject of the email message.</param>
-		/// <param name="templateView">Partial view (.cshtml) used to render email body.</param>
-		/// <param name="model">Model for the specified view.</param>
-		void SendRazorMail<TModel>(string to, string subject, string templateView, TModel model);
-
-		/// <summary>
-		/// Sends an email with html body and specified subject to a multiple recipients.
-		/// Body is rendered by using asp.net mvc view and a model. (some restrictions apply)
-		/// Uses razor view format.
-		/// </summary>
-		/// <param name="to">Addresses of recipients.</param>
-		/// <param name="subject">Subject of the email message.</param>
-		/// <param name="templateView">Partial view (.cshtml) used to render email body.</param>
-		/// <param name="model">Model for the specified view.</param>
-		void SendMassRazorMail<TModel>(IEnumerable<string> to, string subject, string templateView, TModel model);
+		void SendMassHtmlMail(IEnumerable<string> to, string subject, string templateViewName, object model);
 
 		/// <summary>
 		/// Sends an email with text body and specified subject to a single recipient.
@@ -73,31 +51,11 @@ namespace NecroNet.Toolkit.Mail
 		void SendTextMail(string to, string subject, string body);
 
 		/// <summary>
-		/// Sends an email with text body and specified subject to a single recipient.
-		/// Body is rendered with string.Format(bodyTemplate, args) method.
-		/// </summary>
-		/// <param name="to">Address of the recipient.</param>
-		/// <param name="subject">Subject of the email message.</param>
-		/// <param name="bodyTemplate">Text format for the email body.</param>
-		/// <param name="args">Arguments for the email body format.</param>
-		void SendTextMail(string to, string subject, string bodyTemplate, params object[] args);
-
-		/// <summary>
 		/// Sends an email with text body and specified subject to a multiple recipients.
 		/// </summary>
 		/// <param name="to">Addresses of recipients.</param>
 		/// <param name="subject">Subject of the email message.</param>
 		/// <param name="body">Text representing the email body.</param>
 		void SendMassTextMail(IEnumerable<string> to, string subject, string body);
-
-		/// <summary>
-		/// Sends an email with text body and specified subject to a multiple recipients.
-		/// Body is rendered with string.Format(bodyTemplate, args) method.
-		/// </summary>
-		/// <param name="to">Addresses of recipients.</param>
-		/// <param name="subject">Subject of the email message.</param>
-		/// <param name="bodyTemplate">Text format for the email body.</param>
-		/// <param name="args">Arguments for the email body format.</param>
-		void SendMassTextMail(IEnumerable<string> to, string subject, string bodyTemplate, params object[] args);
 	}
 }

@@ -113,6 +113,12 @@
     <Compile Include="Data\UnitOfWork\UnitOfWorkImplementor.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="Configuration\Mail\HostElement.cs" />
+    <Compile Include="Internals\ExceptionHelper.cs" />
+    <Compile Include="Mail\EmailHttpContext.cs" />
+    <Compile Include="Mail\EmailHttpRequest.cs" />
+    <Compile Include="Mail\EmailHttpResponse.cs" />
+    <Compile Include="Mail\EmailRenderer.cs" />
+    <Compile Include="Mail\IEmailRenderer.cs" />
     <Compile Include="Mvc\ActionResults\RssResult.cs" />
     <Compile Include="Mvc\Html\HtmlHelperExtensions.cs" />
     <Compile Include="Mvc\Http404Exception.cs" />

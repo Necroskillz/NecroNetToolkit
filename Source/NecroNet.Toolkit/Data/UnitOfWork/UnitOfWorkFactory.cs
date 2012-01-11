@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NecroNet.Toolkit.Internals;
 
 namespace NecroNet.Toolkit.Data
 {
@@ -11,7 +12,6 @@ namespace NecroNet.Toolkit.Data
 		}
 
 		private const string ObjectContextStoreKey = "ObjectContextStore.Key";
-
 		private static Dictionary<string, IObjectContext> ObjectContextStore
 		{
 			get
@@ -54,6 +54,11 @@ namespace NecroNet.Toolkit.Data
 			return store.ContainsKey(key) ? store[key] : null;
 		}
 
+		private IObjectContext CreateContext()
+		{
+			return ContextFactory.CreateObjectContext();
+		}
+
 		public IUnitOfWork Create()
 		{
 			var context = CreateContext();
@@ -70,7 +75,7 @@ namespace NecroNet.Toolkit.Data
 				var context = RetrieveObjectContext();
 				if(context == null)
 				{
-					throw new InvalidOperationException(string.Format("You are not in a unit of work of type {0}.", GetKey()));
+					ExceptionHelper.ThrowInvalidOp("You are not in a unit of work of type '{0}'.", GetKey());
 				}
 
 				return context;
@@ -86,11 +91,6 @@ namespace NecroNet.Toolkit.Data
 			StoreObjectContext(null);
 
 			UnitOfWork.DisposeUnitOfWork<TObjectContext>();
-		}
-
-		private IObjectContext CreateContext()
-		{
-			return ContextFactory.CreateObjectContext();
 		}
 	}
 }

@@ -43,37 +43,31 @@ namespace NecroNet.Toolkit.Data
 			return Operator.GetConfiguredQuery(QueryConfig).Where(predicate).ToList();
 		}
 
-		public IPagedList<TEntity> GetPage<TKey>(int index, int pageSize, Expression<Func<TEntity, TKey>> orderBySelector, bool ascending)
+		public IPagedList<TEntity> GetPage<TKey>(int pageNumber, int pageSize, Expression<Func<TEntity, TKey>> orderBySelector, bool ascending)
 		{
-			// convert to pageNumber
-			index++;
-
 			return ascending
-					? Operator.GetConfiguredQuery(QueryConfig).OrderBy(orderBySelector).ToPagedList(index, pageSize)
-					: Operator.GetConfiguredQuery(QueryConfig).OrderByDescending(orderBySelector).ToPagedList(index, pageSize);
+					? Operator.GetConfiguredQuery(QueryConfig).OrderBy(orderBySelector).ToPagedList(pageNumber, pageSize)
+					: Operator.GetConfiguredQuery(QueryConfig).OrderByDescending(orderBySelector).ToPagedList(pageNumber, pageSize);
 		}
 
-		public IPagedList<TEntity> GetPage<TKey>(Expression<Func<TEntity, bool>> predicate, int index, int pageSize, Expression<Func<TEntity, TKey>> orderBySelector, bool ascending)
+		public IPagedList<TEntity> GetPage<TKey>(Expression<Func<TEntity, bool>> predicate, int pageNumber, int pageSize, Expression<Func<TEntity, TKey>> orderBySelector, bool ascending)
 		{
-			// convert to pageNumber
-			index++;
-
 			return ascending
-					? Operator.GetConfiguredQuery(QueryConfig).Where(predicate).OrderBy(orderBySelector).ToPagedList(index, pageSize)
-					: Operator.GetConfiguredQuery(QueryConfig).Where(predicate).OrderByDescending(orderBySelector).ToPagedList(index, pageSize);
+					? Operator.GetConfiguredQuery(QueryConfig).Where(predicate).OrderBy(orderBySelector).ToPagedList(pageNumber, pageSize)
+					: Operator.GetConfiguredQuery(QueryConfig).Where(predicate).OrderByDescending(orderBySelector).ToPagedList(pageNumber, pageSize);
 		}
 
-		public virtual ISortedPagedList<TEntity> GetSortedPagedList(int index, int pageSize, string sortKey,
+		public virtual ISortedPagedList<TEntity> GetSortedPagedList(int pageNumber, int pageSize, string sortKey,
 																	string sortDirection)
 		{
-			return Operator.GetConfiguredQuery(QueryConfig).ToSortedPagedList(index, pageSize, sortKey, sortDirection);
+			return Operator.GetConfiguredQuery(QueryConfig).ToSortedPagedList(pageNumber, pageSize, sortKey, sortDirection);
 		}
 
-		public virtual ISortedPagedList<TEntity> GetSortedPagedList(Expression<Func<TEntity, bool>> predicate,
+		public virtual ISortedPagedList<TEntity> GetSortedPagedList(Expression<Func<TEntity, bool>> pageNumber,
 																	int index, int pageSize, string sortKey,
 																	string sortDirection)
 		{
-			return Operator.GetConfiguredQuery(QueryConfig).Where(predicate).ToSortedPagedList(index, pageSize, sortKey, sortDirection);
+			return Operator.GetConfiguredQuery(QueryConfig).Where(pageNumber).ToSortedPagedList(index, pageSize, sortKey, sortDirection);
 		}
 
 		public virtual IEnumerable<TEntity> GetEnumerable()

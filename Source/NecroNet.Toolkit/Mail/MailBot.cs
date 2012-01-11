@@ -4,18 +4,16 @@ using System.Configuration;
 using System.IO;
 using System.Net.Mail;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.UI;
 using NecroNet.Toolkit.Configuration;
-using RazorEngine;
 
 namespace NecroNet.Toolkit.Mail
 {
 	public class MailBot : IMailBot
 	{
-		private static readonly NecroNetToolkitMailConfigurationElement _config;
+		private static readonly NecroNetToolkitMailConfigurationElement Config;
 		private int _queuedMails;
 		private bool _disposed;
 
@@ -27,7 +25,7 @@ namespace NecroNet.Toolkit.Mail
 				if(_smtpClient == null)
 				{
 					_smtpClient = new SmtpClient();
-					if(_config.Host.UseSsl)
+					if(Config.Host.UseSsl)
 					{
 						_smtpClient.EnableSsl = true;
 					}
@@ -37,15 +35,22 @@ namespace NecroNet.Toolkit.Mail
 			}
 		}
 
+		private readonly IEmailRenderer _emailRenderer;
+
 		static MailBot()
 		{
 			NecroNetToolkitConfigurationManager.EnsureConfig();
 
-			_config = NecroNetToolkitConfigurationManager.Configuration.Mail;
-			if(_config == null)
+			Config = NecroNetToolkitConfigurationManager.Configuration.Mail;
+			if(Config == null)
 			{
 				throw new ConfigurationErrorsException("Configuration element 'mail' in section 'necroNetToolkit' was not found.");
 			}
+		}
+
+		public MailBot()
+		{
+			_emailRenderer = new EmailRenderer(ViewEngines.Engines, null);
 		}
 
 		public void Dispose()
@@ -65,32 +70,12 @@ namespace NecroNet.Toolkit.Mail
 
 		public event EventHandler<EmailSendingCompletedEventArgs> SendingCompleted;
 
-		public void RaiseSendingCompleted(bool success, IEnumerable<MailAddress> to, string subject, string body, Exception exception = null)
+		private void RaiseSendingCompleted(bool success, IEnumerable<MailAddress> to, string subject, string body, Exception exception = null)
 		{
 			if(SendingCompleted != null)
 			{
 				SendingCompleted(this, new EmailSendingCompletedEventArgs(success, to, subject, body, exception));
 			}
-		}
-
-		private static string RenderPartialToString(string controlName, object model)
-		{
-			var viewData = new ViewDataDictionary(model);
-			var viewPage = new ViewPage { ViewData = viewData };
-			var control = viewPage.LoadControl(controlName);
-
-			viewPage.Controls.Add(control);
-
-			var builder = new StringBuilder();
-			using(var stringWriter = new StringWriter(builder))
-			{
-				using(var textWriter = new HtmlTextWriter(stringWriter))
-				{
-					viewPage.RenderControl(textWriter);
-				}
-			}
-
-			return builder.ToString();
 		}
 
 		private static MailMessage PrepareMessage()
@@ -103,12 +88,12 @@ namespace NecroNet.Toolkit.Mail
 
 		private static void PopulateMessage(MailMessage message)
 		{
-			var replyTo = _config.ReplyTo.MailAddress;
-			var sender = _config.Sender.MailAddress;
+			var replyTo = Config.ReplyTo.MailAddress;
+			var sender = Config.Sender.MailAddress;
 
-			message.From = _config.From.MailAddress;
-			message.SubjectEncoding = Encoding.GetEncoding(_config.Encoding.Subject);
-			message.BodyEncoding = Encoding.GetEncoding(_config.Encoding.Body);
+			message.From = Config.From.MailAddress;
+			message.SubjectEncoding = Encoding.GetEncoding(Config.Encoding.Subject);
+			message.BodyEncoding = Encoding.GetEncoding(Config.Encoding.Body);
 
 			if (replyTo != null)
 			{
@@ -130,15 +115,15 @@ namespace NecroNet.Toolkit.Mail
 			SendAsync(message);
 		}
 
-		public void SendHtmlMail(string to, string subject, string templateView, object model)
+		public void SendHtmlMail(string to, string subject, string templateViewName, object model)
 		{
-			SendMassHtmlMail(new[] { to }, subject, templateView, model);
+			SendMassHtmlMail(new[] { to }, subject, templateViewName, model);
 		}
 
-		public void SendMassHtmlMail(IEnumerable<string> to, string subject, string templateView, object model)
+		public void SendMassHtmlMail(IEnumerable<string> to, string subject, string templateViewName, object model)
 		{
 			var message = PrepareMessage();
-			message.Body = RenderPartialToString(templateView, model);
+			message.Body = _emailRenderer.Render(templateViewName, model);
 			message.IsBodyHtml = true;
 			message.Subject = subject;
 			
@@ -150,47 +135,9 @@ namespace NecroNet.Toolkit.Mail
 			SendAsync(message);
 		}
 
-		public void SendRazorMail<TModel>(string to, string subject, string templateViewServerPath, TModel model)
-		{
-			SendMassRazorMail(new[] { to }, subject, templateViewServerPath, model);
-		}
-
-		public void SendMassRazorMail<TModel>(IEnumerable<string> to, string subject, string templateViewServerPath, TModel model)
-		{
-			var message = PrepareMessage();
-			message.Body = ParseRazorTemplate(templateViewServerPath, model);
-			message.IsBodyHtml = true;
-			message.Subject = subject;
-
-			foreach (var recipient in to)
-			{
-				message.To.Add(recipient);
-			}
-
-			SendAsync(message);
-		}
-
-		private static string ParseRazorTemplate<TModel>(string templateViewServerPath, TModel model)
-		{
-			var template = File.ReadAllText(templateViewServerPath);
-			template = Regex.Replace(template, "@model .*", string.Empty);
-
-			return Razor.Parse(template, model);
-		}
-
-		public void SendTextMail(string to, string subject, string bodyTemplate, params object[] args)
-		{
-			SendTextMail(to, subject, string.Format(bodyTemplate, args));
-		}
-
 		public void SendTextMail(string to, string subject, string body)
 		{
 			SendMassTextMail(new[] { to }, subject, body);
-		}
-
-		public void SendMassTextMail(IEnumerable<string> to, string subject, string bodyTemplate, params object[] args)
-		{
-			SendMassTextMail(to, subject, string.Format(bodyTemplate, args));
 		}
 
 		public void SendMassTextMail(IEnumerable<string> to, string subject, string body)

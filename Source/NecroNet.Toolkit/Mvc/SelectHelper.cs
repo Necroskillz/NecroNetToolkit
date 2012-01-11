@@ -10,7 +10,7 @@ namespace NecroNet.Toolkit.Mvc
 	{
 		public static IList<SelectListItem> ToSelectItemList<T>(this IEnumerable<T> data,
 		                                                        Func<T, string> textSelector,
-		                                                        Func<T, dynamic> valueSelector,
+		                                                        Func<T, object> valueSelector,
 		                                                        bool nullLine = false, string nullLineText = "--")
 		{
 			var result = new List<SelectListItem>();
@@ -27,8 +27,8 @@ namespace NecroNet.Toolkit.Mvc
 
 		public static IList<SelectListItem> ToSelectItemList<T>(this IEnumerable<T> data,
 																Func<T, string> textSelector,
-																Func<T, dynamic> valueSelector,
-																dynamic selectedValue, bool nullLine = false, string nullLineText = "--")
+																Func<T, object> valueSelector,
+																object selectedValue, bool nullLine = false, string nullLineText = "--")
 		{
 			var result = new List<SelectListItem>();
 

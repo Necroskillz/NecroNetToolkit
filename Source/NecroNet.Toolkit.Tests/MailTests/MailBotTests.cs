@@ -29,9 +29,9 @@ namespace NecroNet.Toolkit.Tests.MailTests
 
 		private IMailBot _mailBot;
 
-		public void SendMail(Action sendAction)
+		private void SendMail(Action sendAction)
 		{
-			if(Directory.Exists(MailDirectory))
+			if (Directory.Exists(MailDirectory))
 			{
 				Directory.Delete(MailDirectory, true);
 			}
@@ -47,7 +47,7 @@ namespace NecroNet.Toolkit.Tests.MailTests
 			sendAction();
 
 			var fieldInfo = typeof(MailBot).GetField("_queuedMails", BindingFlags.NonPublic | BindingFlags.Instance);
-			while((int)fieldInfo.GetValue(_mailBot) != 0)
+			while ((int)fieldInfo.GetValue(_mailBot) != 0)
 			{
 				Thread.Sleep(10);
 			}
@@ -71,21 +71,9 @@ namespace NecroNet.Toolkit.Tests.MailTests
 		}
 
 		[Test]
-		public void MailBot_SendTextMailParametrized_ShoudlSendAnEmailWithSpecifiedSubjectAndFormattedBodyToSpecifiedAddress()
-		{
-			SendMail(() => _mailBot.SendTextMail(EmailAddress, EmailSubject, BodyTemplate, FirstParam, SecondParam));
-
-			string mail = GetCurrentMail();
-
-			Assert.That(mail, Is.StringContaining(EmailAddress));
-			Assert.That(mail, Is.StringContaining(EmailSubject));
-			Assert.That(mail, Is.StringContaining(Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format(BodyTemplate, FirstParam, SecondParam)))));
-		}
-
-		[Test]
 		public void MailBot_SendMassTextMail_ShouldSendAnEmailWithSpecifiedBodyAndSubjectToMultipleSpecifiedAddresses()
 		{
-			SendMail(() => _mailBot.SendMassTextMail(new[] {EmailAddress, EmailAddress2}, EmailSubject, EmailBody));
+			SendMail(() => _mailBot.SendMassTextMail(new[] { EmailAddress, EmailAddress2 }, EmailSubject, EmailBody));
 
 			string mail = GetCurrentMail();
 
@@ -93,19 +81,6 @@ namespace NecroNet.Toolkit.Tests.MailTests
 			Assert.That(mail, Is.StringContaining(EmailAddress2));
 			Assert.That(mail, Is.StringContaining(EmailSubject));
 			Assert.That(mail, Is.StringContaining(Convert.ToBase64String(Encoding.UTF8.GetBytes(EmailBody))));
-		}
-
-		[Test]
-		public void MailBot_SendMassTextMailParametrized_ShoudlSendAnEmailWithSpecifiedSubjectAndFormattedBodyToMultipleSpecifiedAddresses()
-		{
-			SendMail(() => _mailBot.SendMassTextMail(new[] { EmailAddress, EmailAddress2 }, EmailSubject, BodyTemplate, FirstParam, SecondParam));
-
-			string mail = GetCurrentMail();
-
-			Assert.That(mail, Is.StringContaining(EmailAddress));
-			Assert.That(mail, Is.StringContaining(EmailAddress2));
-			Assert.That(mail, Is.StringContaining(EmailSubject));
-			Assert.That(mail, Is.StringContaining(Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format(BodyTemplate, FirstParam, SecondParam)))));
 		}
 	}
 }
