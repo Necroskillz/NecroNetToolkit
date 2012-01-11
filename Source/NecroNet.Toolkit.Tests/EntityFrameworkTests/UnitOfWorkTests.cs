@@ -17,17 +17,17 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		[TestFixtureSetUp]
 		public void FixtureSetUp()
 		{
-			UnitOfWork.Register<FakeObjectContext, FakeObjectContextFactory>();
+			UnitOfWork.RegisterDefault<FakeObjectContext, FakeObjectContextFactory>();
 		}
 
 		[Test]
 		public void UnitOfWork_Start_ShouldStartUnitOfWork()
 		{
-			using(var uow = UnitOfWork.Start<FakeObjectContext>())
+			using(var uow = UnitOfWork.Start())
 			{
 				Assert.That(uow, Is.Not.Null);
-				Assert.That(UnitOfWork.IsStarted<FakeObjectContext>());
-				Assert.That(uow, Is.SameAs(UnitOfWork.GetCurrent<FakeObjectContext>()));
+				Assert.That(UnitOfWork.IsStarted());
+				Assert.That(uow, Is.SameAs(UnitOfWork.GetCurrent()));
 			}
 		}
 
@@ -36,7 +36,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		{
 			Assert.That(() =>
 			            	{
-			            		var uow = UnitOfWork.Current;
+			            		var uow = UnitOfWork.GetCurrent();
 			            	}, Throws.InvalidOperationException);
 		}
 
@@ -55,14 +55,14 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		[Test]
 		public void UnitOfWork_Setup_ShouldThrowIfCalledMoreThanOnce()
 		{
-			Assert.That(() => UnitOfWork.Setup(typeof(FakeObjectContextFactory)), Throws.InvalidOperationException);
+			Assert.That(() => UnitOfWork.RegisterDefault<FakeObjectContext, FakeObjectContextFactory>(), Throws.InvalidOperationException);
 		}
 
 		[Test]
 		public void UnitOfWork_Start_ShouldThrowIfUnitOfWorkWasntSetUp()
 		{
-			var fieldInfo = typeof(UnitOfWork).GetField("_unitOfWorkFactory", BindingFlags.NonPublic | BindingFlags.Static);
-			fieldInfo.SetValue(null, null);
+			var fieldInfo = typeof(UnitOfWork).GetField("UnitOfWorkFactories", BindingFlags.NonPublic | BindingFlags.Static);
+			((Dictionary<string, IUnitOfWorkFactory>)fieldInfo.GetValue(null)).Remove(typeof(FakeObjectContext).FullName);
 
 			Assert.That(() => UnitOfWork.Start(), Throws.InvalidOperationException);
 		}
@@ -74,9 +74,10 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 			var factory = new Mock<IObjectContextFactory>();
 			factory.Setup(f => f.CreateObjectContext()).Returns(() => context.Object);
 
-			var fieldInfo = typeof(UnitOfWork).GetField("_unitOfWorkFactory", BindingFlags.NonPublic | BindingFlags.Static);
-			var uowFactory = fieldInfo.GetValue(null);
-			var propertyInfo = typeof (UnitOfWorkFactory).GetProperty("ContextFactory");
+			var fieldInfo = typeof(UnitOfWork).GetField("UnitOfWorkFactories", BindingFlags.NonPublic | BindingFlags.Static);
+			var uowFactory = ((Dictionary<string, IUnitOfWorkFactory>)fieldInfo.GetValue(null))[typeof(FakeObjectContext).FullName];
+
+			var propertyInfo = typeof(UnitOfWorkFactory<FakeObjectContext>).GetProperty("ContextFactory");
 			propertyInfo.SetValue(uowFactory, factory.Object, null);
 
 			using(UnitOfWork.Start())
@@ -93,9 +94,10 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 			var factory = new Mock<IObjectContextFactory>();
 			factory.Setup(f => f.CreateObjectContext()).Returns(() => context.Object);
 
-			var fieldInfo = typeof(UnitOfWork).GetField("_unitOfWorkFactory", BindingFlags.NonPublic | BindingFlags.Static);
-			var uowFactory = fieldInfo.GetValue(null);
-			var propertyInfo = typeof(UnitOfWorkFactory).GetProperty("ContextFactory");
+			var fieldInfo = typeof(UnitOfWork).GetField("UnitOfWorkFactories", BindingFlags.NonPublic | BindingFlags.Static);
+			var uowFactory = ((Dictionary<string, IUnitOfWorkFactory>)fieldInfo.GetValue(null))[typeof(FakeObjectContext).FullName];
+
+			var propertyInfo = typeof(UnitOfWorkFactory<FakeObjectContext>).GetProperty("ContextFactory");
 			propertyInfo.SetValue(uowFactory, factory.Object, null);
 
 			using (var scope = UnitOfWork.Start())
@@ -113,14 +115,15 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 			var factory = new Mock<IObjectContextFactory>();
 			factory.Setup(f => f.CreateObjectContext()).Returns(() => context.Object);
 
-			var fieldInfo = typeof(UnitOfWork).GetField("_unitOfWorkFactory", BindingFlags.NonPublic | BindingFlags.Static);
-			var uowFactory = fieldInfo.GetValue(null);
-			var propertyInfo = typeof(UnitOfWorkFactory).GetProperty("ContextFactory");
+			var fieldInfo = typeof(UnitOfWork).GetField("UnitOfWorkFactories", BindingFlags.NonPublic | BindingFlags.Static);
+			var uowFactory = ((Dictionary<string, IUnitOfWorkFactory>)fieldInfo.GetValue(null))[typeof(FakeObjectContext).FullName];
+
+			var propertyInfo = typeof(UnitOfWorkFactory<FakeObjectContext>).GetProperty("ContextFactory");
 			propertyInfo.SetValue(uowFactory, factory.Object, null);
 
 			using(UnitOfWork.Start())
 			{
-				Assert.That(UnitOfWork.CurrentContext, Is.SameAs(context.Object));
+				Assert.That(UnitOfWork.GetCurrentContext(), Is.SameAs(context.Object));
 			}
 		}
 
@@ -129,7 +132,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		{
 			Assert.That(() =>
 			            	{
-			            		var context = UnitOfWork.CurrentContext;
+			            		var context = UnitOfWork.GetCurrentContext();
 			            	}, Throws.InvalidOperationException);
 		}
 	}

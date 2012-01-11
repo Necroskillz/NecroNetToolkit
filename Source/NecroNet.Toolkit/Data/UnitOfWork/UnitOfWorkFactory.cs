@@ -33,7 +33,17 @@ namespace NecroNet.Toolkit.Data
 
 		private static void StoreObjectContext(IObjectContext objectContext)
 		{
-			ObjectContextStore.Add(GetKey(), objectContext);
+			var store = ObjectContextStore;
+			var key = GetKey();
+
+			if(store.ContainsKey(key))
+			{
+				store[key] = objectContext;
+			}
+			else
+			{
+				store.Add(GetKey(), objectContext);
+			}
 		}
 
 		private static IObjectContext RetrieveObjectContext()
@@ -73,8 +83,9 @@ namespace NecroNet.Toolkit.Data
 
 		public void DisposeUnitOfWork(UnitOfWorkImplementor adapter)
 		{
-			CurrentContext = null;
-			UnitOfWork.DisposeUnitOfWork<TObjectContext>(adapter);
+			StoreObjectContext(null);
+
+			UnitOfWork.DisposeUnitOfWork<TObjectContext>();
 		}
 
 		private IObjectContext CreateContext()
