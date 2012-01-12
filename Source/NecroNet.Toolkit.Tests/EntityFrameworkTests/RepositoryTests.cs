@@ -235,7 +235,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		[Test]
 		public void DescendantOfUltimateEntityRepositoryBaseOfPerson_GetPage_ShouldReturnPageOfPeople()
 		{
-			IPagedList<Person> people = _personRepository.GetPage(1, 5, p => p.Id);
+			IPagedList<Person> people = _personRepository.GetPage(2, 5, p => p.Id);
 
 			Assert.That(people, Has.Count.EqualTo(5));
 			Assert.That(people.PageNumber, Is.EqualTo(2));
@@ -250,7 +250,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		[Test]
 		public void DescendantOfUltimateEntityRepositoryBaseOfPerson_GetPagedListWithExpressionParameter_ShoudReturnPageOfPeopleThatSatisfySpecifiedCondition()
 		{
-			IPagedList<Person> people = _personRepository.GetPage(p => p.Id < 10, 1, 3, p=>p.Id);
+			IPagedList<Person> people = _personRepository.GetPage(p => p.Id < 10, 2, 3, p=>p.Id);
 
 			Assert.That(people, Has.Count.EqualTo(3));
 			Assert.That(people.PageNumber, Is.EqualTo(2));
@@ -265,7 +265,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		[Test]
 		public void DescendantOfUltimateEntityRepositoryBaseOfPerson_GetSortedPagedListAscending_ShouldReturnSortedPageOfPeopleAscending()
 		{
-			ISortedPagedList<Person> people = _personRepository.GetSortedPagedList(2, 5, "Firstname", SortDirection.Asc);
+			ISortedPagedList<Person> people = _personRepository.GetSortedPagedList(3, 5, "Firstname", SortDirection.Asc);
 
 			Assert.That(people, Has.Count.EqualTo(5));
 			Assert.That(people, Is.Ordered.By("Firstname"));
@@ -275,7 +275,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		[Test]
 		public void DescendantOfUltimateEntityRepositoryBaseOfPerson_GetSortedPagedListDescending_ShouldReturnSortedPageOfPeopleDescending()
 		{
-			ISortedPagedList<Person> people = _personRepository.GetSortedPagedList(2, 5, "Firstname", SortDirection.Desc);
+			ISortedPagedList<Person> people = _personRepository.GetSortedPagedList(3, 5, "Firstname", SortDirection.Desc);
 
 			Assert.That(people, Has.Count.EqualTo(5));
 			Assert.That(people, Is.Ordered.By("Firstname").Descending);
@@ -285,7 +285,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		[Test]
 		public void DescendantOfUltimateEntityRepositoryBaseOfPerson_GetSortedPagedListWithExpressionParameterAscending_ShouldReturnSortedPageOfPeopleThatSatisfySpecifiedConditionAscending()
 		{
-			ISortedPagedList<Person> people = _personRepository.GetSortedPagedList(p => p.Id < 10, 1, 5, "Firstname", SortDirection.Asc);
+			ISortedPagedList<Person> people = _personRepository.GetSortedPagedList(p => p.Id < 10, 2, 5, "Firstname", SortDirection.Asc);
 
 			Assert.That(people, Has.Count.EqualTo(4));
 			Assert.That(people, Is.Ordered.By("Firstname"));
@@ -301,7 +301,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		[Test]
 		public void DescendantOfUltimateEntityRepositoryBaseOfPerson_GetSortedPagedListWithExpressionParameterDescending_ShouldReturnSortedPageOfPeopleThatSatisfySpecifiedConditionDescending()
 		{
-			ISortedPagedList<Person> people = _personRepository.GetSortedPagedList(p => p.Id < 10, 1, 5, "Firstname", SortDirection.Desc);
+			ISortedPagedList<Person> people = _personRepository.GetSortedPagedList(p => p.Id < 10, 2, 5, "Firstname", SortDirection.Desc);
 
 			Assert.That(people, Has.Count.EqualTo(4));
 			Assert.That(people, Is.Ordered.By("Firstname").Descending);

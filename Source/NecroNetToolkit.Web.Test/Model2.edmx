@@ -1,0 +1,1541 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DoplatkyModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="DoplatkyModelStoreContainer">
+          <EntitySet Name="ATCs" EntityType="DoplatkyModel.Store.ATCs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Comments" EntityType="DoplatkyModel.Store.Comments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Countries" EntityType="DoplatkyModel.Store.Countries" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DDDMeasureUnits" EntityType="DoplatkyModel.Store.DDDMeasureUnits" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Deliveries" EntityType="DoplatkyModel.Store.Deliveries" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Drugs" EntityType="DoplatkyModel.Store.Drugs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Forms" EntityType="DoplatkyModel.Store.Forms" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="IndicationGroups" EntityType="DoplatkyModel.Store.IndicationGroups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Organizations" EntityType="DoplatkyModel.Store.Organizations" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Pharmacies" EntityType="DoplatkyModel.Store.Pharmacies" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Places" EntityType="DoplatkyModel.Store.Places" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PlacesInPostalCodes" EntityType="DoplatkyModel.Store.PlacesInPostalCodes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PopularSearches" EntityType="DoplatkyModel.Store.PopularSearches" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PostalCodes" EntityType="DoplatkyModel.Store.PostalCodes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Posts" EntityType="DoplatkyModel.Store.Posts" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Prices" EntityType="DoplatkyModel.Store.Prices" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Roles" EntityType="DoplatkyModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Searches" EntityType="DoplatkyModel.Store.Searches" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SignUpRequests" EntityType="DoplatkyModel.Store.SignUpRequests" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="DoplatkyModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UsersInRoles" EntityType="DoplatkyModel.Store.UsersInRoles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Wrappings" EntityType="DoplatkyModel.Store.Wrappings" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__Posts__UserId__412EB0B6" Association="DoplatkyModel.Store.FK__Posts__UserId__412EB0B6">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Prices" Association="DoplatkyModel.Store.FK_Comments_Prices">
+            <End Role="Prices" EntitySet="Prices" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Companies_Countries" Association="DoplatkyModel.Store.FK_Companies_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Organizations" EntitySet="Organizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drugs_ATCs" Association="DoplatkyModel.Store.FK_Drugs_ATCs">
+            <End Role="ATCs" EntitySet="ATCs" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drugs_Companies" Association="DoplatkyModel.Store.FK_Drugs_Companies">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drugs_Companies1" Association="DoplatkyModel.Store.FK_Drugs_Companies1">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drugs_DDDMeasureUnits" Association="DoplatkyModel.Store.FK_Drugs_DDDMeasureUnits">
+            <End Role="DDDMeasureUnits" EntitySet="DDDMeasureUnits" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drugs_Deliveries" Association="DoplatkyModel.Store.FK_Drugs_Deliveries">
+            <End Role="Deliveries" EntitySet="Deliveries" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drugs_Forms" Association="DoplatkyModel.Store.FK_Drugs_Forms">
+            <End Role="Forms" EntitySet="Forms" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drugs_IndicationGroups" Association="DoplatkyModel.Store.FK_Drugs_IndicationGroups">
+            <End Role="IndicationGroups" EntitySet="IndicationGroups" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drugs_Wrappings" Association="DoplatkyModel.Store.FK_Drugs_Wrappings">
+            <End Role="Wrappings" EntitySet="Wrappings" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Forms_Deliveries" Association="DoplatkyModel.Store.FK_Forms_Deliveries">
+            <End Role="Deliveries" EntitySet="Deliveries" />
+            <End Role="Forms" EntitySet="Forms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pharmacies_PostalCodes" Association="DoplatkyModel.Store.FK_Pharmacies_PostalCodes">
+            <End Role="PostalCodes" EntitySet="PostalCodes" />
+            <End Role="Pharmacies" EntitySet="Pharmacies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlacesInPostalCodes_Places" Association="DoplatkyModel.Store.FK_PlacesInPostalCodes_Places">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="PlacesInPostalCodes" EntitySet="PlacesInPostalCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlacesInPostalCodes_PostalCodes" Association="DoplatkyModel.Store.FK_PlacesInPostalCodes_PostalCodes">
+            <End Role="PostalCodes" EntitySet="PostalCodes" />
+            <End Role="PlacesInPostalCodes" EntitySet="PlacesInPostalCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prices_Drugs" Association="DoplatkyModel.Store.FK_Prices_Drugs">
+            <End Role="Drugs" EntitySet="Drugs" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prices_Pharmacies" Association="DoplatkyModel.Store.FK_Prices_Pharmacies">
+            <End Role="Pharmacies" EntitySet="Pharmacies" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prices_Users" Association="DoplatkyModel.Store.FK_Prices_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SignUpRequests_Users" Association="DoplatkyModel.Store.FK_SignUpRequests_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SignUpRequests" EntitySet="SignUpRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Pharmacies" Association="DoplatkyModel.Store.FK_Users_Pharmacies">
+            <End Role="Pharmacies" EntitySet="Pharmacies" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersInRoles_Roles" Association="DoplatkyModel.Store.FK_UsersInRoles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UsersInRoles" EntitySet="UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersInRoles_Users" Association="DoplatkyModel.Store.FK_UsersInRoles_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersInRoles" EntitySet="UsersInRoles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ATCs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="7" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="PriceId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Content" Type="ntext" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="DDDMeasureUnits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="Deliveries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="7" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Drugs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DeliveryId" Type="int" />
+          <Property Name="IndicationGroupId" Type="int" />
+          <Property Name="DDDMeasureUnitId" Type="int" />
+          <Property Name="FormId" Type="int" />
+          <Property Name="ATCId" Type="int" />
+          <Property Name="WrappingId" Type="int" />
+          <Property Name="ManufacturerId" Type="int" />
+          <Property Name="RegistrationHolderId" Type="int" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="70" />
+          <Property Name="NameSupplement" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="PackageSize" Type="nvarchar" MaxLength="22" />
+          <Property Name="Strength" Type="nvarchar" MaxLength="15" />
+          <Property Name="Registration" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="DDDAmount" Type="nvarchar" MaxLength="4" />
+          <Property Name="DDDCount" Type="decimal" Precision="11" Scale="4" />
+          <Property Name="Source" Type="nvarchar" MaxLength="4" />
+          <Property Name="Retail" Type="nchar" MaxLength="1" />
+          <Property Name="Addiction" Type="nvarchar" MaxLength="2" />
+          <Property Name="RegistrationChangeInfo" Type="nvarchar" MaxLength="5" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="7" />
+          <Property Name="IsAnnoucedBeforeMarketed" Type="bit" Nullable="false" />
+          <Property Name="RegistrationExpiry" Type="datetime" />
+          <Property Name="RegistrationNumber" Type="nvarchar" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="Forms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="DeliveryId" Type="int" />
+          <Property Name="Code" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="IndicationGroups">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="Organizations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="4" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Pharmacies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Street" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="15" />
+          <Property Name="PostalCodeId" Type="int" Nullable="false" />
+          <Property Name="Edited" Type="bit" Nullable="false" />
+          <Property Name="CIN" Type="nvarchar" MaxLength="20" />
+          <Property Name="TIN" Type="nvarchar" MaxLength="20" />
+          <Property Name="OpenHours" Type="nvarchar(max)" />
+          <Property Name="Keywords" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Places">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="LookupName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PlacesInPostalCodes">
+          <Key>
+            <PropertyRef Name="PlaceId" />
+            <PropertyRef Name="PostalCodeId" />
+          </Key>
+          <Property Name="PlaceId" Type="int" Nullable="false" />
+          <Property Name="PostalCodeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PopularSearches">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Keyword" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Hits" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostalCodes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="Posts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="Content" Type="ntext" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Prices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DrugId" Type="int" Nullable="false" />
+          <Property Name="PharmacyId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Searches">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Keyword" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HostIP" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Time" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SignUpRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OpenHours" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CIN" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="TIN" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="PharmacyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PharmacyStreet" Type="nvarchar" MaxLength="50" />
+          <Property Name="PharmacyCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="PharmacyPostalCode" Type="nvarchar" MaxLength="5" />
+          <Property Name="PharmacyPhone" Type="varchar" MaxLength="15" />
+          <Property Name="PharmacyFax" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+          <Property Name="LastLogin" Type="datetime" Nullable="false" />
+          <Property Name="LastActivity" Type="datetime" />
+          <Property Name="LoweredUserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="LoweredEmail" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="PharmacyId" Type="int" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Firstname" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Wrappings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Code" Type="nvarchar" Nullable="false" MaxLength="3" />
+        </EntityType>
+        <Association Name="FK__Posts__UserId__412EB0B6">
+          <End Role="Users" Type="DoplatkyModel.Store.Users" Multiplicity="1" />
+          <End Role="Posts" Type="DoplatkyModel.Store.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Prices">
+          <End Role="Prices" Type="DoplatkyModel.Store.Prices" Multiplicity="1" />
+          <End Role="Comments" Type="DoplatkyModel.Store.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="PriceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Companies_Countries">
+          <End Role="Countries" Type="DoplatkyModel.Store.Countries" Multiplicity="1" />
+          <End Role="Organizations" Type="DoplatkyModel.Store.Organizations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organizations">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drugs_ATCs">
+          <End Role="ATCs" Type="DoplatkyModel.Store.ATCs" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Store.Drugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ATCs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="ATCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drugs_Companies">
+          <End Role="Organizations" Type="DoplatkyModel.Store.Organizations" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Store.Drugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="ManufacturerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drugs_Companies1">
+          <End Role="Organizations" Type="DoplatkyModel.Store.Organizations" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Store.Drugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="RegistrationHolderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drugs_DDDMeasureUnits">
+          <End Role="DDDMeasureUnits" Type="DoplatkyModel.Store.DDDMeasureUnits" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Store.Drugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DDDMeasureUnits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="DDDMeasureUnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drugs_Deliveries">
+          <End Role="Deliveries" Type="DoplatkyModel.Store.Deliveries" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Store.Drugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deliveries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="DeliveryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drugs_Forms">
+          <End Role="Forms" Type="DoplatkyModel.Store.Forms" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Store.Drugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drugs_IndicationGroups">
+          <End Role="IndicationGroups" Type="DoplatkyModel.Store.IndicationGroups" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Store.Drugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndicationGroups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="IndicationGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drugs_Wrappings">
+          <End Role="Wrappings" Type="DoplatkyModel.Store.Wrappings" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Store.Drugs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wrappings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="WrappingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Forms_Deliveries">
+          <End Role="Deliveries" Type="DoplatkyModel.Store.Deliveries" Multiplicity="0..1" />
+          <End Role="Forms" Type="DoplatkyModel.Store.Forms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deliveries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Forms">
+              <PropertyRef Name="DeliveryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pharmacies_PostalCodes">
+          <End Role="PostalCodes" Type="DoplatkyModel.Store.PostalCodes" Multiplicity="1" />
+          <End Role="Pharmacies" Type="DoplatkyModel.Store.Pharmacies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostalCodes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pharmacies">
+              <PropertyRef Name="PostalCodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlacesInPostalCodes_Places">
+          <End Role="Places" Type="DoplatkyModel.Store.Places" Multiplicity="1" />
+          <End Role="PlacesInPostalCodes" Type="DoplatkyModel.Store.PlacesInPostalCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Places">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlacesInPostalCodes">
+              <PropertyRef Name="PostalCodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlacesInPostalCodes_PostalCodes">
+          <End Role="PostalCodes" Type="DoplatkyModel.Store.PostalCodes" Multiplicity="1" />
+          <End Role="PlacesInPostalCodes" Type="DoplatkyModel.Store.PlacesInPostalCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostalCodes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlacesInPostalCodes">
+              <PropertyRef Name="PlaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prices_Drugs">
+          <End Role="Drugs" Type="DoplatkyModel.Store.Drugs" Multiplicity="1" />
+          <End Role="Prices" Type="DoplatkyModel.Store.Prices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drugs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="DrugId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prices_Pharmacies">
+          <End Role="Pharmacies" Type="DoplatkyModel.Store.Pharmacies" Multiplicity="1" />
+          <End Role="Prices" Type="DoplatkyModel.Store.Prices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="PharmacyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prices_Users">
+          <End Role="Users" Type="DoplatkyModel.Store.Users" Multiplicity="0..1" />
+          <End Role="Prices" Type="DoplatkyModel.Store.Prices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SignUpRequests_Users">
+          <End Role="Users" Type="DoplatkyModel.Store.Users" Multiplicity="1" />
+          <End Role="SignUpRequests" Type="DoplatkyModel.Store.SignUpRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SignUpRequests">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Pharmacies">
+          <End Role="Pharmacies" Type="DoplatkyModel.Store.Pharmacies" Multiplicity="0..1" />
+          <End Role="Users" Type="DoplatkyModel.Store.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="PharmacyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersInRoles_Roles">
+          <End Role="Roles" Type="DoplatkyModel.Store.Roles" Multiplicity="1" />
+          <End Role="UsersInRoles" Type="DoplatkyModel.Store.UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersInRoles_Users">
+          <End Role="Users" Type="DoplatkyModel.Store.Users" Multiplicity="1" />
+          <End Role="UsersInRoles" Type="DoplatkyModel.Store.UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DoplatkyModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="DoplatkyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ATCs" EntityType="DoplatkyModel.ATC" />
+          <EntitySet Name="Comments" EntityType="DoplatkyModel.Comment" />
+          <EntitySet Name="Countries" EntityType="DoplatkyModel.Country" />
+          <EntitySet Name="DDDMeasureUnits" EntityType="DoplatkyModel.DDDMeasureUnit" />
+          <EntitySet Name="Deliveries" EntityType="DoplatkyModel.Delivery" />
+          <EntitySet Name="Drugs" EntityType="DoplatkyModel.Drug" />
+          <EntitySet Name="Forms" EntityType="DoplatkyModel.Form" />
+          <EntitySet Name="IndicationGroups" EntityType="DoplatkyModel.IndicationGroup" />
+          <EntitySet Name="Organizations" EntityType="DoplatkyModel.Organization" />
+          <EntitySet Name="Pharmacies" EntityType="DoplatkyModel.Pharmacy" />
+          <EntitySet Name="Places" EntityType="DoplatkyModel.Place" />
+          <EntitySet Name="PopularSearches" EntityType="DoplatkyModel.PopularSearch" />
+          <EntitySet Name="PostalCodes" EntityType="DoplatkyModel.PostalCode" />
+          <EntitySet Name="Posts" EntityType="DoplatkyModel.Post" />
+          <EntitySet Name="Prices" EntityType="DoplatkyModel.Price" />
+          <EntitySet Name="Roles" EntityType="DoplatkyModel.Role" />
+          <EntitySet Name="Searches" EntityType="DoplatkyModel.Search" />
+          <EntitySet Name="SignUpRequests" EntityType="DoplatkyModel.SignUpRequest" />
+          <EntitySet Name="Users" EntityType="DoplatkyModel.User" />
+          <EntitySet Name="Wrappings" EntityType="DoplatkyModel.Wrapping" />
+          <AssociationSet Name="FK_Drugs_ATCs" Association="DoplatkyModel.FK_Drugs_ATCs">
+            <End Role="ATCs" EntitySet="ATCs" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_Prices" Association="DoplatkyModel.FK_Comments_Prices">
+            <End Role="Prices" EntitySet="Prices" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Companies_Countries" Association="DoplatkyModel.FK_Companies_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Organizations" EntitySet="Organizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drugs_DDDMeasureUnits" Association="DoplatkyModel.FK_Drugs_DDDMeasureUnits">
+            <End Role="DDDMeasureUnits" EntitySet="DDDMeasureUnits" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drugs_Deliveries" Association="DoplatkyModel.FK_Drugs_Deliveries">
+            <End Role="Deliveries" EntitySet="Deliveries" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Forms_Deliveries" Association="DoplatkyModel.FK_Forms_Deliveries">
+            <End Role="Deliveries" EntitySet="Deliveries" />
+            <End Role="Forms" EntitySet="Forms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drugs_Companies" Association="DoplatkyModel.FK_Drugs_Companies">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drugs_Companies1" Association="DoplatkyModel.FK_Drugs_Companies1">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drugs_Forms" Association="DoplatkyModel.FK_Drugs_Forms">
+            <End Role="Forms" EntitySet="Forms" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drugs_IndicationGroups" Association="DoplatkyModel.FK_Drugs_IndicationGroups">
+            <End Role="IndicationGroups" EntitySet="IndicationGroups" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drugs_Wrappings" Association="DoplatkyModel.FK_Drugs_Wrappings">
+            <End Role="Wrappings" EntitySet="Wrappings" />
+            <End Role="Drugs" EntitySet="Drugs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prices_Drugs" Association="DoplatkyModel.FK_Prices_Drugs">
+            <End Role="Drugs" EntitySet="Drugs" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pharmacies_PostalCodes" Association="DoplatkyModel.FK_Pharmacies_PostalCodes">
+            <End Role="PostalCodes" EntitySet="PostalCodes" />
+            <End Role="Pharmacies" EntitySet="Pharmacies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prices_Pharmacies" Association="DoplatkyModel.FK_Prices_Pharmacies">
+            <End Role="Pharmacies" EntitySet="Pharmacies" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Pharmacies" Association="DoplatkyModel.FK_Users_Pharmacies">
+            <End Role="Pharmacies" EntitySet="Pharmacies" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Posts__UserId__412EB0B6" Association="DoplatkyModel.FK__Posts__UserId__412EB0B6">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prices_Users" Association="DoplatkyModel.FK_Prices_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SignUpRequests_Users" Association="DoplatkyModel.FK_SignUpRequests_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="SignUpRequests" EntitySet="SignUpRequests" />
+          </AssociationSet>
+          <AssociationSet Name="PlacesInPostalCodes" Association="DoplatkyModel.PlacesInPostalCodes">
+            <End Role="Places" EntitySet="Places" />
+            <End Role="PostalCodes" EntitySet="PostalCodes" />
+          </AssociationSet>
+          <AssociationSet Name="UsersInRoles" Association="DoplatkyModel.UsersInRoles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ATC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="7" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Drugs" Relationship="DoplatkyModel.FK_Drugs_ATCs" FromRole="ATCs" ToRole="Drugs" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="PriceId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Price" Relationship="DoplatkyModel.FK_Comments_Prices" FromRole="Comments" ToRole="Prices" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="3" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Organizations" Relationship="DoplatkyModel.FK_Companies_Countries" FromRole="Countries" ToRole="Organizations" />
+        </EntityType>
+        <EntityType Name="DDDMeasureUnit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Drugs" Relationship="DoplatkyModel.FK_Drugs_DDDMeasureUnits" FromRole="DDDMeasureUnits" ToRole="Drugs" />
+        </EntityType>
+        <EntityType Name="Delivery">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="7" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Drugs" Relationship="DoplatkyModel.FK_Drugs_Deliveries" FromRole="Deliveries" ToRole="Drugs" />
+          <NavigationProperty Name="Forms" Relationship="DoplatkyModel.FK_Forms_Deliveries" FromRole="Deliveries" ToRole="Forms" />
+        </EntityType>
+        <EntityType Name="Drug">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeliveryId" Type="Int32" />
+          <Property Name="IndicationGroupId" Type="Int32" />
+          <Property Name="DDDMeasureUnitId" Type="Int32" />
+          <Property Name="FormId" Type="Int32" />
+          <Property Name="ATCId" Type="Int32" />
+          <Property Name="WrappingId" Type="Int32" />
+          <Property Name="ManufacturerId" Type="Int32" />
+          <Property Name="RegistrationHolderId" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="70" Unicode="true" FixedLength="false" />
+          <Property Name="NameSupplement" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="PackageSize" Type="String" MaxLength="22" Unicode="true" FixedLength="false" />
+          <Property Name="Strength" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="Registration" Type="String" Nullable="false" MaxLength="2" Unicode="true" FixedLength="false" />
+          <Property Name="DDDAmount" Type="String" MaxLength="4" Unicode="true" FixedLength="false" />
+          <Property Name="DDDCount" Type="Decimal" Precision="11" Scale="4" />
+          <Property Name="Source" Type="String" MaxLength="4" Unicode="true" FixedLength="false" />
+          <Property Name="Retail" Type="String" MaxLength="1" Unicode="true" FixedLength="true" />
+          <Property Name="Addiction" Type="String" MaxLength="2" Unicode="true" FixedLength="false" />
+          <Property Name="RegistrationChangeInfo" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="7" Unicode="true" FixedLength="false" />
+          <Property Name="IsAnnoucedBeforeMarketed" Type="Boolean" Nullable="false" />
+          <Property Name="RegistrationExpiry" Type="DateTime" />
+          <Property Name="RegistrationNumber" Type="String" MaxLength="16" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ATC" Relationship="DoplatkyModel.FK_Drugs_ATCs" FromRole="Drugs" ToRole="ATCs" />
+          <NavigationProperty Name="DDDMeasureUnit" Relationship="DoplatkyModel.FK_Drugs_DDDMeasureUnits" FromRole="Drugs" ToRole="DDDMeasureUnits" />
+          <NavigationProperty Name="Delivery" Relationship="DoplatkyModel.FK_Drugs_Deliveries" FromRole="Drugs" ToRole="Deliveries" />
+          <NavigationProperty Name="Organization" Relationship="DoplatkyModel.FK_Drugs_Companies" FromRole="Drugs" ToRole="Organizations" />
+          <NavigationProperty Name="Organization1" Relationship="DoplatkyModel.FK_Drugs_Companies1" FromRole="Drugs" ToRole="Organizations" />
+          <NavigationProperty Name="Form" Relationship="DoplatkyModel.FK_Drugs_Forms" FromRole="Drugs" ToRole="Forms" />
+          <NavigationProperty Name="IndicationGroup" Relationship="DoplatkyModel.FK_Drugs_IndicationGroups" FromRole="Drugs" ToRole="IndicationGroups" />
+          <NavigationProperty Name="Wrapping" Relationship="DoplatkyModel.FK_Drugs_Wrappings" FromRole="Drugs" ToRole="Wrappings" />
+          <NavigationProperty Name="Prices" Relationship="DoplatkyModel.FK_Prices_Drugs" FromRole="Drugs" ToRole="Prices" />
+        </EntityType>
+        <EntityType Name="Form">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="DeliveryId" Type="Int32" />
+          <Property Name="Code" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Delivery" Relationship="DoplatkyModel.FK_Forms_Deliveries" FromRole="Forms" ToRole="Deliveries" />
+          <NavigationProperty Name="Drugs" Relationship="DoplatkyModel.FK_Drugs_Forms" FromRole="Forms" ToRole="Drugs" />
+        </EntityType>
+        <EntityType Name="IndicationGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="2" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Drugs" Relationship="DoplatkyModel.FK_Drugs_IndicationGroups" FromRole="IndicationGroups" ToRole="Drugs" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Country" Relationship="DoplatkyModel.FK_Companies_Countries" FromRole="Organizations" ToRole="Countries" />
+          <NavigationProperty Name="Drugs" Relationship="DoplatkyModel.FK_Drugs_Companies" FromRole="Organizations" ToRole="Drugs" />
+          <NavigationProperty Name="Drugs1" Relationship="DoplatkyModel.FK_Drugs_Companies1" FromRole="Organizations" ToRole="Drugs" />
+        </EntityType>
+        <EntityType Name="Pharmacy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Street" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="Fax" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="PostalCodeId" Type="Int32" Nullable="false" />
+          <Property Name="Edited" Type="Boolean" Nullable="false" />
+          <Property Name="CIN" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="TIN" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="OpenHours" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Keywords" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="PostalCode" Relationship="DoplatkyModel.FK_Pharmacies_PostalCodes" FromRole="Pharmacies" ToRole="PostalCodes" />
+          <NavigationProperty Name="Prices" Relationship="DoplatkyModel.FK_Prices_Pharmacies" FromRole="Pharmacies" ToRole="Prices" />
+          <NavigationProperty Name="Users" Relationship="DoplatkyModel.FK_Users_Pharmacies" FromRole="Pharmacies" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LookupName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="PostalCodes" Relationship="DoplatkyModel.PlacesInPostalCodes" FromRole="Places" ToRole="PostalCodes" />
+        </EntityType>
+        <EntityType Name="PopularSearch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Keyword" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Hits" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PostalCode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Pharmacies" Relationship="DoplatkyModel.FK_Pharmacies_PostalCodes" FromRole="PostalCodes" ToRole="Pharmacies" />
+          <NavigationProperty Name="Places" Relationship="DoplatkyModel.PlacesInPostalCodes" FromRole="PostalCodes" ToRole="Places" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="DoplatkyModel.FK__Posts__UserId__412EB0B6" FromRole="Posts" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Price">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DrugId" Type="Int32" Nullable="false" />
+          <Property Name="PharmacyId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="Comments" Relationship="DoplatkyModel.FK_Comments_Prices" FromRole="Prices" ToRole="Comments" />
+          <NavigationProperty Name="Drug" Relationship="DoplatkyModel.FK_Prices_Drugs" FromRole="Prices" ToRole="Drugs" />
+          <NavigationProperty Name="Pharmacy" Relationship="DoplatkyModel.FK_Prices_Pharmacies" FromRole="Prices" ToRole="Pharmacies" />
+          <NavigationProperty Name="User" Relationship="DoplatkyModel.FK_Prices_Users" FromRole="Prices" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="DoplatkyModel.UsersInRoles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Search">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Keyword" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="HostIP" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Time" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SignUpRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OpenHours" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CIN" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="TIN" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="PharmacyName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="PharmacyStreet" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="PharmacyCity" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="PharmacyPostalCode" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+          <Property Name="PharmacyPhone" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="PharmacyFax" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="User" Relationship="DoplatkyModel.FK_SignUpRequests_Users" FromRole="SignUpRequests" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" />
+          <Property Name="IsLockedOut" Type="Boolean" Nullable="false" />
+          <Property Name="LastLogin" Type="DateTime" Nullable="false" />
+          <Property Name="LastActivity" Type="DateTime" />
+          <Property Name="LoweredUserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LoweredEmail" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="PharmacyId" Type="Int32" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Pharmacy" Relationship="DoplatkyModel.FK_Users_Pharmacies" FromRole="Users" ToRole="Pharmacies" />
+          <NavigationProperty Name="Posts" Relationship="DoplatkyModel.FK__Posts__UserId__412EB0B6" FromRole="Users" ToRole="Posts" />
+          <NavigationProperty Name="Prices" Relationship="DoplatkyModel.FK_Prices_Users" FromRole="Users" ToRole="Prices" />
+          <NavigationProperty Name="SignUpRequests" Relationship="DoplatkyModel.FK_SignUpRequests_Users" FromRole="Users" ToRole="SignUpRequests" />
+          <NavigationProperty Name="Roles" Relationship="DoplatkyModel.UsersInRoles" FromRole="Users" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Wrapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="3" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Drugs" Relationship="DoplatkyModel.FK_Drugs_Wrappings" FromRole="Wrappings" ToRole="Drugs" />
+        </EntityType>
+        <Association Name="FK_Drugs_ATCs">
+          <End Role="ATCs" Type="DoplatkyModel.ATC" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Drug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ATCs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="ATCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_Prices">
+          <End Role="Prices" Type="DoplatkyModel.Price" Multiplicity="1" />
+          <End Role="Comments" Type="DoplatkyModel.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="PriceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Companies_Countries">
+          <End Role="Countries" Type="DoplatkyModel.Country" Multiplicity="1" />
+          <End Role="Organizations" Type="DoplatkyModel.Organization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Organizations">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drugs_DDDMeasureUnits">
+          <End Role="DDDMeasureUnits" Type="DoplatkyModel.DDDMeasureUnit" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Drug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DDDMeasureUnits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="DDDMeasureUnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drugs_Deliveries">
+          <End Role="Deliveries" Type="DoplatkyModel.Delivery" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Drug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deliveries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="DeliveryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Forms_Deliveries">
+          <End Role="Deliveries" Type="DoplatkyModel.Delivery" Multiplicity="0..1" />
+          <End Role="Forms" Type="DoplatkyModel.Form" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Deliveries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Forms">
+              <PropertyRef Name="DeliveryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drugs_Companies">
+          <End Role="Organizations" Type="DoplatkyModel.Organization" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Drug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="ManufacturerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drugs_Companies1">
+          <End Role="Organizations" Type="DoplatkyModel.Organization" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Drug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="RegistrationHolderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drugs_Forms">
+          <End Role="Forms" Type="DoplatkyModel.Form" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Drug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drugs_IndicationGroups">
+          <End Role="IndicationGroups" Type="DoplatkyModel.IndicationGroup" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Drug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IndicationGroups">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="IndicationGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drugs_Wrappings">
+          <End Role="Wrappings" Type="DoplatkyModel.Wrapping" Multiplicity="0..1" />
+          <End Role="Drugs" Type="DoplatkyModel.Drug" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wrappings">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Drugs">
+              <PropertyRef Name="WrappingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prices_Drugs">
+          <End Role="Drugs" Type="DoplatkyModel.Drug" Multiplicity="1" />
+          <End Role="Prices" Type="DoplatkyModel.Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drugs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="DrugId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pharmacies_PostalCodes">
+          <End Role="PostalCodes" Type="DoplatkyModel.PostalCode" Multiplicity="1" />
+          <End Role="Pharmacies" Type="DoplatkyModel.Pharmacy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PostalCodes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pharmacies">
+              <PropertyRef Name="PostalCodeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prices_Pharmacies">
+          <End Role="Pharmacies" Type="DoplatkyModel.Pharmacy" Multiplicity="1" />
+          <End Role="Prices" Type="DoplatkyModel.Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="PharmacyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Pharmacies">
+          <End Role="Pharmacies" Type="DoplatkyModel.Pharmacy" Multiplicity="0..1" />
+          <End Role="Users" Type="DoplatkyModel.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pharmacies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="PharmacyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Posts__UserId__412EB0B6">
+          <End Role="Users" Type="DoplatkyModel.User" Multiplicity="1" />
+          <End Role="Posts" Type="DoplatkyModel.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prices_Users">
+          <End Role="Users" Type="DoplatkyModel.User" Multiplicity="0..1" />
+          <End Role="Prices" Type="DoplatkyModel.Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SignUpRequests_Users">
+          <End Role="Users" Type="DoplatkyModel.User" Multiplicity="1" />
+          <End Role="SignUpRequests" Type="DoplatkyModel.SignUpRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SignUpRequests">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PlacesInPostalCodes">
+          <End Role="Places" Type="DoplatkyModel.Place" Multiplicity="*" />
+          <End Role="PostalCodes" Type="DoplatkyModel.PostalCode" Multiplicity="*" />
+        </Association>
+        <Association Name="UsersInRoles">
+          <End Role="Roles" Type="DoplatkyModel.Role" Multiplicity="*" />
+          <End Role="Users" Type="DoplatkyModel.User" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DoplatkyModelStoreContainer" CdmEntityContainer="DoplatkyEntities">
+          <EntitySetMapping Name="ATCs"><EntityTypeMapping TypeName="DoplatkyModel.ATC"><MappingFragment StoreEntitySet="ATCs">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Code" ColumnName="Code" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Comments"><EntityTypeMapping TypeName="DoplatkyModel.Comment"><MappingFragment StoreEntitySet="Comments">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="PriceId" ColumnName="PriceId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Title" ColumnName="Title" />
+            <ScalarProperty Name="Content" ColumnName="Content" />
+            <ScalarProperty Name="Date" ColumnName="Date" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Countries"><EntityTypeMapping TypeName="DoplatkyModel.Country"><MappingFragment StoreEntitySet="Countries">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Code" ColumnName="Code" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="DDDMeasureUnits"><EntityTypeMapping TypeName="DoplatkyModel.DDDMeasureUnit"><MappingFragment StoreEntitySet="DDDMeasureUnits">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Code" ColumnName="Code" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Deliveries"><EntityTypeMapping TypeName="DoplatkyModel.Delivery"><MappingFragment StoreEntitySet="Deliveries">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Code" ColumnName="Code" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Drugs"><EntityTypeMapping TypeName="DoplatkyModel.Drug"><MappingFragment StoreEntitySet="Drugs">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="DeliveryId" ColumnName="DeliveryId" />
+            <ScalarProperty Name="IndicationGroupId" ColumnName="IndicationGroupId" />
+            <ScalarProperty Name="DDDMeasureUnitId" ColumnName="DDDMeasureUnitId" />
+            <ScalarProperty Name="FormId" ColumnName="FormId" />
+            <ScalarProperty Name="ATCId" ColumnName="ATCId" />
+            <ScalarProperty Name="WrappingId" ColumnName="WrappingId" />
+            <ScalarProperty Name="ManufacturerId" ColumnName="ManufacturerId" />
+            <ScalarProperty Name="RegistrationHolderId" ColumnName="RegistrationHolderId" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="NameSupplement" ColumnName="NameSupplement" />
+            <ScalarProperty Name="PackageSize" ColumnName="PackageSize" />
+            <ScalarProperty Name="Strength" ColumnName="Strength" />
+            <ScalarProperty Name="Registration" ColumnName="Registration" />
+            <ScalarProperty Name="DDDAmount" ColumnName="DDDAmount" />
+            <ScalarProperty Name="DDDCount" ColumnName="DDDCount" />
+            <ScalarProperty Name="Source" ColumnName="Source" />
+            <ScalarProperty Name="Retail" ColumnName="Retail" />
+            <ScalarProperty Name="Addiction" ColumnName="Addiction" />
+            <ScalarProperty Name="RegistrationChangeInfo" ColumnName="RegistrationChangeInfo" />
+            <ScalarProperty Name="Code" ColumnName="Code" />
+            <ScalarProperty Name="IsAnnoucedBeforeMarketed" ColumnName="IsAnnoucedBeforeMarketed" />
+            <ScalarProperty Name="RegistrationExpiry" ColumnName="RegistrationExpiry" />
+            <ScalarProperty Name="RegistrationNumber" ColumnName="RegistrationNumber" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Forms"><EntityTypeMapping TypeName="DoplatkyModel.Form"><MappingFragment StoreEntitySet="Forms">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="DeliveryId" ColumnName="DeliveryId" />
+            <ScalarProperty Name="Code" ColumnName="Code" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="IndicationGroups"><EntityTypeMapping TypeName="DoplatkyModel.IndicationGroup"><MappingFragment StoreEntitySet="IndicationGroups">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Code" ColumnName="Code" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Organizations"><EntityTypeMapping TypeName="DoplatkyModel.Organization"><MappingFragment StoreEntitySet="Organizations">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+            <ScalarProperty Name="Code" ColumnName="Code" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Pharmacies"><EntityTypeMapping TypeName="DoplatkyModel.Pharmacy"><MappingFragment StoreEntitySet="Pharmacies">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Street" ColumnName="Street" />
+            <ScalarProperty Name="City" ColumnName="City" />
+            <ScalarProperty Name="Phone" ColumnName="Phone" />
+            <ScalarProperty Name="Fax" ColumnName="Fax" />
+            <ScalarProperty Name="PostalCodeId" ColumnName="PostalCodeId" />
+            <ScalarProperty Name="Edited" ColumnName="Edited" />
+            <ScalarProperty Name="CIN" ColumnName="CIN" />
+            <ScalarProperty Name="TIN" ColumnName="TIN" />
+            <ScalarProperty Name="OpenHours" ColumnName="OpenHours" />
+            <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Places"><EntityTypeMapping TypeName="DoplatkyModel.Place"><MappingFragment StoreEntitySet="Places">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="LookupName" ColumnName="LookupName" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PopularSearches"><EntityTypeMapping TypeName="DoplatkyModel.PopularSearch"><MappingFragment StoreEntitySet="PopularSearches">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+            <ScalarProperty Name="Hits" ColumnName="Hits" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PostalCodes"><EntityTypeMapping TypeName="DoplatkyModel.PostalCode"><MappingFragment StoreEntitySet="PostalCodes">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Code" ColumnName="Code" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Posts"><EntityTypeMapping TypeName="DoplatkyModel.Post"><MappingFragment StoreEntitySet="Posts">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Title" ColumnName="Title" />
+            <ScalarProperty Name="Content" ColumnName="Content" />
+            <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Prices"><EntityTypeMapping TypeName="DoplatkyModel.Price"><MappingFragment StoreEntitySet="Prices">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="DrugId" ColumnName="DrugId" />
+            <ScalarProperty Name="PharmacyId" ColumnName="PharmacyId" />
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="Date" ColumnName="Date" />
+            <ScalarProperty Name="Amount" ColumnName="Amount" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Roles"><EntityTypeMapping TypeName="DoplatkyModel.Role"><MappingFragment StoreEntitySet="Roles">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Searches"><EntityTypeMapping TypeName="DoplatkyModel.Search"><MappingFragment StoreEntitySet="Searches">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+            <ScalarProperty Name="HostIP" ColumnName="HostIP" />
+            <ScalarProperty Name="Time" ColumnName="Time" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SignUpRequests"><EntityTypeMapping TypeName="DoplatkyModel.SignUpRequest"><MappingFragment StoreEntitySet="SignUpRequests">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="OpenHours" ColumnName="OpenHours" />
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="CIN" ColumnName="CIN" />
+            <ScalarProperty Name="TIN" ColumnName="TIN" />
+            <ScalarProperty Name="PharmacyName" ColumnName="PharmacyName" />
+            <ScalarProperty Name="PharmacyStreet" ColumnName="PharmacyStreet" />
+            <ScalarProperty Name="PharmacyCity" ColumnName="PharmacyCity" />
+            <ScalarProperty Name="PharmacyPostalCode" ColumnName="PharmacyPostalCode" />
+            <ScalarProperty Name="PharmacyPhone" ColumnName="PharmacyPhone" />
+            <ScalarProperty Name="PharmacyFax" ColumnName="PharmacyFax" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="DoplatkyModel.User"><MappingFragment StoreEntitySet="Users">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="UserName" ColumnName="UserName" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+            <ScalarProperty Name="Created" ColumnName="Created" />
+            <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+            <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+            <ScalarProperty Name="LastActivity" ColumnName="LastActivity" />
+            <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+            <ScalarProperty Name="LoweredEmail" ColumnName="LoweredEmail" />
+            <ScalarProperty Name="PharmacyId" ColumnName="PharmacyId" />
+            <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+            <ScalarProperty Name="Phone" ColumnName="Phone" />
+            <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+            <ScalarProperty Name="Surname" ColumnName="Surname" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Wrappings"><EntityTypeMapping TypeName="DoplatkyModel.Wrapping"><MappingFragment StoreEntitySet="Wrappings">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Code" ColumnName="Code" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="PlacesInPostalCodes" TypeName="DoplatkyModel.PlacesInPostalCodes" StoreEntitySet="PlacesInPostalCodes">
+            <EndProperty Name="Places">
+              <ScalarProperty Name="Id" ColumnName="PostalCodeId" />
+            </EndProperty>
+            <EndProperty Name="PostalCodes">
+              <ScalarProperty Name="Id" ColumnName="PlaceId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="UsersInRoles" TypeName="DoplatkyModel.UsersInRoles" StoreEntitySet="UsersInRoles">
+            <EndProperty Name="Roles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="Users">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model2">
+        <EntityTypeShape EntityType="DoplatkyModel.ATC" Width="1.5" PointX="3" PointY="9" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.Comment" Width="1.5" PointX="9.75" PointY="5.25" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.Country" Width="1.5" PointX="0.75" PointY="16.875" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.DDDMeasureUnit" Width="1.5" PointX="3" PointY="11.5" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.Delivery" Width="1.5" PointX="0.75" PointY="5.5" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.Drug" Width="1.5" PointX="5.25" PointY="2.75" Height="7.3647265625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.Form" Width="1.5" PointX="3" PointY="5.375" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.IndicationGroup" Width="1.5" PointX="3" PointY="14.125" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.Organization" Width="1.5" PointX="3" PointY="16.625" Height="2.3648893229166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.Pharmacy" Width="1.5" PointX="5.25" PointY="22.75" Height="3.9033007812500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.Place" Width="1.5" PointX="0.75" PointY="23.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.PopularSearch" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.PostalCode" Width="1.5" PointX="3" PointY="23.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.Post" Width="1.5" PointX="7.5" PointY="26.625" Height="2.1725878906250031" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.Price" Width="1.5" PointX="7.5" PointY="5" Height="2.9417936197916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.Role" Width="1.5" PointX="3" PointY="29" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.Search" Width="1.5" PointX="7.75" PointY="0.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.SignUpRequest" Width="1.5" PointX="7.5" PointY="29.625" Height="3.3263964843750031" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.User" Width="1.5" PointX="5.25" PointY="27.375" Height="4.8648079427083353" IsExpanded="true" />
+        <EntityTypeShape EntityType="DoplatkyModel.Wrapping" Width="1.5" PointX="3" PointY="19.75" Height="1.7879850260416674" IsExpanded="true" />
+        <AssociationConnector Association="DoplatkyModel.FK_Drugs_ATCs" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="9.55736328125" />
+          <ConnectorPoint PointX="5.25" PointY="9.55736328125" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_Comments_Prices" ManuallyRouted="false">
+          <ConnectorPoint PointX="9" PointY="6.5285953776041659" />
+          <ConnectorPoint PointX="9.75" PointY="6.5285953776041659" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_Companies_Countries" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="17.768992513020834" />
+          <ConnectorPoint PointX="3" PointY="17.768992513020834" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_Drugs_DDDMeasureUnits" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="12.393992513020834" />
+          <ConnectorPoint PointX="5.3072879166666675" PointY="12.393992513020834" />
+          <ConnectorPoint PointX="5.4739545833333336" PointY="12.393992513020834" />
+          <ConnectorPoint PointX="5.5104141666666671" PointY="12.393992513020834" />
+          <ConnectorPoint PointX="5.6770808333333331" PointY="12.393992513020834" />
+          <ConnectorPoint PointX="5.7135404166666666" PointY="12.393992513020834" />
+          <ConnectorPoint PointX="5.8802070833333326" PointY="12.393992513020834" />
+          <ConnectorPoint PointX="6" PointY="12.393992513020834" />
+          <ConnectorPoint PointX="6" PointY="10.1147265625" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_Drugs_Deliveries" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="7.4802864583333317" />
+          <ConnectorPoint PointX="1.5" PointY="8.2737939453125" />
+          <ConnectorPoint PointX="5.25" PointY="8.2737939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_Forms_Deliveries" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="6.4901432291666659" />
+          <ConnectorPoint PointX="3" PointY="6.4901432291666659" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_Drugs_Companies" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="17.807444661458334" />
+          <ConnectorPoint PointX="5.5937475" PointY="17.807444661458334" />
+          <ConnectorPoint PointX="5.5937475" PointY="10.1147265625" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_Drugs_Companies1" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="17.184969830729166" />
+          <ConnectorPoint PointX="5.5104141666666671" PointY="17.184969830729166" />
+          <ConnectorPoint PointX="5.6770808333333331" PointY="17.184969830729166" />
+          <ConnectorPoint PointX="5.7135404166666666" PointY="17.184969830729166" />
+          <ConnectorPoint PointX="5.8802070833333326" PointY="17.184969830729166" />
+          <ConnectorPoint PointX="6.4062525" PointY="17.184969830729166" />
+          <ConnectorPoint PointX="6.4062525" PointY="10.1147265625" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_Drugs_Forms" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="6.4612939453125" />
+          <ConnectorPoint PointX="5.25" PointY="6.4612939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_Drugs_IndicationGroups" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="15.018992513020834" />
+          <ConnectorPoint PointX="5.3906212500000006" PointY="15.018992513020834" />
+          <ConnectorPoint PointX="5.3906212500000006" PointY="10.1147265625" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_Drugs_Wrappings" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="20.643992513020834" />
+          <ConnectorPoint PointX="5.79687375" PointY="20.643992513020834" />
+          <ConnectorPoint PointX="5.79687375" PointY="10.1147265625" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_Prices_Drugs" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="6.4708968098958337" />
+          <ConnectorPoint PointX="7.229166666666667" PointY="6.4708968098958328" />
+          <ConnectorPoint PointX="7.395833333333333" PointY="6.4708968098958337" />
+          <ConnectorPoint PointX="7.5" PointY="6.4708968098958337" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_Pharmacies_PostalCodes" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="24.643992513020834" />
+          <ConnectorPoint PointX="5.25" PointY="24.643992513020834" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_Prices_Pharmacies" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="22.751152846153843" />
+          <ConnectorPoint PointX="7.125" PointY="22.376152846153843" />
+          <ConnectorPoint PointX="7.125" PointY="7.2375972148437437" />
+          <ConnectorPoint PointX="7.229166666666667" PointY="7.2375972148437429" />
+          <ConnectorPoint PointX="7.395833333333333" PointY="7.2375972148437437" />
+          <ConnectorPoint PointX="7.5" PointY="7.2375972148437437" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_Users_Pharmacies" ManuallyRouted="false">
+          <ConnectorPoint PointX="6" PointY="26.653300781250003" />
+          <ConnectorPoint PointX="6" PointY="27.375" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK__Posts__UserId__412EB0B6" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="28.0862939453125" />
+          <ConnectorPoint PointX="7.5" PointY="28.0862939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_Prices_Users" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="27.438460538461534" />
+          <ConnectorPoint PointX="7.3125" PointY="26.875960538461534" />
+          <ConnectorPoint PointX="7.3125" PointY="5.7041964049479237" />
+          <ConnectorPoint PointX="7.5" PointY="5.7041964049479237" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.FK_SignUpRequests_Users" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="30.932403971354169" />
+          <ConnectorPoint PointX="7.5" PointY="30.932403971354169" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.PlacesInPostalCodes" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="24.643992513020834" />
+          <ConnectorPoint PointX="3" PointY="24.643992513020834" />
+        </AssociationConnector>
+        <AssociationConnector Association="DoplatkyModel.UsersInRoles" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="29.797841796875" />
+          <ConnectorPoint PointX="5.25" PointY="29.797841796875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

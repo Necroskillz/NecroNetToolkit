@@ -32,7 +32,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		}
 
 		[Test]
-		public void UnitOfWork_Current_ShouldThrowIfNoUnitOfWorkIsStarted()
+		public void UnitOfWork_GetCurrent_ShouldThrowIfNoUnitOfWorkIsStarted()
 		{
 			Assert.That(() =>
 			            	{
@@ -53,7 +53,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		}
 
 		[Test]
-		public void UnitOfWork_Setup_ShouldThrowIfCalledMoreThanOnce()
+		public void UnitOfWork_RegisterDefault_ShouldThrowIfCalledMoreThanOnce()
 		{
 			Assert.That(() => UnitOfWork.RegisterDefault<FakeObjectContext, FakeObjectContextFactory>(), Throws.InvalidOperationException);
 		}
@@ -65,6 +65,8 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 			((Dictionary<string, IUnitOfWorkFactory>)fieldInfo.GetValue(null)).Remove(typeof(FakeObjectContext).FullName);
 
 			Assert.That(() => UnitOfWork.Start(), Throws.InvalidOperationException);
+
+			UnitOfWork.Register<FakeObjectContext, FakeObjectContextFactory>();
 		}
 
 		[Test]
@@ -109,7 +111,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		}
 
 		[Test]
-		public void UnitOfWork_CurrentContext_ShouldReturnUnderlyingObjectContext()
+		public void UnitOfWork_GetCurrentContext_ShouldReturnUnderlyingObjectContext()
 		{
 			var context = new Mock<IObjectContext>();
 			var factory = new Mock<IObjectContextFactory>();
@@ -128,12 +130,109 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		}
 
 		[Test]
-		public void UnitOfWork_CurrentContext_ShouldThrowIfUnitOfWorkIsNotStarted()
+		public void UnitOfWork_GetCurrentContext_ShouldThrowIfUnitOfWorkIsNotStarted()
 		{
 			Assert.That(() =>
 			            	{
 			            		var context = UnitOfWork.GetCurrentContext();
 			            	}, Throws.InvalidOperationException);
+		}
+
+		[Test]
+		public void UnitOfWork_StartOfType_ShouldStartUnitOfWork()
+		{
+			using (var uow = UnitOfWork.Start<FakeObjectContext>())
+			{
+				Assert.That(uow, Is.Not.Null);
+				Assert.That(UnitOfWork.IsStarted<FakeObjectContext>());
+				Assert.That(uow, Is.SameAs(UnitOfWork.GetCurrent()));
+			}
+		}
+
+		[Test]
+		public void UnitOfWork_GetCurrentOfType_ShouldThrowIfNoUnitOfWorkIsStarted()
+		{
+			Assert.That(() =>
+			{
+				var uow = UnitOfWork.GetCurrent<FakeObjectContext>();
+			}, Throws.InvalidOperationException);
+		}
+
+		[Test]
+		public void UnitOfWork_StartOfType_ShouldThrowWhenUnitOfWorkIsAlreadyStarted()
+		{
+			Assert.That(() =>
+			{
+				using (UnitOfWork.Start<FakeObjectContext>())
+				{
+					UnitOfWork.Start<FakeObjectContext>();
+				}
+			}, Throws.InvalidOperationException);
+		}
+
+		[Test]
+		public void UnitOfWork_Register_ShouldThrowIfCalledMoreThanOnceForTheSameType()
+		{
+			Assert.That(() => UnitOfWork.Register<FakeObjectContext, FakeObjectContextFactory>(), Throws.InvalidOperationException);
+		}
+
+		[Test]
+		public void UnitOfWork_StartOfType_ShouldThrowIfUnitOfWorkWasntSetUp()
+		{
+			var fieldInfo = typeof(UnitOfWork).GetField("UnitOfWorkFactories", BindingFlags.NonPublic | BindingFlags.Static);
+			((Dictionary<string, IUnitOfWorkFactory>)fieldInfo.GetValue(null)).Remove(typeof(FakeObjectContext).FullName);
+
+			Assert.That(() => UnitOfWork.Start<FakeObjectContext>(), Throws.InvalidOperationException);
+
+			UnitOfWork.Register<FakeObjectContext, FakeObjectContextFactory>();
+		}
+
+		[Test]
+		public void UnitOfWork_DisposingUnitOfWorkOfTypeShoudDisposeObjectContext()
+		{
+			var context = new Mock<IObjectContext>();
+			var factory = new Mock<IObjectContextFactory>();
+			factory.Setup(f => f.CreateObjectContext()).Returns(() => context.Object);
+
+			var fieldInfo = typeof(UnitOfWork).GetField("UnitOfWorkFactories", BindingFlags.NonPublic | BindingFlags.Static);
+			var uowFactory = ((Dictionary<string, IUnitOfWorkFactory>)fieldInfo.GetValue(null))[typeof(FakeObjectContext).FullName];
+
+			var propertyInfo = typeof(UnitOfWorkFactory<FakeObjectContext>).GetProperty("ContextFactory");
+			propertyInfo.SetValue(uowFactory, factory.Object, null);
+
+			using (UnitOfWork.Start<FakeObjectContext>())
+			{
+			}
+
+			context.Verify(c => c.Dispose());
+		}
+
+		[Test]
+		public void UnitOfWork_CurrentContextOfType_ShouldReturnUnderlyingObjectContext()
+		{
+			var context = new Mock<IObjectContext>();
+			var factory = new Mock<IObjectContextFactory>();
+			factory.Setup(f => f.CreateObjectContext()).Returns(() => context.Object);
+
+			var fieldInfo = typeof(UnitOfWork).GetField("UnitOfWorkFactories", BindingFlags.NonPublic | BindingFlags.Static);
+			var uowFactory = ((Dictionary<string, IUnitOfWorkFactory>)fieldInfo.GetValue(null))[typeof(FakeObjectContext).FullName];
+
+			var propertyInfo = typeof(UnitOfWorkFactory<FakeObjectContext>).GetProperty("ContextFactory");
+			propertyInfo.SetValue(uowFactory, factory.Object, null);
+
+			using (UnitOfWork.Start<FakeObjectContext>())
+			{
+				Assert.That(UnitOfWork.GetCurrentContext<FakeObjectContext>(), Is.SameAs(context.Object));
+			}
+		}
+
+		[Test]
+		public void UnitOfWork_CurrentContextOfType_ShouldThrowIfUnitOfWorkIsNotStarted()
+		{
+			Assert.That(() =>
+			{
+				var context = UnitOfWork.GetCurrentContext<FakeObjectContext>();
+			}, Throws.InvalidOperationException);
 		}
 	}
 }

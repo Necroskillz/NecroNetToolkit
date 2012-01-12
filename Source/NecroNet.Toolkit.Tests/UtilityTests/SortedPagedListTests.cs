@@ -23,42 +23,34 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 		[Test]
 		public void SortedPagedList_ShouldCreateEmptyListIfSourceQueryIsNull()
 		{
-			var list = new SortedPagedList<Movie>(null, 0, 10, "Name", SortDirection.Asc);
+			var list = new SortedPagedList<Movie>(null, 1, 10, "Name", SortDirection.Asc);
 
 			Assert.That(list, Is.Not.Null);
 			Assert.That(list, Is.Empty);
 		}
 
 		[Test]
-		public void SortedPagedList_ShouldThrowIfIndexIsLessThanZero()
+		public void SortedPagedList_ShouldThrowIfPageNumberIsLessThanOne()
 		{
-			Assert.That(() => new SortedPagedList<Movie>(_movieQuery, -1, 10, "Name", SortDirection.Asc), Throws.InstanceOf<ArgumentOutOfRangeException>());
+			Assert.That(() => new SortedPagedList<Movie>(_movieQuery, 0, 10, "Name", SortDirection.Asc), Throws.InstanceOf<ArgumentOutOfRangeException>());
 		}
 
 		[Test]
 		public void SortedPagedList_ShouldThrowIfPageSizeIsLessThanOne()
 		{
-			Assert.That(() => new SortedPagedList<Movie>(_movieQuery, 0, 0, "Name", SortDirection.Asc), Throws.InstanceOf<ArgumentOutOfRangeException>());
+			Assert.That(() => new SortedPagedList<Movie>(_movieQuery, 1, 0, "Name", SortDirection.Asc), Throws.InstanceOf<ArgumentOutOfRangeException>());
 		}
 
 		[Test]
 		public void SortedPagedList_ShouldThrowIfSortDirectionIsNotAscOrDesc()
 		{
-			Assert.That(() => new SortedPagedList<Movie>(_movieQuery, 0, 10, "Name", "XXX"), Throws.ArgumentException);
-		}
-
-		[Test]
-		public void SortedPagedList_PageNumberShouldBeGreaterByOneThanIndex()
-		{
-			var list = new SortedPagedList<Movie>(_movieQuery, 0, 5, "Name", SortDirection.Asc);
-
-			Assert.That(list.PageIndex + 1, Is.EqualTo(list.PageNumber));
+			Assert.That(() => new SortedPagedList<Movie>(_movieQuery, 1, 10, "Name", "XXX"), Throws.ArgumentException);
 		}
 
 		[Test]
 		public void SortedPagedList_FirstItemOnPage_ShouldReturnOneBaseIndexOfFirstItem()
 		{
-			var list = new SortedPagedList<Movie>(_movieQuery, 1, 3, "Name", SortDirection.Asc);
+			var list = new SortedPagedList<Movie>(_movieQuery, 2, 3, "Name", SortDirection.Asc);
 
 			Assert.That(list.FirstItemOnPage, Is.EqualTo(4));
 		}
@@ -66,7 +58,7 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 		[Test]
 		public void SortedPagedList_LastItemOnPage_ShouldReturnOneBaseIndexOfLastItem()
 		{
-			var list = new SortedPagedList<Movie>(_movieQuery, 1, 3, "Name", SortDirection.Asc);
+			var list = new SortedPagedList<Movie>(_movieQuery, 2, 3, "Name", SortDirection.Asc);
 
 			Assert.That(list.LastItemOnPage, Is.EqualTo(5));
 		}
