@@ -26,7 +26,7 @@ namespace NecroNet.Toolkit.Data
 			}
 		}
 
-		protected abstract IEntityOperator<TEntity> Operator { get; } 
+		protected abstract IEntityOperator<TEntity> Operator { get; }
 
 		public IQueryable<TEntity> GetQueryable()
 		{

@@ -4,6 +4,7 @@ using System.Data.Objects;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace NecroNet.Toolkit.Data
 {
@@ -69,9 +70,12 @@ namespace NecroNet.Toolkit.Data
 
 		public override void Clear()
 		{
-			var context = ObjectContext as ObjectContext;
-			context.ExecuteStoreCommand(string.Format("DELETE FROM {0}", EntitySetName));
-			context.Refresh(RefreshMode.StoreWins, EntitySet);
+			var sql = ((ObjectQuery<TEntity>)EntitySet).ToTraceString();
+			var match = Regex.Match(sql, @".*FROM (\[.*?\].\[.*?\]) AS \[.*?\]$", RegexOptions.Singleline);
+			var tableName = match.Groups[1].Value;
+
+			var context = ObjectContext.AsActual<ObjectContext>();
+			context.ExecuteStoreCommand(string.Format("DELETE FROM {0}", tableName));
 		}
 	}
 }

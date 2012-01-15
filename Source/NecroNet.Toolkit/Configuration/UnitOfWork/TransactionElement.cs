@@ -1,6 +1,6 @@
 using System;
 using System.Configuration;
-using System.Transactions;
+using System.Data;
 
 namespace NecroNet.Toolkit.Configuration
 {
@@ -11,20 +11,6 @@ namespace NecroNet.Toolkit.Configuration
 		{
 			get { return (IsolationLevel)this["isolationLevel"]; }
 			set { this["isolationLevel"] = value; }
-		}
-
-		[ConfigurationProperty("scopeOption", IsRequired = false, DefaultValue = TransactionScopeOption.Required)]
-		public TransactionScopeOption ScopeOption
-		{
-			get { return (TransactionScopeOption)this["scopeOption"]; }
-			set { this["scopeOption"] = value; }
-		}
-
-		[ConfigurationProperty("timeout", IsRequired = false, DefaultValue = 0)]
-		public int Timeout
-		{
-			get { return (int)this["timeout"]; }
-			set { this["timeout"] = value; }
 		}
 	}
 }

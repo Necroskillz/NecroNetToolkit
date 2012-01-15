@@ -327,5 +327,11 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 			Assert.That(include1, Is.EqualTo("Cat.Color"));
 			Assert.That(include2, Is.EqualTo("Firstname"));
 		}
+
+		[Test]
+		public void x()
+		{
+			_personRepository.Clear();
+		}
 	}
 }

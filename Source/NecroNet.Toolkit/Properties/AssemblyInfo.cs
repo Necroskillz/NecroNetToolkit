@@ -38,4 +38,3 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: InternalsVisibleTo("NecroNet.Toolkit.Tests, PublicKey=0a5f64936e18e425")]

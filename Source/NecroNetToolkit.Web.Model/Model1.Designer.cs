@@ -18,18 +18,18 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_ActualDeal_Category", "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NecroNetToolkit.Web.Test.Category), "ActualDeal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Test.ActualDeal), true)]
-[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_ActualDeal_City", "City", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NecroNetToolkit.Web.Test.City), "ActualDeal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Test.ActualDeal), true)]
-[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_ActualDeal_Server", "Server", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NecroNetToolkit.Web.Test.Server), "ActualDeal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Test.ActualDeal), true)]
-[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_Category_MetaCategory", "MetaCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NecroNetToolkit.Web.Test.MetaCategory), "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Test.Category), true)]
-[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_HistoryDeal_Category", "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NecroNetToolkit.Web.Test.Category), "HistoryDeal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Test.HistoryDeal), true)]
-[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_City_State", "State", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NecroNetToolkit.Web.Test.State), "City", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Test.City), true)]
-[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_HistoryDeal_City", "City", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NecroNetToolkit.Web.Test.City), "HistoryDeal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Test.HistoryDeal), true)]
-[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_HistoryDeal_Server", "Server", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NecroNetToolkit.Web.Test.Server), "HistoryDeal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Test.HistoryDeal), true)]
+[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_ActualDeal_Category", "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NecroNetToolkit.Web.Model.Category), "ActualDeal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Model.ActualDeal), true)]
+[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_ActualDeal_City", "City", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NecroNetToolkit.Web.Model.City), "ActualDeal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Model.ActualDeal), true)]
+[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_ActualDeal_Server", "Server", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NecroNetToolkit.Web.Model.Server), "ActualDeal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Model.ActualDeal), true)]
+[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_Category_MetaCategory", "MetaCategory", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NecroNetToolkit.Web.Model.MetaCategory), "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Model.Category), true)]
+[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_HistoryDeal_Category", "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NecroNetToolkit.Web.Model.Category), "HistoryDeal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Model.HistoryDeal), true)]
+[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_City_State", "State", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NecroNetToolkit.Web.Model.State), "City", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Model.City), true)]
+[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_HistoryDeal_City", "City", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NecroNetToolkit.Web.Model.City), "HistoryDeal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Model.HistoryDeal), true)]
+[assembly: EdmRelationshipAttribute("AllDealsModel", "FK_HistoryDeal_Server", "Server", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NecroNetToolkit.Web.Model.Server), "HistoryDeal", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NecroNetToolkit.Web.Model.HistoryDeal), true)]
 
 #endregion
 
-namespace NecroNetToolkit.Web.Test
+namespace NecroNetToolkit.Web.Model
 {
     #region Contexts
     

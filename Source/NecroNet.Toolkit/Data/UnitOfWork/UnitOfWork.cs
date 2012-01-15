@@ -160,37 +160,6 @@ namespace NecroNet.Toolkit.Data
 			return IsStarted(DefaultKey);
 		}
 
-		private static IObjectContext GetCurrentContext(string key)
-		{
-			var factory = GetUnitOfWorkFactory(key);
-
-			if (!IsStarted(key))
-			{
-				ExceptionHelper.ThrowInvalidOp("You are not in a unit of work of type '{0}'.", key);
-			}
-
-			return factory.CurrentContext;
-		}
-
-		/// <summary>
-		/// Gets current underlying object context from unit of work of specified type.
-		/// </summary>
-		/// <typeparam name="TObjectContext">Type of object context</typeparam>
-		public static IObjectContext GetCurrentContext<TObjectContext>()
-		{
-			var key = GetKey<TObjectContext>();
-
-			return GetCurrentContext(key);
-		}
-
-		/// <summary>
-		/// Gets current underlying object context from default unit of work.
-		/// </summary>
-		public static IObjectContext GetCurrentContext()
-		{
-			return GetCurrentContext(DefaultKey);
-		}
-
 		private static IUnitOfWork Start(string key)
 		{
 			if (IsStarted(key))

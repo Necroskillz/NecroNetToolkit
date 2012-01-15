@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NecroNet.Toolkit.Tests", "N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NecroNetToolkit.Web.Test", "NecroNetToolkit.Web.Test\NecroNetToolkit.Web.Test.csproj", "{79747045-D07E-4BB6-86AC-C7605B77492D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NecroNetToolkit.Web.Model", "NecroNetToolkit.Web.Model\NecroNetToolkit.Web.Model.csproj", "{5E1D7DB0-09AE-445D-BEB7-D9632BD1CD26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,8 +27,15 @@ Global
 		{79747045-D07E-4BB6-86AC-C7605B77492D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79747045-D07E-4BB6-86AC-C7605B77492D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79747045-D07E-4BB6-86AC-C7605B77492D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E1D7DB0-09AE-445D-BEB7-D9632BD1CD26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E1D7DB0-09AE-445D-BEB7-D9632BD1CD26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E1D7DB0-09AE-445D-BEB7-D9632BD1CD26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E1D7DB0-09AE-445D-BEB7-D9632BD1CD26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal

@@ -4,6 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Castle.Core.Configuration;
+using Castle.MicroKernel;
+using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.SubSystems.Configuration;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
+using NecroNet.Toolkit.Data;
+using NecroNetToolkit.Web.Model;
 
 namespace NecroNetToolkit.Web.Test
 {
@@ -35,6 +43,15 @@ namespace NecroNetToolkit.Web.Test
 
 			RegisterGlobalFilters(GlobalFilters.Filters);
 			RegisterRoutes(RouteTable.Routes);
+
+            UnitOfWork.Register<AllDealsEntities, AllDealsEntitiesFactory>();
+            UnitOfWork.Register<DoplatkyEntities, DoplatkyEntitiesFactory>();
+
+			var container = new WindsorContainer().Install(FromAssembly.This());
+			container.Install(new TestWindsorInstaller());
+
+			var controllerFactory = new WindsorControllerFactory(container.Kernel);
+			ControllerBuilder.Current.SetControllerFactory(controllerFactory);
 		}
 	}
 }

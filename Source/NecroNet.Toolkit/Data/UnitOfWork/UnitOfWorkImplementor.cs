@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Transactions;
+using System.Data;
+using NecroNet.Toolkit.Internals;
 
 namespace NecroNet.Toolkit.Data
 {
@@ -7,6 +8,7 @@ namespace NecroNet.Toolkit.Data
 	{
 		private readonly IObjectContext _context;
 		private readonly IUnitOfWorkFactory _factory;
+	    private bool _isDisposed;
 
 		public UnitOfWorkImplementor(IUnitOfWorkFactory factory, IObjectContext context)
 		{
@@ -16,8 +18,9 @@ namespace NecroNet.Toolkit.Data
 
 		public void Dispose()
 		{
-			_factory.DisposeUnitOfWork(this);
+			_factory.DisposeUnitOfWork();
 			_context.Dispose();
+		    _isDisposed = true;
 		}
 
 		public void Flush()
@@ -25,9 +28,22 @@ namespace NecroNet.Toolkit.Data
 			_context.SaveChanges();
 		}
 
-		public ITransaction BeginTransaction(TransactionScopeOption? scopeOption, IsolationLevel? isolationLevel, int? timeout)
+		public ITransaction BeginTransaction(IsolationLevel? isolationLevel)
 		{
-			return new GenericTransaction(scopeOption, isolationLevel, timeout);
+			return new DatabaseTransaction(_context.Connection, isolationLevel);
 		}
+
+	    public IObjectContext Context
+	    {
+	        get
+	        {
+                if (_isDisposed)
+                {
+                    ExceptionHelper.ThrowInvalidOp("This unit of work and it's object context has already been disposed.");
+                }
+
+	            return _context;
+	        }
+	    }
 	}
 }

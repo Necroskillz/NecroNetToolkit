@@ -79,7 +79,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 			var fieldInfo = typeof(UnitOfWork).GetField("UnitOfWorkFactories", BindingFlags.NonPublic | BindingFlags.Static);
 			var uowFactory = ((Dictionary<string, IUnitOfWorkFactory>)fieldInfo.GetValue(null))[typeof(FakeObjectContext).FullName];
 
-			var propertyInfo = typeof(UnitOfWorkFactory<FakeObjectContext>).GetProperty("ContextFactory");
+            var propertyInfo = typeof(UnitOfWorkFactory<FakeObjectContext>).GetProperty("ContextFactory", BindingFlags.NonPublic | BindingFlags.Instance);
 			propertyInfo.SetValue(uowFactory, factory.Object, null);
 
 			using(UnitOfWork.Start())
@@ -99,7 +99,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 			var fieldInfo = typeof(UnitOfWork).GetField("UnitOfWorkFactories", BindingFlags.NonPublic | BindingFlags.Static);
 			var uowFactory = ((Dictionary<string, IUnitOfWorkFactory>)fieldInfo.GetValue(null))[typeof(FakeObjectContext).FullName];
 
-			var propertyInfo = typeof(UnitOfWorkFactory<FakeObjectContext>).GetProperty("ContextFactory");
+            var propertyInfo = typeof(UnitOfWorkFactory<FakeObjectContext>).GetProperty("ContextFactory", BindingFlags.NonPublic | BindingFlags.Instance);
 			propertyInfo.SetValue(uowFactory, factory.Object, null);
 
 			using (var scope = UnitOfWork.Start())
@@ -120,12 +120,12 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 			var fieldInfo = typeof(UnitOfWork).GetField("UnitOfWorkFactories", BindingFlags.NonPublic | BindingFlags.Static);
 			var uowFactory = ((Dictionary<string, IUnitOfWorkFactory>)fieldInfo.GetValue(null))[typeof(FakeObjectContext).FullName];
 
-			var propertyInfo = typeof(UnitOfWorkFactory<FakeObjectContext>).GetProperty("ContextFactory");
+            var propertyInfo = typeof(UnitOfWorkFactory<FakeObjectContext>).GetProperty("ContextFactory", BindingFlags.NonPublic | BindingFlags.Instance);
 			propertyInfo.SetValue(uowFactory, factory.Object, null);
 
-			using(UnitOfWork.Start())
+			using(var scope = UnitOfWork.Start())
 			{
-				Assert.That(UnitOfWork.GetCurrentContext(), Is.SameAs(context.Object));
+				Assert.That(scope.Context, Is.SameAs(context.Object));
 			}
 		}
 
@@ -133,9 +133,15 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		public void UnitOfWork_GetCurrentContext_ShouldThrowIfUnitOfWorkIsNotStarted()
 		{
 			Assert.That(() =>
-			            	{
-			            		var context = UnitOfWork.GetCurrentContext();
-			            	}, Throws.InvalidOperationException);
+			                {
+			                    IUnitOfWork unitOfWork;
+			                    using (unitOfWork = UnitOfWork.Start())
+			                    {
+			                        
+			                    }
+
+			                    var context = unitOfWork.Context;
+			                }, Throws.InvalidOperationException);
 		}
 
 		[Test]
@@ -197,7 +203,7 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 			var fieldInfo = typeof(UnitOfWork).GetField("UnitOfWorkFactories", BindingFlags.NonPublic | BindingFlags.Static);
 			var uowFactory = ((Dictionary<string, IUnitOfWorkFactory>)fieldInfo.GetValue(null))[typeof(FakeObjectContext).FullName];
 
-			var propertyInfo = typeof(UnitOfWorkFactory<FakeObjectContext>).GetProperty("ContextFactory");
+            var propertyInfo = typeof(UnitOfWorkFactory<FakeObjectContext>).GetProperty("ContextFactory", BindingFlags.NonPublic | BindingFlags.Instance);
 			propertyInfo.SetValue(uowFactory, factory.Object, null);
 
 			using (UnitOfWork.Start<FakeObjectContext>())
@@ -207,32 +213,15 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 			context.Verify(c => c.Dispose());
 		}
 
-		[Test]
-		public void UnitOfWork_CurrentContextOfType_ShouldReturnUnderlyingObjectContext()
-		{
-			var context = new Mock<IObjectContext>();
-			var factory = new Mock<IObjectContextFactory>();
-			factory.Setup(f => f.CreateObjectContext()).Returns(() => context.Object);
+        [Test]
+        public void IObjectContext_AsActual_ShouldReturnUnwrappedObjectContext()
+        {
+            using (var scope = UnitOfWork.Start())
+            {
+                var context = scope.Context.AsActual<FakeObjectContext>();
 
-			var fieldInfo = typeof(UnitOfWork).GetField("UnitOfWorkFactories", BindingFlags.NonPublic | BindingFlags.Static);
-			var uowFactory = ((Dictionary<string, IUnitOfWorkFactory>)fieldInfo.GetValue(null))[typeof(FakeObjectContext).FullName];
-
-			var propertyInfo = typeof(UnitOfWorkFactory<FakeObjectContext>).GetProperty("ContextFactory");
-			propertyInfo.SetValue(uowFactory, factory.Object, null);
-
-			using (UnitOfWork.Start<FakeObjectContext>())
-			{
-				Assert.That(UnitOfWork.GetCurrentContext<FakeObjectContext>(), Is.SameAs(context.Object));
-			}
-		}
-
-		[Test]
-		public void UnitOfWork_CurrentContextOfType_ShouldThrowIfUnitOfWorkIsNotStarted()
-		{
-			Assert.That(() =>
-			{
-				var context = UnitOfWork.GetCurrentContext<FakeObjectContext>();
-			}, Throws.InvalidOperationException);
-		}
+                Assert.That(context, Is.TypeOf<FakeObjectContext>());
+            }
+        }
 	}
 }

@@ -1,4 +1,6 @@
-﻿using System.Data.Objects;
+﻿using System.Data.Common;
+using System.Data.Objects;
+using System.Data.SqlClient;
 using NecroNet.Toolkit.Data;
 
 namespace NecroNet.Toolkit.Tests.Fakes
@@ -20,5 +22,13 @@ namespace NecroNet.Toolkit.Tests.Fakes
 		{
 			return 0;
 		}
+
+	    public DbConnection Connection
+	    {
+	        get
+	        {
+	            return new SqlConnection();
+	        }
+	    }
 	}
 }

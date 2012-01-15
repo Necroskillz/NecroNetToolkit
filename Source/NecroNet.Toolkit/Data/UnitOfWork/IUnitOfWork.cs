@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Transactions;
+using System.Data;
 
 namespace NecroNet.Toolkit.Data
 {
@@ -13,6 +13,11 @@ namespace NecroNet.Toolkit.Data
 		/// <summary>
 		/// Begins a transaction by creating a transaction scope.
 		/// </summary>
-		ITransaction BeginTransaction(TransactionScopeOption? scopeOption = null, IsolationLevel? isolationLevel = null, int? timeout = null);
+		ITransaction BeginTransaction(IsolationLevel? isolationLevel = null);
+
+        /// <summary>
+        /// Gets underlying object context
+        /// </summary>
+        IObjectContext Context { get; }
 	}
 }
