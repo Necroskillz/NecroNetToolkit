@@ -16,7 +16,8 @@ namespace NecroNet.Toolkit.Data
 		ITransaction BeginTransaction(IsolationLevel? isolationLevel = null);
 
         /// <summary>
-        /// Gets underlying object context
+        /// Gets underlying object context.
+        /// Under normal circumstances you should not use this. If you do, make sure to abstract it away if you want your code to be unit testable.
         /// </summary>
         IObjectContext Context { get; }
 	}

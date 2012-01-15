@@ -2,6 +2,7 @@
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using NecroNet.Toolkit.Data;
 
 namespace NecroNetToolkit.Web.Test
 {
@@ -12,6 +13,8 @@ namespace NecroNetToolkit.Web.Test
 			container.Register(Classes.FromThisAssembly()
 								.BasedOn<IController>()
 								.LifestyleTransient());
+
+			container.Register(Component.For<IUnitOfWorkManager>().ImplementedBy<UnitOfWorkManager>().LifestyleSingleton());
 		}
 	}
 }

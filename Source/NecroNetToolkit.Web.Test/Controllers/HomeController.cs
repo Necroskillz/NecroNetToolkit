@@ -13,13 +13,15 @@ namespace NecroNetToolkit.Web.Test.Controllers
 {
 	public class HomeController : Controller
 	{
+		private readonly IUnitOfWorkManager _unitOfWorkManager;
 		private readonly ICityRepository _cityRepository;
-		private readonly IRepository<City> _repository; 
+		private readonly IRepository<City> _repository;
 
-		public HomeController(ICityRepository cityRepository, IRepository<City> repository)
+		public HomeController(ICityRepository cityRepository, IRepository<City> repository, IUnitOfWorkManager unitOfWorkManager)
 		{
 			_cityRepository = cityRepository;
 			_repository = repository;
+			_unitOfWorkManager = unitOfWorkManager;
 		}
 
 		public ActionResult Index()
@@ -93,9 +95,11 @@ namespace NecroNetToolkit.Web.Test.Controllers
 			//    var r = new ActualDealRepository();
 			//    r.Clear();
 			//}
-			using (UnitOfWork.Start<AllDealsEntities>())
+			using (var scope = _unitOfWorkManager.Start<AllDealsEntities>())
 			{
-				_cityRepository.Get(c => c.ID == 1);
+				var city = _cityRepository.Get(c => c.ID == 1);
+				
+				scope.Flush();
 			}
 
 			return View();

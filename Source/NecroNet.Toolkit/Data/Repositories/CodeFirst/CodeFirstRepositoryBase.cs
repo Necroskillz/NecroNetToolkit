@@ -28,7 +28,7 @@ namespace NecroNet.Toolkit.Data
 		public override void Clear()
 		{
 			var context = DbContext.AsActual<DbContext>();
-
+			
 			var sql = ((ObjectQuery<TEntity>)context.Set<TEntity>().AsQueryable()).ToTraceString();
 			var match = Regex.Match(sql, @".*FROM (\[.*?\].\[.*?\]) AS \[.*?\]$", RegexOptions.Singleline);
 			var tableName = match.Groups[1].Value;

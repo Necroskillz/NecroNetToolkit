@@ -45,6 +45,47 @@ namespace NecroNet.Toolkit
 			}
 		}
 
+		/// <summary>
+		/// Static sorted paged list constructor
+		/// </summary>
+		public SortedPagedList(IEnumerable<T> subset, int pageNumber, int pageSize, int totalItemCount, string sortKey, string sortDirection)
+		{
+			// set source to blank list if source is null to prevent exceptions
+			if (subset == null)
+				subset = new List<T>();
+
+			// argument checking
+			if (pageNumber < 1)
+				throw new ArgumentOutOfRangeException("pageNumber");
+			if (pageSize < 1)
+				throw new ArgumentOutOfRangeException("pageSize");
+
+			Guard.IsNotNullOrEmpty(sortKey, "sortKey", "Sort key cannot be null");
+
+			if (sortDirection != Toolkit.SortDirection.Asc && sortDirection != Toolkit.SortDirection.Desc)
+				throw new ArgumentException("Sort direction must be either SortDir.Asc or SortDir.Desc");
+
+			// set properties
+			var index = pageNumber - 1;
+			TotalItemCount = totalItemCount;
+			PageSize = pageSize;
+			PageNumber = pageNumber;
+			PageCount = TotalItemCount > 0 ? (int)Math.Ceiling(TotalItemCount / (double)PageSize) : 0;
+			HasPreviousPage = (index > 0);
+			HasNextPage = (index < (PageCount - 1));
+			IsFirstPage = (index <= 0);
+			IsLastPage = (index >= (PageCount - 1));
+			SortDirection = sortDirection;
+			SortKey = sortKey;
+
+			if (TotalItemCount > 0)
+			{
+				AddRange(SortDirection == Toolkit.SortDirection.Asc
+							? subset.AsQueryable().OrderBy(sortKey).Skip(index * pageSize).Take(pageSize)
+							: subset.AsQueryable().OrderByDescending(sortKey).Skip(index * pageSize).Take(pageSize));
+			}
+		}
+
 		public int PageCount { get; private set; }
 		public int TotalItemCount { get; private set; }
 
