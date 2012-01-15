@@ -44,12 +44,6 @@
       <HintPath>..\packages\EntityFramework.4.2.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MvcExtensions">
-      <HintPath>..\packages\MvcExtensions.2.0.4.529\lib\net40\MvcExtensions.dll</HintPath>
-    </Reference>
-    <Reference Include="MvcExtensions.Windsor">
-      <HintPath>..\packages\MvcExtensions.Windsor.2.0.4.529\lib\net40\MvcExtensions.Windsor.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
