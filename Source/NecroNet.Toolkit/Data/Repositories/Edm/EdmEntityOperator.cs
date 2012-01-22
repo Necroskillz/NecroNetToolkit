@@ -23,10 +23,7 @@ namespace NecroNet.Toolkit.Data
 
 		public override IQueryable<TEntity> GetConfiguredQuery(QueryConfig config)
 		{
-			var query = GetStore().AsQueryable();
-			query = config.Includes.Aggregate(query, (current, include) => current.Include(include));
-
-			config.Reset();
+			var query = config.Configure(GetStore());
 
 			return query;
 		}

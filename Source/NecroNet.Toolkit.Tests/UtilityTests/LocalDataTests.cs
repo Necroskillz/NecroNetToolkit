@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Specialized;
 using System.IO;
 using System.Reflection;
 using System.Web;
@@ -14,16 +15,32 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 		private const string Key = "Key";
 		private static readonly object Obj = new object();
 
-		[Test]
-		public void LocalData_ShouldStoreDataInLocalHashtableWhenNotRunningInWeb()
+		private static HybridDictionary GetWebDictionary()
 		{
-			Local.Data[Key] = Obj;
+			var fieldInfo = typeof(Local.LocalDataProvider).GetField("StoreKey",
+																	  BindingFlags.NonPublic | BindingFlags.Static);
+			var storeKey = fieldInfo.GetValue(Local.Data);
+			var dictionary = HttpContext.Current.Items[storeKey] as HybridDictionary;
+			return dictionary;
+		}
 
-			var fieldInfo = typeof (Local.LocalDataProvider).GetField("_localData", BindingFlags.Static | BindingFlags.NonPublic);
-			var hashtable = fieldInfo.GetValue(Local.Data) as Hashtable;
+		private static HybridDictionary GetLocalDictionary()
+		{
+			var fieldInfo = typeof(Local.LocalDataProvider).GetField("_localStore",
+																	  BindingFlags.NonPublic | BindingFlags.Static);
+			var dictionary = fieldInfo.GetValue(null) as HybridDictionary;
+			return dictionary;
+		}
 
-			Assert.That(hashtable, Is.Not.Null);
-			Assert.That(hashtable[Key], Is.EqualTo(Obj));
+		[Test]
+		public void LocalData_ShouldStoreDataInLocalDictionaryWhenNotRunningInWeb()
+		{
+			Local.Data.Set(Key, Obj);
+
+			var dictionary = GetLocalDictionary();
+
+			Assert.That(dictionary, Is.Not.Null);
+			Assert.That(dictionary[Key], Is.EqualTo(Obj));
 		}
 
 		[Test]
@@ -36,33 +53,33 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 
 			HttpContext.Current = httpContext;
 
-			Local.Data[Key] = Obj;
+			Local.Data.Set(Key, Obj);
 
-			var fieldInfo = typeof (Local.LocalDataProvider).GetField("LocalDataHashtableKey", BindingFlags.NonPublic | BindingFlags.Static);
-			var hashtableKey = fieldInfo.GetValue(Local.Data);
-			var hashtable = HttpContext.Current.Items[hashtableKey] as Hashtable;
+			var dictionary = GetWebDictionary();
 
-			Assert.That(hashtable, Is.Not.Null);
-			Assert.That(hashtable[Key], Is.EqualTo(Obj));
+			Assert.That(dictionary, Is.Not.Null);
+			Assert.That(dictionary[Key], Is.EqualTo(Obj));
 		}
 
 		[Test]
 		public void LocalData_Count_ShouldReturnAmountOfItemsStored()
 		{
-			Local.Data[Key] = Obj;
-			Local.Data["Key2"] = new object();
+			Local.Data.Set(Key, Obj);
+			Local.Data.Set("Key2", new object());
 
-			Assert.That(Local.Data, Has.Count.EqualTo(2));
+			var dictionary = GetLocalDictionary();
 
-			Local.Data["Key3"] = new object();
+			Assert.That(dictionary, Has.Count.EqualTo(2));
 
-			Assert.That(Local.Data, Has.Count.EqualTo(3));
+			Local.Data.Set("Key3", new object());
+
+			Assert.That(dictionary, Has.Count.EqualTo(3));
 		}
 
 		[Test]
 		public void LocalData_Contains_ShouldReturnTrueIfHashtableContainsSpecifiedKey()
 		{
-			Local.Data[Key] = Obj;
+			Local.Data.Set(Key, Obj);
 
 			Assert.That(Local.Data.Contains(Key));
 		}
@@ -76,12 +93,12 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 		[Test]
 		public void LocalData_Clear_ShouldRemoveAllDataFromTheHashtable()
 		{
-			Local.Data[Key] = Obj;
-			Local.Data["Key2"] = new object();
+			Local.Data.Set(Key, Obj);
+			Local.Data.Set("Key2", new object());
 
 			Local.Data.Clear();
 
-			Assert.That(Local.Data, Has.Count.EqualTo(0));
+			Assert.That(GetLocalDictionary(), Has.Count.EqualTo(0));
 		}
 
 		[Test]
@@ -89,7 +106,7 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 		{
 			Local.ChangeContext(new FakeLocalDataProvider());
 
-			Assert.That(() => Local.Data.Count, Throws.Exception);
+			Assert.That(() => Local.Data.Set(Key, 1), Throws.Exception);
 
 			Local.ChangeContext(new Local.LocalDataProvider());
 		}

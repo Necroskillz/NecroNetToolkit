@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -37,42 +38,31 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 			HttpContext.Current = httpContext;
 		}
 
-		[Test]
-		public void SessionData_Count_ShouldBeZeroWhenFirstUsed()
+		private static HybridDictionary GetSessionDictionary()
 		{
-			Assert.That(Session.Data.Count, Is.EqualTo(0));
-		}
-
-		[Test]
-		public void SessionData_Count_ShouldIncreaseAfterAddingItems()
-		{
-			Session.Data[Key] = 1;
-
-			Assert.That(Session.Data.Count, Is.EqualTo(1));
-
-			Session.Data[Key + "2"] = 2;
-
-			Assert.That(Session.Data.Count, Is.EqualTo(2));
+			var fieldInfo = typeof(Session.SessionDataProvider).GetField("StoreKey",
+																		  BindingFlags.NonPublic | BindingFlags.Static);
+			var storeKey = (string)fieldInfo.GetValue(Local.Data);
+			var store = HttpContext.Current.Session[storeKey] as HybridDictionary;
+			return store;
 		}
 
 		[Test]
 		public void SessionData_SetItem_ShouldStoreValueInHttpContextSession()
 		{
-			Session.Data[Key] = 1;
+			Session.Data.Set(Key, 1);
 
-			var fieldInfo = typeof(Session.SessionDataProvider).GetField("LocalDataHashtableKey", BindingFlags.NonPublic | BindingFlags.Static);
-			var hashtableKey = (string)fieldInfo.GetValue(Local.Data);
-			var hashtable = HttpContext.Current.Session[hashtableKey] as Hashtable;
+			var store = GetSessionDictionary();
 
-			Assert.That((int)hashtable[Key], Is.EqualTo(1));
+			Assert.That((int)store[Key], Is.EqualTo(1));
 		}
 
 		[Test]
 		public void SessionData_GetItem_ShouldReturnStoredValue()
 		{
-			Session.Data[Key] = 1;
+			Session.Data.Set(Key, 1);
 
-			var value = (int)Session.Data[Key];
+			var value = Session.Data.Get<int>(Key);
 
 			Assert.That(value, Is.EqualTo(1));
 		}
@@ -80,7 +70,7 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 		[Test]
 		public void SessionData_GetItem_ShouldReturnDefaultValueForTIfNoValueWithSpecifiedKeyIsStored()
 		{
-			var value = Session.Data[Key];
+			var value = Session.Data.Get(Key);
 
 			Assert.That(value, Is.Null);
 		}
@@ -88,16 +78,16 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 		[Test]
 		public void SessionData_Clear_ShouldRemoveAllKeysFromSession()
 		{
-			Session.Data[Key] = 1;
+			Session.Data.Set(Key, 1);
 			Session.Data.Clear();
 
-			Assert.That(Session.Data.Count, Is.EqualTo(0));
+			Assert.That(GetSessionDictionary().Count, Is.EqualTo(0));
 		}
 
 		[Test]
 		public void LocalData_Contains_ShouldReturnTrueIfHashtableContainsSpecifiedKey()
 		{
-			Session.Data[Key] = Obj;
+			Session.Data.Set(Key, Obj);
 
 			Assert.That(Session.Data.Contains(Key));
 		}
@@ -107,9 +97,20 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 		{
 			Session.ChangeContext(new FakeLocalDataProvider());
 
-			Assert.That(() => Session.Data[Key] = 0, Throws.Exception);
+			Assert.That(() => Session.Data.Set(Key, 0), Throws.Exception);
 
 			Session.ChangeContext(new Session.SessionDataProvider());
+		}
+
+		[Test]
+		public void SessionData_ShouldReturnTheSameValueForSameStringKeyThatAreDifferentObjects()
+		{
+			const string key1 = "KEY";
+			const string key2 = "KEY";
+
+			Session.Data.Set(key1, 1);
+
+			Assert.That(Session.Data.Get<int>(key2), Is.EqualTo(1));
 		}
 	}
 }

@@ -4,7 +4,7 @@ using System.Web;
 
 namespace NecroNet.Toolkit.Mail
 {
-	public class EmailHttpResponse : HttpResponseBase
+	internal class EmailHttpResponse : HttpResponseBase
 	{
 		public override string ApplyAppPathModifier(string virtualPath)
 		{

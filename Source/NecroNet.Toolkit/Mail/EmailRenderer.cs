@@ -9,7 +9,7 @@ using NecroNet.Toolkit.Configuration;
 
 namespace NecroNet.Toolkit.Mail
 {
-	public class EmailRenderer : IEmailRenderer
+	internal class EmailRenderer : IEmailRenderer
 	{
 		public EmailRenderer(ViewEngineCollection viewEngines, Uri url)
 		{
@@ -25,7 +25,7 @@ namespace NecroNet.Toolkit.Mail
 				_getUrl = () => GetUrlFromHttpContext() ?? DefaultUrlRatherThanNull();
 			}
 
-			_emailViewDirectoryName = NecroNetToolkitConfigurationManager.Configuration.Mail.EmailDirectory ?? "Emails";
+			_emailViewDirectoryName = NecroNetToolkitConfigurationManager.GetOption(c => c.Mail.EmailDirectory);
 		}
 
 		readonly ViewEngineCollection _viewEngines;

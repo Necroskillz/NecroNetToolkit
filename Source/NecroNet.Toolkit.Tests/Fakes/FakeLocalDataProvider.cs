@@ -5,25 +5,29 @@ using System.Text;
 
 namespace NecroNet.Toolkit.Tests.Fakes
 {
-	public class FakeLocalDataProvider : ILocalDataProvider
+	public class FakeLocalDataProvider : IHttpGeneralDataProvider
 	{
-		public object this[object key]
-		{
-			get { throw new Exception(); }
-			set { throw new Exception(); }
-		}
-
-		public int Count
-		{
-			get { throw new Exception(); }
-		}
-
 		public void Clear()
 		{
 			throw new Exception();
 		}
 
 		public bool Contains(object key)
+		{
+			throw new Exception();
+		}
+
+		public T Get<T>(object key)
+		{
+			throw new Exception();
+		}
+
+		public object Get(object key)
+		{
+			throw new Exception();
+		}
+
+		public void Set(object key, object value)
 		{
 			throw new Exception();
 		}

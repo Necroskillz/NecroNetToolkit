@@ -13,7 +13,7 @@ namespace NecroNet.Toolkit.Mvc.Html
 	public static class LabelExtensions
 	{
 		/// <summary>
-		/// Generates simple label (&lt;label&gt; withour 'for' attribute)
+		/// Generates simple label (&lt;label&gt; withour the 'for' attribute).
 		/// </summary>
 		public static MvcHtmlString SimpleLabelFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression)
 		{
@@ -25,7 +25,7 @@ namespace NecroNet.Toolkit.Mvc.Html
 		}
 
 		/// <summary>
-		/// Generates simple label (&lt;label&gt; withour 'for' attribute)
+		/// Generates simple label (&lt;label&gt; withour the 'for' attribute).
 		/// </summary>
 		public static MvcHtmlString SimpleLabel(this HtmlHelper helper, string text)
 		{

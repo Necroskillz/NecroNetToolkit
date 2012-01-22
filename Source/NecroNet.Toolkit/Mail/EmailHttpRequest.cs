@@ -6,7 +6,7 @@ using System.Web;
 
 namespace NecroNet.Toolkit.Mail
 {
-	public class EmailHttpRequest : HttpRequestBase
+	internal class EmailHttpRequest : HttpRequestBase
 	{
 		readonly Uri _url;
 		readonly NameValueCollection _serverVariables = new NameValueCollection();

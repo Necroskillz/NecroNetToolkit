@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using NecroNet.Toolkit.Data;
 using NecroNet.Toolkit.Tests.Fakes;
@@ -319,19 +320,13 @@ namespace NecroNet.Toolkit.Tests.EntityFrameworkTests
 		{
 			_personRepository.WithInclude(p => p.Cat.Color).WithInclude(p => p.Firstname);
 			var key = typeof(UltimateRepositoryBase<>).MakeGenericType(new[] { typeof(Person) }).GetField("QueryConfigKey", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(_personRepository);
-			var queryConfig = Local.Data[key] as QueryConfig;
+			var queryConfig = Local.Data.Get<QueryConfig>(key);
 
 			var include1 = queryConfig.Includes[0];
 			var include2 = queryConfig.Includes[1];
 
-			Assert.That(include1, Is.EqualTo("Cat.Color"));
-			Assert.That(include2, Is.EqualTo("Firstname"));
-		}
-
-		[Test]
-		public void x()
-		{
-			_personRepository.Clear();
+			Assert.That(include1.ToString(), Is.EqualTo(((Expression<Func<Person, string>>)(p => p.Cat.Color)).ToString()));
+			Assert.That(include2.ToString(), Is.EqualTo(((Expression<Func<Person, string>>)(p => p.Firstname)).ToString()));
 		}
 	}
 }

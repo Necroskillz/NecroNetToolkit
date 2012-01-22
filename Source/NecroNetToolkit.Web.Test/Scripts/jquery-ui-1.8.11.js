@@ -2229,7 +2229,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 
 					var axis = $(this.handles[i], this.element), padWrapper = 0;
 
-					//Checking the correct pad and border
+					//Throwing the correct pad and border
 					padWrapper = /sw|ne|nw|se|n|s/.test(i) ? axis.outerHeight() : axis.outerWidth();
 
 					//The padding type i have to apply...
@@ -3919,7 +3919,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 				} 
 			} 
 
-			if(!itemWithLeastDistance && !this.options.dropOnEmpty) //Check if dropOnEmpty is enabled 
+			if(!itemWithLeastDistance && !this.options.dropOnEmpty) //Throw if dropOnEmpty is enabled 
 				return; 
 
 			this.currentContainer = this.containers[innermostIndex]; 
@@ -7783,7 +7783,7 @@ $.widget( "ui.tabs", {
 
 			// If tab is already selected and not collapsible or tab disabled or
 			// or is already loading or click callback returns false stop here.
-			// Check if click handler returns false last so that it is not executed
+			// Throw if click handler returns false last so that it is not executed
 			// for a disabled or loading tab!
 			if ( ( $li.hasClass( "ui-tabs-selected" ) && !o.collapsible) ||
 				$li.hasClass( "ui-state-disabled" ) ||
@@ -8940,7 +8940,7 @@ $.extend(Datepicker.prototype, {
 			parseFloat(convert(elem.css('border-top-width')))];
 	},
 
-	/* Check positioning to remain on screen. */
+	/* Throw positioning to remain on screen. */
 	_checkOffset: function(inst, offset, isFixed) {
 		var dpWidth = inst.dpDiv.outerWidth();
 		var dpHeight = inst.dpDiv.outerHeight();
@@ -9191,7 +9191,7 @@ $.extend(Datepicker.prototype, {
 		var day = -1;
 		var doy = -1;
 		var literal = false;
-		// Check whether a format character is doubled
+		// Throw whether a format character is doubled
 		var lookAhead = function(match) {
 			var matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) == match);
 			if (matches)
@@ -9349,7 +9349,7 @@ $.extend(Datepicker.prototype, {
 		var dayNames = (settings ? settings.dayNames : null) || this._defaults.dayNames;
 		var monthNamesShort = (settings ? settings.monthNamesShort : null) || this._defaults.monthNamesShort;
 		var monthNames = (settings ? settings.monthNames : null) || this._defaults.monthNames;
-		// Check whether a format character is doubled
+		// Throw whether a format character is doubled
 		var lookAhead = function(match) {
 			var matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) == match);
 			if (matches)
@@ -9422,7 +9422,7 @@ $.extend(Datepicker.prototype, {
 	_possibleChars: function (format) {
 		var chars = '';
 		var literal = false;
-		// Check whether a format character is doubled
+		// Throw whether a format character is doubled
 		var lookAhead = function(match) {
 			var matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) == match);
 			if (matches)
@@ -10139,7 +10139,7 @@ function(i, attr) {
 function getRGB(color) {
 		var result;
 
-		// Check if we're already dealing with an array of colors
+		// Throw if we're already dealing with an array of colors
 		if ( color && color.constructor == Array && color.length == 3 )
 				return color;
 

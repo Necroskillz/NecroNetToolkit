@@ -424,11 +424,70 @@ namespace NecroNetToolkit.Web.Model
 
 
 	// Dependency injection configuration
-	public class TestWindsorInstaller : global::Castle.MicroKernel.Registration.IWindsorInstaller
+	public class TestNinjectModule : global::Ninject.Modules.NinjectModule
 	{
-		public void Install(global::Castle.Windsor.IWindsorContainer container, global::Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore store)
+		public override void Load()
 		{
-			container.Register(global::Castle.MicroKernel.Registration.Classes.FromThisAssembly().BasedOn(typeof (IRepository<>)).WithService.AllInterfaces().LifestyleSingleton());
+			// AllDealsEntities
+			Kernel.Bind<IActualDealRepository>().To<ActualDealRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<ActualDeal>>().To<ActualDealRepository>().InSingletonScope();
+			Kernel.Bind<ICategoryRepository>().To<CategoryRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Category>>().To<CategoryRepository>().InSingletonScope();
+			Kernel.Bind<ICityRepository>().To<CityRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<City>>().To<CityRepository>().InSingletonScope();
+			Kernel.Bind<IHistoryDealRepository>().To<HistoryDealRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<HistoryDeal>>().To<HistoryDealRepository>().InSingletonScope();
+			Kernel.Bind<IIndexRepository>().To<IndexRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Index>>().To<IndexRepository>().InSingletonScope();
+			Kernel.Bind<ILogRepository>().To<LogRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Log>>().To<LogRepository>().InSingletonScope();
+			Kernel.Bind<IMetaCategoryRepository>().To<MetaCategoryRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<MetaCategory>>().To<MetaCategoryRepository>().InSingletonScope();
+			Kernel.Bind<IServerRepository>().To<ServerRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Server>>().To<ServerRepository>().InSingletonScope();
+			Kernel.Bind<IStateRepository>().To<StateRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<State>>().To<StateRepository>().InSingletonScope();
+			// DoplatkyEntities
+			Kernel.Bind<IATCRepository>().To<ATCRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<ATC>>().To<ATCRepository>().InSingletonScope();
+			Kernel.Bind<ICommentRepository>().To<CommentRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Comment>>().To<CommentRepository>().InSingletonScope();
+			Kernel.Bind<ICountryRepository>().To<CountryRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Country>>().To<CountryRepository>().InSingletonScope();
+			Kernel.Bind<IDDDMeasureUnitRepository>().To<DDDMeasureUnitRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<DDDMeasureUnit>>().To<DDDMeasureUnitRepository>().InSingletonScope();
+			Kernel.Bind<IDeliveryRepository>().To<DeliveryRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Delivery>>().To<DeliveryRepository>().InSingletonScope();
+			Kernel.Bind<IDrugRepository>().To<DrugRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Drug>>().To<DrugRepository>().InSingletonScope();
+			Kernel.Bind<IFormRepository>().To<FormRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Form>>().To<FormRepository>().InSingletonScope();
+			Kernel.Bind<IIndicationGroupRepository>().To<IndicationGroupRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<IndicationGroup>>().To<IndicationGroupRepository>().InSingletonScope();
+			Kernel.Bind<IOrganizationRepository>().To<OrganizationRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Organization>>().To<OrganizationRepository>().InSingletonScope();
+			Kernel.Bind<IPharmacyRepository>().To<PharmacyRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Pharmacy>>().To<PharmacyRepository>().InSingletonScope();
+			Kernel.Bind<IPlaceRepository>().To<PlaceRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Place>>().To<PlaceRepository>().InSingletonScope();
+			Kernel.Bind<IPopularSearchRepository>().To<PopularSearchRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<PopularSearch>>().To<PopularSearchRepository>().InSingletonScope();
+			Kernel.Bind<IPostalCodeRepository>().To<PostalCodeRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<PostalCode>>().To<PostalCodeRepository>().InSingletonScope();
+			Kernel.Bind<IPostRepository>().To<PostRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Post>>().To<PostRepository>().InSingletonScope();
+			Kernel.Bind<IPriceRepository>().To<PriceRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Price>>().To<PriceRepository>().InSingletonScope();
+			Kernel.Bind<IRoleRepository>().To<RoleRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Role>>().To<RoleRepository>().InSingletonScope();
+			Kernel.Bind<ISearchRepository>().To<SearchRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Search>>().To<SearchRepository>().InSingletonScope();
+			Kernel.Bind<ISignUpRequestRepository>().To<SignUpRequestRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<SignUpRequest>>().To<SignUpRequestRepository>().InSingletonScope();
+			Kernel.Bind<IUserRepository>().To<UserRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<User>>().To<UserRepository>().InSingletonScope();
+			Kernel.Bind<IWrappingRepository>().To<WrappingRepository>().InSingletonScope();
+			Kernel.Bind<IRepository<Wrapping>>().To<WrappingRepository>().InSingletonScope();
 		}
 	}
 }

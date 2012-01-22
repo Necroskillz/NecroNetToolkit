@@ -43,7 +43,7 @@ namespace NecroNet.Toolkit.Configuration
 			set { this["host"] = value; }
 		}
 
-		[ConfigurationProperty("emailViewDirectory", IsRequired = false)]
+		[ConfigurationProperty("emailViewDirectory", IsRequired = false, DefaultValue = "Emails")]
 		public string EmailDirectory
 		{
 			get { return (string)this["emailViewDirectory"]; }

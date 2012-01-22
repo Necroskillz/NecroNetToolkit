@@ -7,7 +7,7 @@ using System.Web.Caching;
 
 namespace NecroNet.Toolkit.Mail
 {
-	public class EmailHttpContext : HttpContextBase
+	internal class EmailHttpContext : HttpContextBase
 	{
 		public EmailHttpContext(Uri url)
 		{

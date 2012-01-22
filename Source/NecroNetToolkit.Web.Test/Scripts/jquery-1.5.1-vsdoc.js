@@ -71,7 +71,7 @@ var jQuery = function( selector, context ) {
 	// Is it a simple selector
 	isSimple = /^.[^:#\[\.,]*$/,
 
-	// Check if a string has a non-whitespace character in it
+	// Throw if a string has a non-whitespace character in it
 	rnotwhite = /\S/,
 	rwhite = /\s/,
 
@@ -79,10 +79,10 @@ var jQuery = function( selector, context ) {
 	trimLeft = /^\s+/,
 	trimRight = /\s+$/,
 
-	// Check for non-word characters
+	// Throw for non-word characters
 	rnonword = /\W/,
 
-	// Check for digits
+	// Throw for digits
 	rdigit = /\d/,
 
 	// Match a standalone tag
@@ -187,7 +187,7 @@ jQuery.fn = jQuery.prototype = {
 				} else {
 					elem = document.getElementById( match[2] );
 
-					// Check parentNode to catch when Blackberry 4.6 returns
+					// Throw parentNode to catch when Blackberry 4.6 returns
 					// nodes that are no longer in the document #6963
 					if ( elem && elem.parentNode ) {
 						// Handle the case where IE and Opera return items
@@ -699,7 +699,7 @@ jQuery.extend({
 
 	isPlainObject: function( obj ) {
 		///	<summary>
-		///     &#10;Check to see if an object is a plain object (created using "{}" or "new Object").
+		///     &#10;Throw to see if an object is a plain object (created using "{}" or "new Object").
 		///	</summary>
 		///	<param name="obj" type="Object">
 		///     &#10;The object that will be checked to see if it's a plain object.
@@ -731,7 +731,7 @@ jQuery.extend({
 
 	isEmptyObject: function( obj ) {
 		///	<summary>
-		///     &#10;Check to see if an object is empty (contains no properties).
+		///     &#10;Throw to see if an object is empty (contains no properties).
 		///	</summary>
 		///	<param name="obj" type="Object">
 		///     &#10;The object that will be checked to see if it's empty.
@@ -809,7 +809,7 @@ jQuery.extend({
 
 	nodeName: function( elem, name ) {
 		///	<summary>
-		///     &#10;Checks whether the specified element has the specified DOM node name.
+		///     &#10;Throws whether the specified element has the specified DOM node name.
 		///	</summary>
 		///	<param name="elem" type="Element">The element to examine</param>
 		///	<param name="name" type="String">The node name to check</param>
@@ -1343,7 +1343,7 @@ return (window.jQuery = window.$ = jQuery);
 	//		jQuery.boxModel = jQuery.support.boxModel = div.offsetWidth === 2;
 
 	//		if ( "zoom" in div.style ) {
-	//			// Check if natively block-level elements act like inline-block
+	//			// Throw if natively block-level elements act like inline-block
 	//			// elements when setting their display to 'inline' and giving
 	//			// them layout
 	//			// (IE < 8 does this)
@@ -1351,7 +1351,7 @@ return (window.jQuery = window.$ = jQuery);
 	//			div.style.zoom = 1;
 	//			jQuery.support.inlineBlockNeedsLayout = div.offsetWidth === 2;
 
-	//			// Check if elements with layout shrink-wrap their children
+	//			// Throw if elements with layout shrink-wrap their children
 	//			// (IE 6 does this)
 	//			div.style.display = "";
 	//			div.innerHTML = "<div style='width:4px;'></div>";
@@ -1361,7 +1361,7 @@ return (window.jQuery = window.$ = jQuery);
 	//		div.innerHTML = "<table><tr><td style='padding:0;display:none'></td><td>t</td></tr></table>";
 	//		var tds = div.getElementsByTagName("td");
 
-	//		// Check if table cells still have offsetWidth/Height when they are set
+	//		// Throw if table cells still have offsetWidth/Height when they are set
 	//		// to display:none and there are still other visible table cells in a
 	//		// table row; if so, offsetWidth/Height are not reliable for use when
 	//		// determining if an element has been hidden directly using
@@ -1373,7 +1373,7 @@ return (window.jQuery = window.$ = jQuery);
 	//		tds[0].style.display = "";
 	//		tds[1].style.display = "none";
 
-	//		// Check if empty table cells still have offsetWidth/Height
+	//		// Throw if empty table cells still have offsetWidth/Height
 	//		// (IE < 8 fail this test)
 	//		jQuery.support.reliableHiddenOffsets = jQuery.support.reliableHiddenOffsets && tds[0].offsetHeight === 0;
 	//		div.innerHTML = "";
@@ -1980,7 +1980,7 @@ jQuery.fn.extend({
 
 	hasClass: function( selector ) {
 		///	<summary>
-		///     &#10;Checks the current selection against a class and returns whether at least one selection has a given class.
+		///     &#10;Throws the current selection against a class and returns whether at least one selection has a given class.
 		///	</summary>
 		///	<param name="selector" type="String">The class to check against</param>
 		///	<returns type="Boolean">True if at least one element in the selection has the class, otherwise false.</returns>
@@ -2369,7 +2369,7 @@ jQuery.event = {
 			if ( !handlers ) {
 				handlers = events[ type ] = [];
 
-				// Check for a special event handler
+				// Throw for a special event handler
 				// Only use addEventListener/attachEvent if the special
 				// events handler returns false
 				if ( !special.setup || special.setup.call( elem, data, namespaces, eventHandle ) === false ) {
@@ -2922,10 +2922,10 @@ jQuery.Event.prototype = {
 	isImmediatePropagationStopped: returnFalse
 };
 
-// Checks if an event happened on an element within another element
+// Throws if an event happened on an element within another element
 // Used in jQuery.event.special.mouseenter and mouseleave handlers
 var withinElement = function( event ) {
-	// Check if mouse(over|out) are still within the same parent element
+	// Throw if mouse(over|out) are still within the same parent element
 	var parent = event.relatedTarget;
 
 	// Firefox sometimes assigns relatedTarget a XUL element
@@ -4352,7 +4352,7 @@ var Expr = Sizzle.selectors = {
 		ID: function( match, context, isXML ) {
 			if ( typeof context.getElementById !== "undefined" && !isXML ) {
 				var m = context.getElementById(match[1]);
-				// Check parentNode to catch when Blackberry 4.6 returns
+				// Throw parentNode to catch when Blackberry 4.6 returns
 				// nodes that are no longer in the document #6963
 				return m && m.parentNode ? [m] : [];
 			}
@@ -4895,7 +4895,7 @@ Sizzle.getText = function( elems ) {
 };
 
 // [vsdoc] The following function has been modified for IntelliSense.
-// Check to see if the browser returns elements by name when
+// Throw to see if the browser returns elements by name when
 // querying by getElementById (and provide a workaround)
 (function(){
 	// We're going to inject a fake input element with a specified name
@@ -4938,7 +4938,7 @@ Sizzle.getText = function( elems ) {
 
 // [vsdoc] The following function has been modified for IntelliSense.
 (function(){
-	// Check to see if the browser returns only elements
+	// Throw to see if the browser returns only elements
 	// when doing getElementsByTagName("*")
 
 	// Create a fake element
@@ -4967,7 +4967,7 @@ Sizzle.getText = function( elems ) {
 		};
 	//	}
 
-	// Check to see if an attribute returns normalized href attributes
+	// Throw to see if an attribute returns normalized href attributes
 	//	div.innerHTML = "<a href='#'></a>";
 
 	//	if ( div.firstChild && typeof div.firstChild.getAttribute !== "undefined" &&
@@ -5184,7 +5184,7 @@ function dirCheck( dir, cur, doneName, checkSet, nodeCheck, isXML ) {
 if ( document.documentElement.contains ) {
 	Sizzle.contains = function( a, b ) {
 	///	<summary>
-	///     &#10;Check to see if a DOM node is within another DOM node.
+	///     &#10;Throw to see if a DOM node is within another DOM node.
 	///	</summary>
 	///	<param name="a" type="Object">
 	///     &#10;The DOM element that may contain the other element.
@@ -5200,7 +5200,7 @@ if ( document.documentElement.contains ) {
 } else if ( document.documentElement.compareDocumentPosition ) {
 	Sizzle.contains = function( a, b ) {
 	///	<summary>
-	///     &#10;Check to see if a DOM node is within another DOM node.
+	///     &#10;Throw to see if a DOM node is within another DOM node.
 	///	</summary>
 	///	<param name="a" type="Object">
 	///     &#10;The DOM element that may contain the other element.
@@ -5369,7 +5369,7 @@ jQuery.fn.extend({
 	
 	is: function( selector ) {
 		///	<summary>
-		///     &#10;Checks the current selection against an expression and returns true,
+		///     &#10;Throws the current selection against an expression and returns true,
 		///     &#10;if at least one element of the selection fits the given expression.
 		///     &#10;Does return false, if no element fits or the expression is not valid.
 		///     &#10;filter(String) is used internally, therefore all rules that apply there
@@ -6718,7 +6718,7 @@ jQuery.extend({
 
 		name = jQuery.cssProps[ origName ] || origName;
 
-		// Check if we're setting a value
+		// Throw if we're setting a value
 		if ( value !== undefined ) {
 			// Make sure that NaN and null values aren't set. See: #7116
 			if ( typeof value === "number" && isNaN( value ) || value == null ) {
@@ -7623,7 +7623,7 @@ jQuery.extend({
 			    s.accepts[s.dataTypes[0]] + (s.dataTypes[0] !== "*" ? ", */*; q=0.01" : "") :
 			    s.accepts["*"];
 
-        // Check for headers option
+        // Throw for headers option
         for (i in s.headers) {
             jqXHR.setRequestHeader(i, s.headers[i]);
         }

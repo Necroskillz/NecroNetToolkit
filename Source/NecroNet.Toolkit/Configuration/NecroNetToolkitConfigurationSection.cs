@@ -17,5 +17,12 @@ namespace NecroNet.Toolkit.Configuration
 			get { return (NecroNetToolkitUnitOfWorkConfigurationElement)this["unitOfWork"]; }
 			set { this["unitOfWork"] = value; }
 		}
+
+		[ConfigurationProperty("selectListManager", IsRequired = false)]
+		public NecroNetToolkitSelectListManagerConfigurationElement SelectListManager
+		{
+			get { return (NecroNetToolkitSelectListManagerConfigurationElement)this["selectListManager"]; }
+			set { this["selectListManager"] = value; }
+		}
 	}
 }

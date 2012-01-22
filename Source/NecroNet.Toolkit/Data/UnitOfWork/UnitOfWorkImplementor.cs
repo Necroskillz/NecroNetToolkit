@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using NecroNet.Toolkit.Internals;
+using NecroNet.Toolkit.Resources;
 
 namespace NecroNet.Toolkit.Data
 {
@@ -37,10 +38,10 @@ namespace NecroNet.Toolkit.Data
 	    {
 	        get
 	        {
-                if (_isDisposed)
-                {
-                    ExceptionHelper.ThrowInvalidOp("This unit of work and it's object context has already been disposed.");
-                }
+				if(_isDisposed)
+				{
+					Throw.New<InvalidOperationException>(Res.ExceptionMessage_UnitOfWork_Disposed);
+				}
 
 	            return _context;
 	        }

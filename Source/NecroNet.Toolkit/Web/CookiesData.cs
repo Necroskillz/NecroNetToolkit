@@ -8,9 +8,9 @@ namespace NecroNet.Toolkit
 {
 	public static class Cookies
 	{
-		private static ILocalDataProvider _cookiesDataProvider = new CookiesDataProvider();
+		private static IHttpCookiesDataProvider _cookiesDataProvider = new CookiesDataProvider();
 
-		public static ILocalDataProvider Data
+		public static IHttpCookiesDataProvider Data
 		{
 			get
 			{
@@ -18,12 +18,12 @@ namespace NecroNet.Toolkit
 			}
 		}
 
-		public static void ChangeContext(ILocalDataProvider dataProvider)
+		public static void ChangeContext(IHttpCookiesDataProvider dataProvider)
 		{
 			_cookiesDataProvider = dataProvider;
 		}
 
-		public class CookiesDataProvider : ILocalDataProvider
+		public class CookiesDataProvider : IHttpCookiesDataProvider
 		{
 			private HttpCookieCollection OutgoingCookies
 			{
@@ -41,32 +41,9 @@ namespace NecroNet.Toolkit
 				}
 			}
 
-			public object this[object key]
+			public bool Contains(string key)
 			{
-				get
-				{
-					var cookie = IncommingCookies[key.ToString()];
-					return cookie == null ? null : cookie.Value;
-				}
-				set 
-				{
-					var cookie = new HttpCookie(key.ToString())
-					             	{
-					             		Expires = DateTime.Now.Add(TimeSpan.FromDays(365)),
-					             		Value = value.ToString()
-					             	};
-
-					OutgoingCookies.Set(cookie);
-					IncommingCookies.Set(cookie);
-				}
-			}
-
-			public int Count
-			{
-				get
-				{
-					return IncommingCookies.Count;
-				}
+				return IncommingCookies.AllKeys.Contains(key);
 			}
 
 			public void Clear()
@@ -74,9 +51,31 @@ namespace NecroNet.Toolkit
 				OutgoingCookies.Clear();
 			}
 
-			public bool Contains(object key)
+			public string Get(string key)
 			{
-				return IncommingCookies.AllKeys.Contains(key.ToString());
+				var cookie = IncommingCookies[key];
+				return cookie == null ? null : cookie.Value;
+			}
+
+			public void Set(string key, string value, DateTime expires)
+			{
+				var cookie = new HttpCookie(key)
+				{
+					Expires = DateTime.Now.Add(TimeSpan.FromDays(365)),
+					Value = value
+				};
+
+				OutgoingCookies.Set(cookie);
+			}
+
+			public HttpCookie GetCookie(string key)
+			{
+				return IncommingCookies[key];
+			}
+
+			public void SetCookie(HttpCookie cookie)
+			{
+				IncommingCookies.Set(cookie);
 			}
 		}
 	}

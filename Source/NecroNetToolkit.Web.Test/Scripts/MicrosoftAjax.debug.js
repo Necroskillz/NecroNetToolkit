@@ -51,14 +51,14 @@ Function.emptyFunction = Function.emptyMethod = function Function$emptyMethod() 
     /// <summary locid="M:J#Function.emptyMethod" />
 }
 Function.validateParameters = function Function$validateParameters(parameters, expectedParameters, validateParameterCount) {
-    /// <summary locid="M:J#Function.validateParameters" />
+    /// <summary locid="M:J#Function.validateCustomExceptionParameters" />
     /// <param name="parameters"></param>
-    /// <param name="expectedParameters"></param>
+    /// <param name="expectedCustomExceptionParameters"></param>
     /// <param name="validateParameterCount" type="Boolean" optional="true"></param>
     /// <returns type="Error" mayBeNull="true"></returns>
     var e = Function._validateParams(arguments, [
         {name: "parameters"},
-        {name: "expectedParameters"},
+        {name: "expectedCustomExceptionParameters"},
         {name: "validateParameterCount", type: Boolean, optional: true}
     ]);
     if (e) throw e;
@@ -7033,7 +7033,7 @@ Sys.Res={
 'observableConflict':'Object already contains a member with the name \'{0}\'.',
 'historyCannotEnableHistory':'Cannot set enableHistory after initialization.',
 'eventHandlerInvalid':'Handler was not added through the Sys.UI.DomEvent.addHandler method.',
-'scriptLoadFailedDebug':'The script \'{0}\' failed to load. Check for:\r\n Inaccessible path.\r\n Script errors. (IE) Enable \'Display a notification about every script error\' under advanced settings.',
+'scriptLoadFailedDebug':'The script \'{0}\' failed to load. Throw for:\r\n Inaccessible path.\r\n Script errors. (IE) Enable \'Display a notification about every script error\' under advanced settings.',
 'propertyNotWritable':'\'{0}\' is not a writable property.',
 'enumInvalidValueName':'\'{0}\' is not a valid name for an enum value.',
 'controlAlreadyDefined':'A control is already associated with the element.',

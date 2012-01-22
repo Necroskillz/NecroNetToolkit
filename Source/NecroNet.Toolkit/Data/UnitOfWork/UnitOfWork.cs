@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NecroNet.Toolkit.Internals;
+using NecroNet.Toolkit.Resources;
 
 namespace NecroNet.Toolkit.Data
 {
@@ -18,10 +18,11 @@ namespace NecroNet.Toolkit.Data
 		{
 			get
 			{
-				var store = Local.Data[UnitOfWorkStoreKey] as Dictionary<string, IUnitOfWork>;
+				var store = Local.Data.Get<Dictionary<string, IUnitOfWork>>(UnitOfWorkStoreKey);
 				if (store == null)
 				{
-					Local.Data[UnitOfWorkStoreKey] = store = new Dictionary<string, IUnitOfWork>();
+					store = new Dictionary<string, IUnitOfWork>();
+					Local.Data.Set(UnitOfWorkStoreKey, store);
 				}
 
 				return store;
@@ -44,9 +45,9 @@ namespace NecroNet.Toolkit.Data
 
 		private static IUnitOfWorkFactory GetUnitOfWorkFactory(string key)
 		{
-			if (!UnitOfWorkFactories.ContainsKey(key))
+			if(!UnitOfWorkFactories.ContainsKey(key))
 			{
-				ExceptionHelper.ThrowInvalidOp("UnitOfWork factory for type '{0}' was not initialized. Make sure you called UnitOfWork.Register() method before using UnitOfWork.", key);
+				Throw.New<InvalidOperationException>(Res.ExceptionMessage_UnitOfWork_NotRegistered, key);
 			}
 
 			return UnitOfWorkFactories[key];
@@ -60,9 +61,10 @@ namespace NecroNet.Toolkit.Data
 		public static void Register<TObjectContext>(Type objectContextFactoryType)
 		{
 			var key = GetKey<TObjectContext>();
+
 			if (UnitOfWorkFactories.ContainsKey(key))
 			{
-				ExceptionHelper.ThrowInvalidOp("UnitOfWork for type '{0}' was already registered.", key);
+				Throw.New<InvalidOperationException>(Res.ExceptionMessage_UnitOfWork_AlreadyRegistered, key);
 			}
 
 			UnitOfWorkFactories.Add(key, new UnitOfWorkFactory<TObjectContext>(objectContextFactoryType));
@@ -85,15 +87,16 @@ namespace NecroNet.Toolkit.Data
 		/// <param name="objectContextFactoryType">Type of <see cref="IObjectContextFactory"/> used for creating object contexts.</param>
 		public static void RegisterDefault<TObjectContext>(Type objectContextFactoryType)
 		{
-			if (!string.IsNullOrEmpty(DefaultKey))
+			if(!string.IsNullOrEmpty(DefaultKey))
 			{
-				ExceptionHelper.ThrowInvalidOp("You cannot specify more then one default unit of work.");
+				Throw.New<InvalidOperationException>(Res.ExceptionMessage_UnitOfWork_RegisterMoreThanOneDefault);
 			}
 
 			var key = GetKey<TObjectContext>();
-			if (UnitOfWorkFactories.ContainsKey(key))
+
+			if(UnitOfWorkFactories.ContainsKey(key))
 			{
-				ExceptionHelper.ThrowInvalidOp("UnitOfWork for type '{0}' was already registered.", key);
+				Throw.New<InvalidOperationException>(Res.ExceptionMessage_UnitOfWork_AlreadyRegistered);
 			}
 
 			DefaultKey = key;
@@ -113,9 +116,10 @@ namespace NecroNet.Toolkit.Data
 		private static IUnitOfWork GetCurrent(string key)
 		{
 			var unitOfWork = RetrieveUnitOfWork(key);
-			if (unitOfWork == null)
+
+			if(unitOfWork == null)
 			{
-				ExceptionHelper.ThrowInvalidOp("You are not in a unit of work of type '{0}'.", key);
+				Throw.New<InvalidOperationException>(Res.ExceptionMessage_UnitOfWork_NotInUnitOfWork, key);
 			}
 
 			return unitOfWork;
@@ -162,9 +166,9 @@ namespace NecroNet.Toolkit.Data
 
 		private static IUnitOfWork Start(string key)
 		{
-			if (IsStarted(key))
+			if(IsStarted(key))
 			{
-				ExceptionHelper.ThrowInvalidOp("You cannot start more than one unit of work of the same type at the same time.");
+				Throw.New<InvalidOperationException>(Res.ExceptionMessage_UnitOfWork_StartSecondAtTheSameTime);
 			}
 
 			var factory = GetUnitOfWorkFactory(key);
@@ -190,7 +194,7 @@ namespace NecroNet.Toolkit.Data
 		{
 			if(string.IsNullOrEmpty(DefaultKey))
 			{
-				ExceptionHelper.ThrowInvalidOp("Default UnitOfWork factory was not initialized. Make sure you called UnitOfWork.RegisterDefault() method before using default UnitOfWork.");
+				Throw.New<InvalidOperationException>(Res.ExceptionMessage_UnitOfWork_DefaultNotRegistered);
 			}
 
 			return Start(DefaultKey);

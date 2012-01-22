@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Specialized;
 using System.Web;
 
 namespace NecroNet.Toolkit
 {
 	public static class Session
 	{
-		private static ILocalDataProvider _sessionDataProvider = new SessionDataProvider();
+		private static IHttpGeneralDataProvider _sessionDataProvider = new SessionDataProvider();
 
-		public static ILocalDataProvider Data
+		public static IHttpGeneralDataProvider Data
 		{
 			get
 			{
@@ -16,57 +17,54 @@ namespace NecroNet.Toolkit
 			}
 		}
 
-		public static void ChangeContext(ILocalDataProvider dataProvider)
+		public static void ChangeContext(IHttpGeneralDataProvider dataProvider)
 		{
 			_sessionDataProvider = dataProvider;
 		}
 
-		public class SessionDataProvider : ILocalDataProvider
+		public class SessionDataProvider : IHttpGeneralDataProvider
 		{
-			private const string LocalDataHashtableKey = "SessionHashtable.Key";
+			private const string StoreKey = "SessionStore.Key";
 
-			private static Hashtable LocalHashtable
+			private static HybridDictionary Store
 			{
 				get
 				{
-					var hashtable = HttpContext.Current.Session[LocalDataHashtableKey] as Hashtable;
+					var hashtable = HttpContext.Current.Session[StoreKey] as HybridDictionary;
 					if(hashtable == null)
 					{
-						hashtable = new Hashtable();
-						HttpContext.Current.Session[LocalDataHashtableKey] = hashtable;
+						hashtable = new HybridDictionary();
+						HttpContext.Current.Session[StoreKey] = hashtable;
 					}
 					return hashtable;
 				}
 			}
 
-			public object this[object key]
+			public bool Contains(object key)
 			{
-				get
-				{
-					return LocalHashtable[key];
-				}
-				set
-				{
-					LocalHashtable[key] = value;
-				}
-			}
-
-			public int Count
-			{
-				get
-				{
-					return LocalHashtable.Count;
-				}
+				return Store.Contains(key);
 			}
 
 			public void Clear()
 			{
-				LocalHashtable.Clear();
+				Store.Clear();
 			}
 
-			public bool Contains(object key)
+			public T Get<T>(object key)
 			{
-				return LocalHashtable.ContainsKey(key);
+				var value = Store[key];
+
+				return value == null ? default(T) : (T)value;
+			}
+
+			public object Get(object key)
+			{
+				return Store[key];
+			}
+
+			public void Set(object key, object value)
+			{
+				Store[key] = value;
 			}
 		}
 	}

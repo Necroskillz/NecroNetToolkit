@@ -12,24 +12,12 @@ namespace NecroNet.Toolkit.Data
 
         public DatabaseTransaction(DbConnection connection, IsolationLevel? isolationLevel)
         {
-            IsolationLevel isolationLevelActual;
-
-            if (NecroNetToolkitConfigurationManager.Configuration != null)
-            {
-                var transactionConfig = NecroNetToolkitConfigurationManager.Configuration.UnitOfWork.Transaction;
-                isolationLevelActual = isolationLevel ?? transactionConfig.IsolationLevel;
-            }
-            else
-            {
-                isolationLevelActual = isolationLevel ?? default(IsolationLevel);
-            }
-
             if (connection.State == ConnectionState.Closed)
             {
                 connection.Open();
             }
 
-            _transaction = connection.BeginTransaction(isolationLevelActual);
+            _transaction = connection.BeginTransaction(isolationLevel ?? NecroNetToolkitConfigurationManager.GetOption(c => c.UnitOfWork.Transaction.IsolationLevel));
         }
 
         public void Dispose()

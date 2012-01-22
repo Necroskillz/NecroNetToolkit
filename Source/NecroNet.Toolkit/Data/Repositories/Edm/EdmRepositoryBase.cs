@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Data.Objects;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
+using NecroNet.Toolkit.Resources;
 
 namespace NecroNet.Toolkit.Data
 {
@@ -13,6 +13,7 @@ namespace NecroNet.Toolkit.Data
 		where TEntity : class
 	{
 		private static PropertyInfo _entitySetPropertyInfo;
+
 		protected abstract TObjectContext ObjectContext { get; }
 
 		protected IObjectSet<TEntity> EntitySet
@@ -45,17 +46,18 @@ namespace NecroNet.Toolkit.Data
 		private void Initialize()
 		{
 			var attributes = GetType().GetCustomAttributes(typeof(EntitySetNameAttribute), false);
-			if (attributes == null || attributes.Length > 1 || attributes.Length == 0)
+
+			if(attributes.Length != 1)
 			{
-				throw new InvalidOperationException("Invalid EntitySetName attribute setup.");
+				Throw.New<InvalidOperationException>(Res.ExceptionMessage_Repository_InvalidEntitySetNameAttributeSetup);
 			}
 
 			EntitySetName = ((EntitySetNameAttribute)attributes.First()).EntitySetName;
 			_entitySetPropertyInfo = typeof(TObjectContext).GetProperty(EntitySetName);
 
-			if (_entitySetPropertyInfo == null)
+			if(_entitySetPropertyInfo == null)
 			{
-				throw new InvalidOperationException("Invalid entity set name.");
+				Throw.New<InvalidOperationException>(Res.ExceptionMessage_Repository_InvalidEntitySetName);
 			}
 		}
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using NecroNet.Toolkit.Tests.Helpers;
 using NUnit.Framework;
 
@@ -44,7 +43,14 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 		[Test]
 		public void SortedPagedList_ShouldThrowIfSortDirectionIsNotAscOrDesc()
 		{
-			Assert.That(() => new SortedPagedList<Movie>(_movieQuery, 1, 10, "Name", "XXX"), Throws.ArgumentException);
+			Assert.That(() => new SortedPagedList<Movie>(_movieQuery, 1, 10, "Name", "XXX"), Throws.InstanceOf<ArgumentOutOfRangeException>());
+		}
+
+		[Test]
+		public void SortedPagedList_ShouldThrowIfSortKeyIsNullOrEmpty()
+		{
+			Assert.That(() => new SortedPagedList<Movie>(_movieQuery, 1, 10, null, SortDirection.Asc), Throws.InstanceOf<ArgumentException>());
+			Assert.That(() => new SortedPagedList<Movie>(_movieQuery, 1, 10, string.Empty, SortDirection.Asc), Throws.InstanceOf<ArgumentException>());
 		}
 
 		[Test]

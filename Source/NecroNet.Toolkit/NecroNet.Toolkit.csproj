@@ -27,6 +27,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +39,39 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
     </DocumentationFile>
+    <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>False</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>False</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>False</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>False</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
+    <CodeContractsInferRequires>False</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>False</CodeContractsInferEnsures>
+    <CodeContractsInferObjectInvariants>False</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>False</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
+    <CodeContractsSuggestEnsures>False</CodeContractsSuggestEnsures>
+    <CodeContractsSuggestObjectInvariants>False</CodeContractsSuggestObjectInvariants>
+    <CodeContractsDisjunctiveRequires>False</CodeContractsDisjunctiveRequires>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>False</CodeContractsCacheAnalysisResults>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -84,11 +118,26 @@
   <ItemGroup>
     <Compile Include="Configuration\NecroNetToolkitConfigurationManager.cs" />
     <Compile Include="Configuration\NecroNetToolkitConfigurationSection.cs" />
+    <Compile Include="Configuration\SelectListManager\NecroNetToolkitSelectListManagerConfigurationElement.cs" />
     <Compile Include="Data\DbContextExtensions.cs" />
+    <Compile Include="Data\Repositories\Infrastructure\IQueryFactory.cs" />
     <Compile Include="Data\UnitOfWork\IUnitOfWorkManager.cs" />
     <Compile Include="Data\UnitOfWork\UnitOfWorkManager.cs" />
+    <Compile Include="Internals\ExpressionExtensions.cs" />
+    <Compile Include="Internals\ResharperCodeAnnotations.cs" />
+    <Compile Include="Mvc\Html\HtmlHelperExtensions.cs" />
+    <Compile Include="Mvc\SelectListManager\ISelectListManager.cs" />
+    <Compile Include="Mvc\SelectListManager\SelectListManager.cs" />
+    <Compile Include="Mvc\SelectListManager\SelectListParameters.cs" />
+    <Compile Include="Resources\Res.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Res.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\Throw.cs" />
+    <Compile Include="Web\CacheData.cs" />
     <Compile Include="Web\CookiesData.cs" />
-    <Compile Include="Data\Repositories\Base\IEntityOperator.cs" />
+    <Compile Include="Data\Repositories\Infrastructure\IEntityOperator.cs" />
     <Compile Include="Data\Repositories\Edm\POCO\EdmRepositoryBase.cs" />
     <Compile Include="Data\Repositories\Memory\MemoryEntityOperator.cs" />
     <Compile Include="Data\Repositories\Memory\MemoryRepository.cs" />
@@ -103,8 +152,8 @@
     <Compile Include="Data\Repositories\CodeFirst\CodeFirstEntityOperator.cs" />
     <Compile Include="Data\Repositories\Edm\EdmEntityOperator.cs" />
     <Compile Include="Data\Repositories\Edm\EdmRepositoryBase.cs" />
-    <Compile Include="Data\Repositories\Base\EntityOperatorBase.cs" />
-    <Compile Include="Data\Repositories\Base\QueryConfig.cs" />
+    <Compile Include="Data\Repositories\Infrastructure\EntityOperatorBase.cs" />
+    <Compile Include="Data\Repositories\Infrastructure\QueryConfig.cs" />
     <Compile Include="Data\UnitOfWork\IObjectContext.cs" />
     <Compile Include="Data\UnitOfWork\IObjectContextFactory.cs" />
     <Compile Include="Data\UnitOfWork\IUnitOfWork.cs" />
@@ -113,9 +162,7 @@
     <Compile Include="Data\UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Data\UnitOfWork\UnitOfWorkFactory.cs" />
     <Compile Include="Data\UnitOfWork\UnitOfWorkImplementor.cs" />
-    <Compile Include="Utilities\Guard.cs" />
     <Compile Include="Configuration\Mail\HostElement.cs" />
-    <Compile Include="Internals\ExceptionHelper.cs" />
     <Compile Include="Mail\EmailHttpContext.cs" />
     <Compile Include="Mail\EmailHttpRequest.cs" />
     <Compile Include="Mail\EmailHttpResponse.cs" />
@@ -124,29 +171,32 @@
     <Compile Include="Mvc\ActionResults\RssResult.cs" />
     <Compile Include="Mvc\Html\LabelExtensions.cs" />
     <Compile Include="Mvc\Html\InputExtensions.cs" />
-    <Compile Include="Mvc\Http404Exception.cs" />
-    <Compile Include="Web\ILocalDataProvider.cs" />
-    <Compile Include="Utilities\ISortedPagedList.cs" />
+    <Compile Include="Mvc\Filters\Http404Exception.cs" />
+    <Compile Include="Web\IHttpCacheDataProvider.cs" />
+    <Compile Include="Web\IHttpCookiesDataProvider.cs" />
+    <Compile Include="Web\IHttpDataProvider.cs" />
+    <Compile Include="Web\IHttpGeneralDataProvider.cs" />
+    <Compile Include="Utilities\SortedPagedList\ISortedPagedList.cs" />
     <Compile Include="Web\LocalData.cs" />
-    <Compile Include="Mvc\Handle404Attribute.cs" />
-    <Compile Include="Mvc\LowercaseRoute.cs" />
+    <Compile Include="Mvc\Filters\Handle404Attribute.cs" />
+    <Compile Include="Mvc\Routing\LowercaseRoute.cs" />
     <Compile Include="Configuration\Mail\EmailAddressElement.cs" />
     <Compile Include="Configuration\Mail\EncodingElement.cs" />
     <Compile Include="Configuration\Mail\NecroNetToolkitMailConfigurationElement.cs" />
     <Compile Include="Mail\EmailSendingCompletedEventArgs.cs" />
     <Compile Include="Mail\IMailBot.cs" />
     <Compile Include="Mail\MailBot.cs" />
-    <Compile Include="Mvc\NoCache.cs" />
-    <Compile Include="Mvc\RouteCollectionExtensions.cs" />
-    <Compile Include="Mvc\SelectHelper.cs" />
+    <Compile Include="Mvc\Filters\NoCache.cs" />
+    <Compile Include="Mvc\Routing\RouteCollectionExtensions.cs" />
+    <Compile Include="Mvc\SelectListManager\SelectHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data\Repositories\Edm\EntitySetNameAttribute.cs" />
-    <Compile Include="Data\Repositories\Base\IRepository.cs" />
-    <Compile Include="Data\Repositories\Base\UltimateRepositoryBase.cs" />
+    <Compile Include="Data\Repositories\Infrastructure\IRepository.cs" />
+    <Compile Include="Data\Repositories\Infrastructure\UltimateRepositoryBase.cs" />
     <Compile Include="Web\SessionData.cs" />
     <Compile Include="Utilities\Slug.cs" />
-    <Compile Include="Utilities\SortDirection.cs" />
-    <Compile Include="Utilities\SortedPagedList.cs" />
+    <Compile Include="Utilities\SortedPagedList\SortDirection.cs" />
+    <Compile Include="Utilities\SortedPagedList\SortedPagedList.cs" />
     <Compile Include="Utilities\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -178,7 +228,12 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Res.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Res.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy $(TargetPath) ..\..\..\..\NuGet\lib</PostBuildEvent>

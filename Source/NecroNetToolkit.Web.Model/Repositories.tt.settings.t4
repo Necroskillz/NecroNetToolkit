@@ -4,6 +4,6 @@
 	static bool OmitEdmx = false;
 	
 	// options: null/empty - no IoC, Ninject|<Module_Name>, Unity|<Extension_Name>, StructureMap|<Registry_Name>, Windsor|<Installer_Name>
-	static string IoC = "Windsor|Test";
+	static string IoC = "Ninject|Test";
 
 #>

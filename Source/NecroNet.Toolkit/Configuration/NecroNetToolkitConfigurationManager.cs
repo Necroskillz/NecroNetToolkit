@@ -1,5 +1,6 @@
 using System;
 using System.Configuration;
+using NecroNet.Toolkit.Resources;
 
 namespace NecroNet.Toolkit.Configuration
 {
@@ -14,10 +15,20 @@ namespace NecroNet.Toolkit.Configuration
 
 		public static void EnsureConfig()
 		{
+			if(Configuration == null)
+			{
+				Throw.New<InvalidOperationException>(Res.ExceptionMessage_ConfigurationManager_SectionNotFound);
+			}
+		}
+
+		public static T GetOption<T>(Func<NecroNetToolkitConfigurationSection, T> optionGetter, T defaultValue = default(T))
+		{
 			if (Configuration == null)
 			{
-				throw new ConfigurationErrorsException("Configuration section 'necroNetToolkit' was not found.");
+				return defaultValue;
 			}
+
+			return optionGetter(Configuration);
 		}
 	}
 }

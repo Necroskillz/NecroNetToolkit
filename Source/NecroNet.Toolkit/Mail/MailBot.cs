@@ -13,7 +13,6 @@ namespace NecroNet.Toolkit.Mail
 {
 	public class MailBot : IMailBot
 	{
-		private static readonly NecroNetToolkitMailConfigurationElement Config;
 		private int _queuedMails;
 		private bool _disposed;
 
@@ -25,7 +24,7 @@ namespace NecroNet.Toolkit.Mail
 				if(_smtpClient == null)
 				{
 					_smtpClient = new SmtpClient();
-					if(Config.Host.UseSsl)
+					if(NecroNetToolkitConfigurationManager.GetOption(c => c.Mail.Host.UseSsl))
 					{
 						_smtpClient.EnableSsl = true;
 					}
@@ -40,12 +39,6 @@ namespace NecroNet.Toolkit.Mail
 		static MailBot()
 		{
 			NecroNetToolkitConfigurationManager.EnsureConfig();
-
-			Config = NecroNetToolkitConfigurationManager.Configuration.Mail;
-			if(Config == null)
-			{
-				throw new ConfigurationErrorsException("Configuration element 'mail' in section 'necroNetToolkit' was not found.");
-			}
 		}
 
 		public MailBot()
@@ -88,12 +81,12 @@ namespace NecroNet.Toolkit.Mail
 
 		private static void PopulateMessage(MailMessage message)
 		{
-			var replyTo = Config.ReplyTo.MailAddress;
-			var sender = Config.Sender.MailAddress;
+			var replyTo = NecroNetToolkitConfigurationManager.GetOption(c => c.Mail.ReplyTo.MailAddress);
+			var sender = NecroNetToolkitConfigurationManager.GetOption(c => c.Mail.Sender.MailAddress);
 
-			message.From = Config.From.MailAddress;
-			message.SubjectEncoding = Encoding.GetEncoding(Config.Encoding.Subject);
-			message.BodyEncoding = Encoding.GetEncoding(Config.Encoding.Body);
+			message.From = NecroNetToolkitConfigurationManager.GetOption(c => c.Mail.From.MailAddress);
+			message.SubjectEncoding = Encoding.GetEncoding(NecroNetToolkitConfigurationManager.GetOption(c => c.Mail.Encoding.Subject));
+			message.BodyEncoding = Encoding.GetEncoding(NecroNetToolkitConfigurationManager.GetOption(c => c.Mail.Encoding.Body));
 
 			if (replyTo != null)
 			{
@@ -168,12 +161,9 @@ namespace NecroNet.Toolkit.Mail
 
 		private void CheckDispose()
 		{
-			if(_queuedMails == 0 && _disposed)
+			if(_queuedMails == 0 && _disposed && SmtpClient != null)
 			{
-				if(SmtpClient != null)
-				{
-					SmtpClient.Dispose();
-				}
+				SmtpClient.Dispose();
 			}
 		}
 	}

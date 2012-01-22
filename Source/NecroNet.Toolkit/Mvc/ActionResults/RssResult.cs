@@ -27,9 +27,9 @@ namespace NecroNet.Toolkit.Mvc
 		protected RssResult() : base("application/rss+xml") { }
 
 		public RssResult(IEnumerable<T> items, string title, string description, Func<T, string> getItemTitle,
-								Func<T, UrlHelper, string> getItemUrl, Func<T, UrlHelper, string> getItemContent,
-								Func<T, DateTime> getItemPublished, Func<T, UrlHelper, string> getItemSummary = null,
-								Func<T, DateTime> getItemUpdated = null)
+						 Func<T, UrlHelper, string> getItemUrl, Func<T, UrlHelper, string> getItemContent,
+						 Func<T, DateTime> getItemPublished, Func<T, UrlHelper, string> getItemSummary = null,
+						 Func<T, DateTime> getItemUpdated = null)
 			: this()
 		{
 			Items = items;

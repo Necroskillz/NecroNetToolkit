@@ -2,7 +2,7 @@
 
 namespace NecroNet.Toolkit.Mail
 {
-	public interface IEmailRenderer
+	internal interface IEmailRenderer
 	{
 		string Render(string viewName, object model);
 	}

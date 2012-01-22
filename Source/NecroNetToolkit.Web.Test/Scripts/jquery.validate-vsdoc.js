@@ -1,4 +1,4 @@
-/*
+﻿/*
 * This file has been commented to support Visual Studio Intellisense.
 * You should not use this file at runtime inside the browser--it is only
 * intended to be used only for design-time IntelliSense.  Please use the
@@ -114,7 +114,7 @@ $.extend($.fn, {
 	// http://docs.jquery.com/Plugins/Validation/valid
 	valid: function() {
 		/// <summary>
-		/// Checks if the selected form is valid or if all selected elements are valid.
+		/// Throws if the selected form is valid or if all selected elements are valid.
 		/// validate() needs to be called on the form before checking it using this method.
 		/// </summary>
 		/// <returns type="Boolean" />

@@ -1,107 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Transactions;
+using System.Linq.Expressions;
 using System.Web;
+using System.Web.Caching;
 using System.Web.Mvc;
+using NecroNet.Toolkit;
 using NecroNet.Toolkit.Data;
-using NecroNet.Toolkit.Mail;
 using NecroNetToolkit.Web.Model;
-using NecroNetToolkit.Web.Test.Models;
 
 namespace NecroNetToolkit.Web.Test.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly IUnitOfWorkManager _unitOfWorkManager;
 		private readonly ICityRepository _cityRepository;
 		private readonly IRepository<City> _repository;
 
-		public HomeController(ICityRepository cityRepository, IRepository<City> repository, IUnitOfWorkManager unitOfWorkManager)
+		public HomeController(ICityRepository cityRepository, IRepository<City> repository)
 		{
 			_cityRepository = cityRepository;
 			_repository = repository;
-			_unitOfWorkManager = unitOfWorkManager;
 		}
 
 		public ActionResult Index()
 		{
-			//var model = new EmailModel();
-			//model.Message = "Hello there";
-
-			//IMailBot mailBot = new MailBot();
-
-			//mailBot.SendHtmlMail("necroskillz@gmail.com", "subj", "Email", model);
-
-			//using (var allDeals = new AllDealsEntities())
-			//{
-			//    using (var doplatky = new DoplatkyEntities())
-			//    {
-			//        using (var transaction = new TransactionScope())
-			//        {
-			//            allDeals.Categories.AddObject(new Category
-			//                                            {
-			//                                                Name = "XXX"
-			//                                            });
-
-			//            var d = doplatky.Drugs.FirstOrDefault();
-
-			//            d.Code = "6546";
-
-			//            doplatky.Deliveries.AddObject(new Delivery
-			//                                            {
-			//                                                Code = "654",
-			//                                                Name = "Del1",
-			//                                            });
-
-			//            doplatky.SaveChanges();
-
-			//            var deal = allDeals.ActualDeals.FirstOrDefault();
-
-			//            deal.CharityDeal = 54.55m;
-
-			//            allDeals.SaveChanges();
-
-			//            transaction.Complete();
-			//        }
-			//    }
-			//}
+			//var city = _cityRepository.Get(c => c.ID == 1);
 
 
-			//using (var doplatky = UnitOfWork.Start<DoplatkyEntities>())
-			//{
-			//    using (var allDeals = UnitOfWork.Start<AllDealsEntities>())
-			//    {
-			//        using (var dt = doplatky.BeginTransaction())
-			//        {
-			//            using (var at = allDeals.BeginTransaction())
-			//            {
-			//                doplatky.Context.AsActual<DoplatkyEntities>().ATCs.AddObject(new ATC {Code = "cc", Name = "ccc"});
+			List<int> list = null;
 
-			//                doplatky.Flush();
-
-			//                allDeals.Flush();
-
-			//                dt.Commit();
-
-			//                at.Commit();
-			//            }
-			//        }
-			//    }
-			//}
-
-			//using (var scope = UnitOfWork.Start<AllDealsEntities>())
-			//{
-			//    var r = new ActualDealRepository();
-			//    r.Clear();
-			//}
-			using (var scope = _unitOfWorkManager.Start<AllDealsEntities>())
+			if(list == null)
 			{
-				var city = _cityRepository.Get(c => c.ID == 1);
-				
-				scope.Flush();
+				Throw.New<InvalidOperationException>();
 			}
 
+			list.Add(1);
+			
 			return View();
 		}
 
