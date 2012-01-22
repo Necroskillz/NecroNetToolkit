@@ -4,6 +4,9 @@ using System.Web.Mvc;
 
 namespace NecroNet.Toolkit.Mvc
 {
+	/// <summary>
+	/// Represents an attribute that is used to handle a <see cref="Http404Exception"/> thrown by an action method. Returns view named 404 by default, and sets the reponse status code to 404.
+	/// </summary>
 	public class Handle404Attribute : HandleErrorAttribute
 	{
 		public Handle404Attribute()

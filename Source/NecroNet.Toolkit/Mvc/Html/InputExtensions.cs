@@ -11,6 +11,12 @@ namespace NecroNet.Toolkit.Mvc.Html
 {
 	public static class InputExtensions
 	{
+		/// <summary>
+		/// Render a group of radio buttons.
+		/// </summary>
+		/// <param name="helper"></param>
+		/// <param name="expression">An expression that identifies the object that contais the properties to render.</param>
+		/// <param name="items">A select list of items to render radio buttons for.</param>
 		public static MvcHtmlString RadioGroupFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression, IEnumerable<SelectListItem> items)
 		{
 			var property = ExpressionHelper.GetExpressionText(expression);
@@ -51,6 +57,11 @@ namespace NecroNet.Toolkit.Mvc.Html
 			return MvcHtmlString.Create(div.ToString());
 		}
 
+		/// <summary>
+		/// Renders a hidden field for each value. Uses a property name as an id.
+		/// </summary>
+		/// <param name="helper"></param>
+		/// <param name="values">The key value pairs in form of an anonymous object used to render the fields.</param>
 		public static void RenderHiddenFields(this HtmlHelper helper, object values)
 		{
 			if (values == null)
@@ -67,6 +78,13 @@ namespace NecroNet.Toolkit.Mvc.Html
 			}
 		}
 
+		/// <summary>
+		/// Returns a text input element for each property in the object the is represented by the specified expression with the specified value, using the specified html attributes. 
+		/// </summary>
+		/// <param name="helper"></param>
+		/// <param name="expression">An expression that identifies the object that contais the properties to render.</param>
+		/// <param name="value">The value to set to the element.</param>
+		/// <param name="htmlAttributes">An object that contains the HTML attributes to set for the element.</param>
 		public static MvcHtmlString TextBoxFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression, object value, object htmlAttributes)
 		{
 			var propertyName = ExpressionHelper.GetExpressionText(expression);
@@ -82,6 +100,13 @@ namespace NecroNet.Toolkit.Mvc.Html
 			return MvcHtmlString.Create(input.ToString());
 		}
 
+		/// <summary>
+		/// Returns a hidden input element for each property in the object the is represented by the specified expression with the specified value, using the specified html attributes. 
+		/// </summary>
+		/// <param name="helper"></param>
+		/// <param name="expression">An expression that identifies the object that contais the properties to render.</param>
+		/// <param name="value">The value to set to the element.</param>
+		/// <param name="htmlAttributes">An object that contains the HTML attributes to set for the element.</param>
 		public static MvcHtmlString HiddenFor<TModel, TProperty>(this HtmlHelper<TModel> helper, Expression<Func<TModel, TProperty>> expression, object value, object htmlAttributes)
 		{
 			var propertyName = ExpressionHelper.GetExpressionText(expression);
@@ -97,6 +122,12 @@ namespace NecroNet.Toolkit.Mvc.Html
 			return MvcHtmlString.Create(input.ToString());
 		}
 
+		/// <summary>
+		/// Return a submit button with the specified text and no name, using the specified html attributes.
+		/// </summary>
+		/// <param name="helper"></param>
+		/// <param name="text">The text value of the button.</param>
+		/// <param name="htmlAttributes">An object that contains the HTML attributes to set for the element.</param>
 		public static MvcHtmlString Submit(this HtmlHelper helper, string text, object htmlAttributes)
 		{
 			var input = new TagBuilder("input");
@@ -110,6 +141,11 @@ namespace NecroNet.Toolkit.Mvc.Html
 			return MvcHtmlString.Create(input.ToString());
 		}
 
+		/// <summary>
+		/// Return a submit button with the specified text and no name.
+		/// </summary>
+		/// <param name="helper"></param>
+		/// <param name="text">The text value of the button.</param>
 		public static MvcHtmlString Submit(this HtmlHelper helper, string text)
 		{
 			return helper.Submit(text, null);

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NecroNet.Toolkit.Data
 {
-	public class MemoryEntityOperator<TEntity> : EntityOperatorBase<TEntity, IList<TEntity>>
+	internal class MemoryEntityOperator<TEntity> : EntityOperatorBase<TEntity, IList<TEntity>>
 	{
 		public MemoryEntityOperator(Func<IList<TEntity>> getStore) : base(getStore)
 		{

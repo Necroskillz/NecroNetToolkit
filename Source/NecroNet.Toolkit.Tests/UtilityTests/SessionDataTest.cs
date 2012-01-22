@@ -9,6 +9,7 @@ using System.Text;
 using System.Web;
 using System.Web.SessionState;
 using Moq;
+using NecroNet.Toolkit.Http;
 using NecroNet.Toolkit.Tests.Fakes;
 using NUnit.Framework;
 
@@ -40,7 +41,7 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 
 		private static HybridDictionary GetSessionDictionary()
 		{
-			var fieldInfo = typeof(Session.SessionDataProvider).GetField("StoreKey",
+			var fieldInfo = typeof(SessionDataStore).GetField("StoreKey",
 																		  BindingFlags.NonPublic | BindingFlags.Static);
 			var storeKey = (string)fieldInfo.GetValue(Local.Data);
 			var store = HttpContext.Current.Session[storeKey] as HybridDictionary;
@@ -95,11 +96,11 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 		[Test]
 		public void SessionData_ChangeContext_ShouldChangeImplementationOfSessionData()
 		{
-			Session.ChangeContext(new FakeLocalDataProvider());
+			Session.ChangeDataStore(new FakeLocalDataStore());
 
 			Assert.That(() => Session.Data.Set(Key, 0), Throws.Exception);
 
-			Session.ChangeContext(new Session.SessionDataProvider());
+			Session.ResetDataStore();
 		}
 
 		[Test]

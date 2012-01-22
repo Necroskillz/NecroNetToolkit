@@ -119,10 +119,12 @@
     <Compile Include="Configuration\NecroNetToolkitConfigurationManager.cs" />
     <Compile Include="Configuration\NecroNetToolkitConfigurationSection.cs" />
     <Compile Include="Configuration\SelectListManager\NecroNetToolkitSelectListManagerConfigurationElement.cs" />
-    <Compile Include="Data\DbContextExtensions.cs" />
     <Compile Include="Data\Repositories\Infrastructure\IQueryFactory.cs" />
     <Compile Include="Data\UnitOfWork\IUnitOfWorkManager.cs" />
     <Compile Include="Data\UnitOfWork\UnitOfWorkManager.cs" />
+    <Compile Include="Http\DataProviders\CacheDataStore.cs" />
+    <Compile Include="Http\DataProviders\CookiesDataStore.cs" />
+    <Compile Include="Http\DataProviders\LocalDataStore.cs" />
     <Compile Include="Internals\ExpressionExtensions.cs" />
     <Compile Include="Internals\ResharperCodeAnnotations.cs" />
     <Compile Include="Mvc\Html\HtmlHelperExtensions.cs" />
@@ -135,8 +137,8 @@
       <DependentUpon>Res.resx</DependentUpon>
     </Compile>
     <Compile Include="Utilities\Throw.cs" />
-    <Compile Include="Web\CacheData.cs" />
-    <Compile Include="Web\CookiesData.cs" />
+    <Compile Include="Http\Access\Cached.cs" />
+    <Compile Include="Http\Access\Cookies.cs" />
     <Compile Include="Data\Repositories\Infrastructure\IEntityOperator.cs" />
     <Compile Include="Data\Repositories\Edm\POCO\EdmRepositoryBase.cs" />
     <Compile Include="Data\Repositories\Memory\MemoryEntityOperator.cs" />
@@ -144,9 +146,8 @@
     <Compile Include="Configuration\UnitOfWork\NecroNetToolkitUnitOfWorkConfigurationElement.cs" />
     <Compile Include="Configuration\UnitOfWork\TransactionElement.cs" />
     <Compile Include="Data\UnitOfWork\DatabaseTransaction.cs" />
-    <Compile Include="Data\UnitOfWork\IObjectContextExtensions.cs" />
     <Compile Include="Data\UnitOfWork\ITransaction.cs" />
-    <Compile Include="Utilities\Dynamic.cs" />
+    <Compile Include="Internals\Dynamic.cs" />
     <Compile Include="Data\ObjectContextExtensions.cs" />
     <Compile Include="Data\Repositories\CodeFirst\CodeFirstRepositoryBase.cs" />
     <Compile Include="Data\Repositories\CodeFirst\CodeFirstEntityOperator.cs" />
@@ -172,12 +173,12 @@
     <Compile Include="Mvc\Html\LabelExtensions.cs" />
     <Compile Include="Mvc\Html\InputExtensions.cs" />
     <Compile Include="Mvc\Filters\Http404Exception.cs" />
-    <Compile Include="Web\IHttpCacheDataProvider.cs" />
-    <Compile Include="Web\IHttpCookiesDataProvider.cs" />
-    <Compile Include="Web\IHttpDataProvider.cs" />
-    <Compile Include="Web\IHttpGeneralDataProvider.cs" />
+    <Compile Include="Http\Interface\IHttpCacheDataStore.cs" />
+    <Compile Include="Http\Interface\IHttpCookiesDataStore.cs" />
+    <Compile Include="Http\Interface\IHttpDataStore.cs" />
+    <Compile Include="Http\Interface\IHttpGeneralDataStore.cs" />
     <Compile Include="Utilities\SortedPagedList\ISortedPagedList.cs" />
-    <Compile Include="Web\LocalData.cs" />
+    <Compile Include="Http\Access\Local.cs" />
     <Compile Include="Mvc\Filters\Handle404Attribute.cs" />
     <Compile Include="Mvc\Routing\LowercaseRoute.cs" />
     <Compile Include="Configuration\Mail\EmailAddressElement.cs" />
@@ -193,11 +194,12 @@
     <Compile Include="Data\Repositories\Edm\EntitySetNameAttribute.cs" />
     <Compile Include="Data\Repositories\Infrastructure\IRepository.cs" />
     <Compile Include="Data\Repositories\Infrastructure\UltimateRepositoryBase.cs" />
-    <Compile Include="Web\SessionData.cs" />
+    <Compile Include="Http\Access\Session.cs" />
     <Compile Include="Utilities\Slug.cs" />
     <Compile Include="Utilities\SortedPagedList\SortDirection.cs" />
     <Compile Include="Utilities\SortedPagedList\SortedPagedList.cs" />
     <Compile Include="Utilities\StringExtensions.cs" />
+    <Compile Include="Http\DataProviders\SessionDataStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="key.snk" />

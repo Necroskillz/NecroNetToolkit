@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace NecroNet.Toolkit.Mvc
 {
-	public class SelectListParameters<T, TOrderByProperty>
+	internal class SelectListParameters<T, TOrderByProperty>
 	{
 		public SelectListParameters(Func<T, string> textSelector, Func<T, object> valueSelector, Expression<Func<T, TOrderByProperty>> orderBySelector, Expression<Func<T, bool>> predicate, bool nullLine, string nullLineText, bool noCache)
 			: this(textSelector, valueSelector, predicate, nullLine, nullLineText, noCache)

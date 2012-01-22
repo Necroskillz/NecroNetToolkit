@@ -78,8 +78,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blades\ApplicationBlade.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\UnitOfWorkAttribute.cs" />
     <Compile Include="Models\x.cs" />
     <Compile Include="Registration\FilterRegistry.cs" />
     <Compile Include="Global.asax.cs">
@@ -161,7 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

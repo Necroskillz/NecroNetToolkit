@@ -15,13 +15,13 @@ namespace NecroNet.Toolkit.Data
 		IEnumerable<TEntity> GetEnumerable();
 
 		/// <summary>
-		/// Gets collection of entities filtered by specified pageNumber as emumerable.
+		/// Gets collection of entities filtered by the specified predicate as emumerable.
 		/// </summary>
 		/// <param name="predicate">Predicate used to filter the collection.</param>
 		IEnumerable<TEntity> GetEnumerable(Expression<Func<TEntity, bool>> predicate);
 
 		/// <summary>
-		/// Gets collection of entities ordered by specified key in specified direction as emumerable.
+		/// Gets collection of entities ordered by the specified key in the specified direction as emumerable.
 		/// </summary>
 		/// <typeparam name="TKey">Type of property used for ordering</typeparam>
 		/// <param name="keySelector">Selector of property used for ordering.</param>
@@ -29,7 +29,7 @@ namespace NecroNet.Toolkit.Data
 		IEnumerable<TEntity> GetEnumerable<TKey>(Expression<Func<TEntity, TKey>> keySelector, bool ascending = true);
 
 		/// <summary>
-		/// Gets collection of entities filtered by specified pageNumber, ordered by specified key in specified direction as emumerable.
+		/// Gets collection of entities filtered by the specified predicate, ordered by the specified key in the specified direction as emumerable.
 		/// </summary>
 		/// <typeparam name="TKey">Type of property used for ordering</typeparam>
 		/// <param name="predicate">Predicate used to filter the collection.</param>
@@ -49,13 +49,13 @@ namespace NecroNet.Toolkit.Data
 		IList<TEntity> GetList();
 
 		/// <summary>
-		/// Gets a list of entities filtered by specified pageNumber.
+		/// Gets a list of entities filtered by the specified predicate.
 		/// </summary>
 		/// <param name="predicate">Predicate used to filter the collection.</param>
 		IList<TEntity> GetList(Expression<Func<TEntity, bool>> predicate);
 
 		/// <summary>
-		/// Gets a paged list of entities ordered by specified key in specified direction.
+		/// Gets a paged list of entities ordered by the specified key in the specified direction.
 		/// </summary>
 		/// <typeparam name="TKey">Type of property used for ordering</typeparam>
 		/// <param name="pageNumber">Number of current page.</param>
@@ -65,7 +65,7 @@ namespace NecroNet.Toolkit.Data
 		IPagedList<TEntity> GetPage<TKey>(int pageNumber, int pageSize, Expression<Func<TEntity, TKey>> orderBySelector, bool ascending = true);
 
 		/// <summary>
-		/// Gets a paged list of entities filtered by specified pageNumber, ordered by specified key in specified direction.
+		/// Gets a paged list of entities filtered by the specified predicate, ordered by the specified key in the specified direction.
 		/// </summary>
 		/// <typeparam name="TKey">Type of property used for ordering</typeparam>
 		/// <param name="predicate">Predicate used to filter the collection.</param>
@@ -85,7 +85,7 @@ namespace NecroNet.Toolkit.Data
 		ISortedPagedList<TEntity> GetSortedPagedList(int pageNumber, int pageSize, string sortKey, string sortDirection);
 
 		/// <summary>
-		/// Gets sorted, paged list of entities filtered by specified pageNumber.
+		/// Gets sorted, paged list of entities filtered by the specified predicate.
 		/// </summary>
 		/// <param name="pageNumber">Predicate used to filter the collection.</param>
 		/// <param name="index">Number of current page.</param>
@@ -96,37 +96,37 @@ namespace NecroNet.Toolkit.Data
 		                                             string sortKey, string sortDirection);
 
 		/// <summary>
-		/// Gets a single entity that matches specified pageNumber.
+		/// Gets a single entity that matches the specified predicate.
 		/// </summary>
 		/// <param name="predicate">Predicate indentifying the entity.</param>
 		TEntity Get(Expression<Func<TEntity, bool>> predicate);
 
 		/// <summary>
-		/// Adds specified entity to the repository.
+		/// Adds the specified entity to the repository.
 		/// </summary>
 		/// <param name="entity">The entity to be added.</param>
 		void Add(TEntity entity);
 
 		/// <summary>
-		/// Removes single entity that matches specified pageNumber from the repository.
+		/// Removes single entity that matches the specified predicate from the repository.
 		/// </summary>
 		/// <param name="predicate">Predicate indentifying the entity.</param>
 		void Remove(Expression<Func<TEntity, bool>> predicate);
 
 		/// <summary>
-		/// Removes specified entity from the repository.
+		/// Removes the specified entity from the repository.
 		/// </summary>
 		/// <param name="entity">The entity to be removed.</param>
 		void Remove(TEntity entity);
 
 		/// <summary>
-		/// Removes all entities that match specified pageNumber from the repository.
+		/// Removes all entities that match the specified predicate from the repository.
 		/// </summary>
 		/// <param name="predicate">Predicate indentifying the entities.</param>
 		void RemoveRange(Expression<Func<TEntity, bool>> predicate);
 
 		/// <summary>
-		/// Gets the count of all entitites that match specified pageNumber in the repository.
+		/// Gets the count of all entitites that match the specified predicate in the repository.
 		/// </summary>
 		/// <param name="predicate">Predicate indentifying the entities.</param>
 		int Count(Expression<Func<TEntity, bool>> predicate);
@@ -137,14 +137,14 @@ namespace NecroNet.Toolkit.Data
 		int Count();
 
 		/// <summary>
-		/// Registers an include (eager load) of specified property for the next query.
+		/// Registers an include (eager load) of the specified property for the next query.
 		/// </summary>
 		/// <typeparam name="TProperty">Type of property to include</typeparam>
 		/// <param name="includeSelector">Selector of property to include.</param>
 		IRepository<TEntity> WithInclude<TProperty>(Expression<Func<TEntity, TProperty>> includeSelector);
 
 		/// <summary>
-		/// Registers an include (eager load) of specified property for the next query.
+		/// Registers an include (eager load) of the specified property for the next query.
 		/// </summary>
 		/// <param name="include">Name of property to include.</param>
 		IRepository<TEntity> WithInclude(string include);
@@ -155,7 +155,7 @@ namespace NecroNet.Toolkit.Data
 		void Clear();
 
 		/// <summary>
-		/// Marks the specified property as updated. (this method may not be supported by all types of repository, e.g. if entities are self tracking)
+		/// Marks the specified property as updated. (this method may not be supported by all types of repository, e.g. if entities are tracked by the context automatically)
 		/// </summary>
 		/// <param name="entity">The updated entity.</param>
 		void Update(TEntity entity);

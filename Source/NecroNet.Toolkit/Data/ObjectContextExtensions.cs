@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Objects;
 using System.Data.SqlClient;
 using System.Linq;
@@ -10,6 +12,21 @@ namespace NecroNet.Toolkit.Data
 {
 	public static class ObjectContextExtensions
 	{
+		public static ObjectContext GetUnderlyingObjectContext(this DbContext context)
+		{
+			return ((IObjectContextAdapter)context).ObjectContext;
+		}
+
+		/// <summary>
+		/// Returns actual unwrapped object context.
+		/// </summary>
+		/// <typeparam name="TObjectContext">Type of object context to return</typeparam>
+		/// <param name="context">The wrapped object context.</param>
+		public static TObjectContext AsActual<TObjectContext>(this IObjectContext context)
+		{
+			return (TObjectContext)context;
+		}
+
 		/// <summary>
 		/// Searches in all string properties for the specifed search key.
 		/// It is also able to search for several words. If the searchKey is for example 'John Travolta' then
@@ -20,7 +37,7 @@ namespace NecroNet.Toolkit.Data
 		/// <param name="searchKey">Search term.</param>
 		/// <param name="exactMatch">Specifies if only the whole word or every single word should be searched.</param>
 		/// <param name="searchProperties">Properties to check for matches.</param>
-		/// <returns>Query that matches specified search parameters.</returns>
+		/// <returns>Query that matchesthe specified search parameters.</returns>
 		public static IQueryable<T> FullTextSearch<T>(this IQueryable<T> query, string searchKey, bool exactMatch = false, params string[] searchProperties)
 		{
 			var parameter = Expression.Parameter(typeof(T), "c");

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NecroNet.Toolkit.Http;
 using NecroNet.Toolkit.Resources;
 
 namespace NecroNet.Toolkit.Data
@@ -54,7 +55,7 @@ namespace NecroNet.Toolkit.Data
 		}
 
 		/// <summary>
-		/// Registers unit of work for specified type of object context with factory type that can create object context (<see cref="IObjectContextFactory"/>).
+		/// Registers unit of work for the specified type of object context with factory type that can create object context (<see cref="IObjectContextFactory"/>).
 		/// </summary>
 		/// <typeparam name="TObjectContext">Type of object context created by factory and used by unit of work</typeparam>
 		/// <param name="objectContextFactoryType">Type of <see cref="IObjectContextFactory"/> used for creating object contexts.</param>
@@ -71,7 +72,7 @@ namespace NecroNet.Toolkit.Data
 		}
 
 		/// <summary>
-		/// Registers unit of work for specified type of object context with factory type that can create object context (<see cref="IObjectContextFactory"/>).
+		/// Registers unit of work for the specified type of object context with factory type that can create object context (<see cref="IObjectContextFactory"/>).
 		/// </summary>
 		/// <typeparam name="TObjectContext">Type of object context created by factory and used by unit of work</typeparam>
 		/// <typeparam name="TObjectContextFactory">Type of <see cref="IObjectContextFactory"/> used for creating object contexts.</typeparam>
@@ -81,7 +82,7 @@ namespace NecroNet.Toolkit.Data
 		}
 
 		/// <summary>
-		/// Registers default unit of work for specified type of object context with factory type that can create object context (<see cref="IObjectContextFactory"/>).
+		/// Registers default unit of work for the specified type of object context with factory type that can create object context (<see cref="IObjectContextFactory"/>).
 		/// </summary>
 		/// <typeparam name="TObjectContext">Type of object context created by factory and used by unit of work</typeparam>
 		/// <param name="objectContextFactoryType">Type of <see cref="IObjectContextFactory"/> used for creating object contexts.</param>
@@ -104,7 +105,7 @@ namespace NecroNet.Toolkit.Data
 		}
 
 		/// <summary>
-		/// Registers default unit of work for specified type of object context with factory type that can create object context (<see cref="IObjectContextFactory"/>).
+		/// Registers default unit of work for the specified type of object context with factory type that can create object context (<see cref="IObjectContextFactory"/>).
 		/// </summary>
 		/// <typeparam name="TObjectContext">Type of object context created by factory and used by unit of work</typeparam>
 		/// <typeparam name="TObjectContextFactory">Type of <see cref="IObjectContextFactory"/> used for creating object contexts.</typeparam>
@@ -126,7 +127,7 @@ namespace NecroNet.Toolkit.Data
 		}
 
 		/// <summary>
-		/// Gets currently active unit of work of specified type.
+		/// Gets currently active unit of work of the specified type.
 		/// </summary>
 		/// <typeparam name="TObjectContext">Type of object context</typeparam>
 		public static IUnitOfWork GetCurrent<TObjectContext>()
@@ -148,7 +149,7 @@ namespace NecroNet.Toolkit.Data
 		}
 
 		/// <summary>
-		/// Gets whether a unit of work of specified type has been started, and have not yet been disposed.
+		/// Gets whether a unit of work of the specified type has been started, and have not yet been disposed.
 		/// </summary>
 		/// <typeparam name="TObjectContext">Type of object context</typeparam>
 		public static bool IsStarted<TObjectContext>()
@@ -179,7 +180,7 @@ namespace NecroNet.Toolkit.Data
 		}
 
 		/// <summary>
-		/// Starts a unit of work of specified type.
+		/// Starts a unit of work of the specified type.
 		/// </summary>
 		/// <typeparam name="TObjectContext">Type of object context</typeparam>
 		public static IUnitOfWork Start<TObjectContext>()

@@ -2,6 +2,7 @@
 using System.Linq;
 using MvcTurbine.Ninject;
 using NecroNet.Toolkit.Data;
+using NecroNetToolkit.Web.Model;
 using Ninject;
 using Ninject.Extensions.Conventions;
 
@@ -13,14 +14,16 @@ namespace NecroNetToolkit.Web.Test.Registration
 		{
 			kernel.Bind<IUnitOfWorkManager>().To<UnitOfWorkManager>().InSingletonScope();
 
-			kernel.Scan(s =>
-			            	{
-			            		s.FromAssembliesMatching("*Web.Model*");
-								s.WhereTypeInheritsFromGeneric(typeof(IRepository<>));
-								s.BindWith(new GenericBindingGenerator(typeof(IRepository<>)));
-								s.BindWithDefaultConventions();
-								s.InSingletonScope();
-			            	});
+			kernel.Load<TestNinjectModule>();
+
+			//kernel.Scan(s =>
+			//                {
+			//                    s.FromAssembliesMatching("*Web.Model*");
+			//                    s.WhereTypeInheritsFromGeneric(typeof(IRepository<>));
+			//                    s.BindWith(new GenericBindingGenerator(typeof(IRepository<>)));
+			//                    s.BindWithDefaultConventions();
+			//                    s.InSingletonScope();
+			//                });
 		}
 	}
 

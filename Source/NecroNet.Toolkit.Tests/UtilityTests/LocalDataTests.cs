@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Reflection;
 using System.Web;
+using NecroNet.Toolkit.Http;
 using NecroNet.Toolkit.Tests.Fakes;
 using NUnit.Framework;
 
@@ -17,7 +18,7 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 
 		private static HybridDictionary GetWebDictionary()
 		{
-			var fieldInfo = typeof(Local.LocalDataProvider).GetField("StoreKey",
+			var fieldInfo = typeof(LocalDataStore).GetField("StoreKey",
 																	  BindingFlags.NonPublic | BindingFlags.Static);
 			var storeKey = fieldInfo.GetValue(Local.Data);
 			var dictionary = HttpContext.Current.Items[storeKey] as HybridDictionary;
@@ -26,7 +27,7 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 
 		private static HybridDictionary GetLocalDictionary()
 		{
-			var fieldInfo = typeof(Local.LocalDataProvider).GetField("_localStore",
+			var fieldInfo = typeof(LocalDataStore).GetField("_localStore",
 																	  BindingFlags.NonPublic | BindingFlags.Static);
 			var dictionary = fieldInfo.GetValue(null) as HybridDictionary;
 			return dictionary;
@@ -104,11 +105,11 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 		[Test]
 		public void LocalData_ChangeContext_ShouldChangeImplementationOfLocalData()
 		{
-			Local.ChangeContext(new FakeLocalDataProvider());
+			Local.ChangeDataStore(new FakeLocalDataStore());
 
 			Assert.That(() => Local.Data.Set(Key, 1), Throws.Exception);
 
-			Local.ChangeContext(new Local.LocalDataProvider());
+			Local.ResetDataStore();
 		}
 	}
 }

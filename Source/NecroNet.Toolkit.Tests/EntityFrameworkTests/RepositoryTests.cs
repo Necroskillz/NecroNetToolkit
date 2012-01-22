@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using NecroNet.Toolkit.Data;
+using NecroNet.Toolkit.Http;
 using NecroNet.Toolkit.Tests.Fakes;
 using NecroNet.Toolkit.Tests.Helpers;
 using NUnit.Framework;

@@ -13,8 +13,8 @@ namespace NecroNet.Toolkit.Mvc
 		/// </summary>
 		/// <typeparam name="T">The type of items</typeparam>
 		/// <param name="data">The data source.</param>
-		/// <param name="textSelector">Function that selects the text displayed on the drop down list.</param>
-		/// <param name="valueSelector">Function that selects underlying values for the drop down list.</param>
+		/// <param name="textSelector">A delegate that selects the text displayed on the drop down list.</param>
+		/// <param name="valueSelector">A delegate that selects underlying value for the drop down list.</param>
 		/// <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
 		/// <param name="nullLineText">The text of the empty line.</param>
 		public static IList<SelectListItem> ToSelectItemList<T>(this IEnumerable<T> data,
@@ -35,12 +35,12 @@ namespace NecroNet.Toolkit.Mvc
 		}
 
 		/// <summary>
-		/// Converts an enumerable of items to list of <see cref="SelectListItem"/> with specified selected value that can be used for drop down lists.
+		/// Converts an enumerable of items to list of <see cref="SelectListItem"/> with the specified selected value that can be used for drop down lists.
 		/// </summary>
 		/// <typeparam name="T">The type of items</typeparam>
 		/// <param name="data">The data source.</param>
-		/// <param name="textSelector">Function that selects the text displayed on the drop down list.</param>
-		/// <param name="valueSelector">Function that selects underlying values for the drop down list.</param>
+		/// <param name="textSelector">A delegate that selects the text displayed on the drop down list.</param>
+		/// <param name="valueSelector">A delegate that selects underlying value for the drop down list.</param>
 		/// <param name="selectedValue">The value that is selected.</param>
 		/// <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
 		/// <param name="nullLineText">The text of the empty line.</param>

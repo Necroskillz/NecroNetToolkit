@@ -6,6 +6,7 @@ using System.Web.Caching;
 using System.Web.Mvc;
 using NecroNet.Toolkit.Configuration;
 using NecroNet.Toolkit.Data;
+using NecroNet.Toolkit.Http;
 using NecroNet.Toolkit.Internals;
 using NecroNet.Toolkit.Resources;
 
@@ -27,6 +28,19 @@ namespace NecroNet.Toolkit.Mvc
 			return SelectListSettings.ContainsKey(key);
 		}
 
+		/// <summary>
+		/// Registers a select list configuration with the <see cref="SelectListManager"/>.
+		/// </summary>
+		/// <typeparam name="T">The type of items to generate select list from.</typeparam>
+		/// <typeparam name="TOrderByProperty">The type of property to order by.</typeparam>
+		/// <param name="key">The key to associate with this specific registration. Use to differentiate between configurations for the same item type.</param>
+		/// <param name="textSelector">A delegate that selects the text displayed on the drop down list.</param>
+		/// <param name="valueSelector">A delegate that selects underlying value for the drop down list.</param>
+		/// <param name="orderBySelector">A selector of property used for ordering.</param>
+		/// <param name="predicate">A predicate used to filter the collection.</param>
+		/// <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
+		/// <param name="nullLineText">The text of the empty line.</param>
+		/// <param name="noCache">True means the collection won't be cached.</param>
 		public static void Register<T, TOrderByProperty>(string key, Func<T, string> textSelector,
 														 Func<T, object> valueSelector,
 														 Expression<Func<T, TOrderByProperty>> orderBySelector,
@@ -44,6 +58,18 @@ namespace NecroNet.Toolkit.Mvc
 			SelectListSettings.Add(fullKey, selectParams);
 		}
 
+		/// <summary>
+		/// Registers a select list configuration with the <see cref="SelectListManager"/>.
+		/// </summary>
+		/// <typeparam name="T">The type of items to generate select list from.</typeparam>
+		/// <typeparam name="TOrderByProperty">The type of property to order by.</typeparam>
+		/// <param name="textSelector">A delegate that selects the text displayed on the drop down list.</param>
+		/// <param name="valueSelector">A delegate that selects underlying value for the drop down list.</param>
+		/// <param name="orderBySelector">A selector of property used for ordering.</param>
+		/// <param name="predicate">A predicate used to filter the collection.</param>
+		/// <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
+		/// <param name="nullLineText">The text of the empty line.</param>
+		/// <param name="noCache">True means the collection won't be cached.</param>
 		public static void Register<T, TOrderByProperty>(Func<T, string> textSelector,
 														 Func<T, object> valueSelector,
 														 Expression<Func<T, TOrderByProperty>> orderBySelector,
@@ -53,6 +79,17 @@ namespace NecroNet.Toolkit.Mvc
 			Register(null, textSelector, valueSelector, orderBySelector, predicate, nullLine, nullLineText, noCache);
 		}
 
+		/// <summary>
+		/// Registers a select list configuration with the <see cref="SelectListManager"/>.
+		/// </summary>
+		/// <typeparam name="T">The type of items to generate select list from.</typeparam>
+		/// <param name="key">The key to associate with this specific registration. Use to differentiate between configurations for the same item type.</param>
+		/// <param name="textSelector">A delegate that selects the text displayed on the drop down list.</param>
+		/// <param name="valueSelector">A delegate that selects underlying value for the drop down list.</param>
+		/// <param name="predicate">A predicate used to filter the collection.</param>
+		/// <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
+		/// <param name="nullLineText">The text of the empty line.</param>
+		/// <param name="noCache">True means the collection won't be cached.</param>
 		public static void Register<T>(string key, Func<T, string> textSelector,
 									   Func<T, object> valueSelector,
 									   Expression<Func<T, bool>> predicate = null,
@@ -69,6 +106,16 @@ namespace NecroNet.Toolkit.Mvc
 			SelectListSettings.Add(fullKey, selectParams);
 		}
 
+		/// <summary>
+		/// Registers a select list configuration with the <see cref="SelectListManager"/>.
+		/// </summary>
+		/// <typeparam name="T">The type of items to generate select list from.</typeparam>
+		/// <param name="textSelector">A delegate that selects the text displayed on the drop down list.</param>
+		/// <param name="valueSelector">A delegate that selects underlying value for the drop down list.</param>
+		/// <param name="predicate">A predicate used to filter the collection.</param>
+		/// <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
+		/// <param name="nullLineText">The text of the empty line.</param>
+		/// <param name="noCache">True means the collection won't be cached.</param>
 		public static void Register<T>(Func<T, string> textSelector,
 									   Func<T, object> valueSelector,
 									   Expression<Func<T, bool>> predicate = null,

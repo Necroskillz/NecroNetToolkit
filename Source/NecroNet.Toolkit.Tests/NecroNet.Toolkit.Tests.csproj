@@ -30,6 +30,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -64,7 +70,7 @@
     <Compile Include="EntityFrameworkTests\FullTextSearchTests.cs" />
     <Compile Include="EntityFrameworkTests\UnitOfWorkTests.cs" />
     <Compile Include="Fakes\EntityWithId.cs" />
-    <Compile Include="Fakes\FakeLocalDataProvider.cs" />
+    <Compile Include="Fakes\FakeLocalDataStore.cs" />
     <Compile Include="Helpers\BrokenRepository.cs" />
     <Compile Include="Helpers\FakeObjectContextFactory.cs" />
     <Compile Include="Helpers\ITestPersonRepository.cs" />
@@ -96,6 +102,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="key.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

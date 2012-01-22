@@ -15,27 +15,19 @@ namespace NecroNetToolkit.Web.Test.Controllers
 	{
 		private readonly ICityRepository _cityRepository;
 		private readonly IRepository<City> _repository;
+		private readonly IUnitOfWorkManager _unitOfWorkManager;
 
-		public HomeController(ICityRepository cityRepository, IRepository<City> repository)
+		public HomeController(ICityRepository cityRepository, IRepository<City> repository, IUnitOfWorkManager unitOfWorkManager)
 		{
 			_cityRepository = cityRepository;
 			_repository = repository;
+			_unitOfWorkManager = unitOfWorkManager;
 		}
 
 		public ActionResult Index()
 		{
 			//var city = _cityRepository.Get(c => c.ID == 1);
 
-
-			List<int> list = null;
-
-			if(list == null)
-			{
-				Throw.New<InvalidOperationException>();
-			}
-
-			list.Add(1);
-			
 			return View();
 		}
 

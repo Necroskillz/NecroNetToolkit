@@ -4,6 +4,9 @@ using System.Web.Mvc;
 
 namespace NecroNet.Toolkit.Mvc
 {
+	/// <summary>
+	/// Disables all caching for an action method.
+	/// </summary>
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
 	public class NoCacheAttribute : ActionFilterAttribute
 	{

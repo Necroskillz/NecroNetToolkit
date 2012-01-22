@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NecroNet.Toolkit.Http;
 
 namespace NecroNet.Toolkit.Tests.Fakes
 {
-	public class FakeLocalDataProvider : IHttpGeneralDataProvider
+	public class FakeLocalDataStore : IHttpGeneralDataStore
 	{
 		public void Clear()
 		{

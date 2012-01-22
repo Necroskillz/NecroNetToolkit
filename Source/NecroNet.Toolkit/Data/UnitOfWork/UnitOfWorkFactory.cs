@@ -4,7 +4,7 @@ using NecroNet.Toolkit.Internals;
 
 namespace NecroNet.Toolkit.Data
 {
-	public class UnitOfWorkFactory<TObjectContext> : IUnitOfWorkFactory
+	internal class UnitOfWorkFactory<TObjectContext> : IUnitOfWorkFactory
 	{
 		internal UnitOfWorkFactory(Type objectContextFactoryType)
 		{

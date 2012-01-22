@@ -21,7 +21,7 @@ namespace NecroNet.Toolkit.Mail
 		void SendMail(MailMessage message, bool loadConfigValues = false);
 
 		/// <summary>
-		/// Sends an email with html body and specified subject to a single recipient.
+		/// Sends an email with html body and the specified subject to a single recipient.
 		/// Body is rendered by using asp.net mvc view and a model.
 		/// </summary>
 		/// <param name="to">The address of the recipient.</param>
@@ -31,7 +31,7 @@ namespace NecroNet.Toolkit.Mail
 		void SendHtmlMail(string to, string subject, string templateViewName, object model);
 
 		/// <summary>
-		/// Sends an email with html body and specified subject to a multiple recipients.
+		/// Sends an email with html body and the specified subject to a multiple recipients.
 		/// Body is rendered by using asp.net mvc view and a model.
 		/// </summary>
 		/// <param name="to">The address of the recipient.</param>
@@ -41,7 +41,7 @@ namespace NecroNet.Toolkit.Mail
 		void SendMassHtmlMail(IEnumerable<string> to, string subject, string templateViewName, object model);
 
 		/// <summary>
-		/// Sends an email with text body and specified subject to a single recipient.
+		/// Sends an email with text body and the specified subject to a single recipient.
 		/// </summary>
 		/// <param name="to">The address of the recipient.</param>
 		/// <param name="subject">The subject of the email message.</param>
@@ -49,7 +49,7 @@ namespace NecroNet.Toolkit.Mail
 		void SendTextMail(string to, string subject, string body);
 
 		/// <summary>
-		/// Sends an email with text body and specified subject to a multiple recipients.
+		/// Sends an email with text body and the specified subject to a multiple recipients.
 		/// </summary>
 		/// <param name="to">The address of the recipient.</param>
 		/// <param name="subject">The subject of the email message.</param>

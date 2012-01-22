@@ -9,7 +9,8 @@ namespace NecroNetToolkit.Web.Test.Filters
 	{
 		public IEnumerable<Filter> GetFilterRegistrations()
 		{
-			yield return new GlobalFilter {FilterType = typeof(HandleErrorAttribute)};
+			yield return new GlobalFilter { FilterType = typeof(UnitOfWorkAttribute) };
+			yield return new GlobalFilter { FilterType = typeof(HandleErrorAttribute) };
 		}
 	}
 }

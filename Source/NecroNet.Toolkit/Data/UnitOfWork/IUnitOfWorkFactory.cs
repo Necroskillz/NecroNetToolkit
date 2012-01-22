@@ -1,6 +1,6 @@
 ﻿namespace NecroNet.Toolkit.Data
 {
-	public interface IUnitOfWorkFactory
+	internal interface IUnitOfWorkFactory
 	{
 		IUnitOfWork Create();
 		void DisposeUnitOfWork();

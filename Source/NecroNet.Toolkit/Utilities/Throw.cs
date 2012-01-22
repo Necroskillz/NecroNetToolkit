@@ -9,7 +9,7 @@ namespace NecroNet.Toolkit
 	public static class Throw
 	{
 		/// <summary>
-		/// Throws an excepion of specified type.
+		/// Throws an excepion of the specified type.
 		/// </summary>
 		/// <typeparam name="TException">The type of exception to throw.</typeparam>
 		[JetBrains.Annotations.TerminatesProgram]
@@ -19,7 +19,7 @@ namespace NecroNet.Toolkit
 		}
 
 		/// <summary>
-		/// Throw an exception of specified type with specified formatted message.
+		/// Throw an exception of the specified type with the specified formatted message.
 		/// </summary>
 		/// <typeparam name="TException">The type of exception to throw.</typeparam>
 		/// <param name="message">A composite format string.</param>
@@ -43,7 +43,7 @@ namespace NecroNet.Toolkit
 		}
 
 		/// <summary>
-		/// Throws an <see cref="ArgumentException"/> with specified formatted message.
+		/// Throws an <see cref="ArgumentException"/> with the specified formatted message.
 		/// </summary>
 		/// <param name="message">A composite format string.</param>
 		/// <param name="args">An object array that contains zero or more objects to format.</param>
@@ -54,7 +54,7 @@ namespace NecroNet.Toolkit
 		}
 
 		/// <summary>
-		/// Throws an <see cref="ArgumentException"/> with specified parameter name and specified formatted message.
+		/// Throws an <see cref="ArgumentException"/> with the specified parameter name and the specified formatted message.
 		/// </summary>
 		/// <param name="paramName">The name of the parameter that caused current exception.</param>
 		/// <param name="message">A composite format string.</param>
@@ -66,7 +66,7 @@ namespace NecroNet.Toolkit
 		}
 
 		/// <summary>
-		/// Throws an <see cref="ArgumentException"/> with parameter name parsed from specified expression and specified formatted message.
+		/// Throws an <see cref="ArgumentException"/> with parameter name parsed from the specified expression and the specified formatted message.
 		/// </summary>
 		/// <param name="paramNameSelector">An expression with path to the parameter that caused current exception.</param>
 		/// <param name="message">A composite format string.</param>
@@ -87,7 +87,7 @@ namespace NecroNet.Toolkit
 		}
 
 		/// <summary>
-		/// Throws an <see cref="ArgumentNullException"/> with specified parameter name.
+		/// Throws an <see cref="ArgumentNullException"/> with the specified parameter name.
 		/// </summary>
 		/// <param name="paramName">The name of the parameter that caused current exception.</param>
 		[JetBrains.Annotations.TerminatesProgram]
@@ -97,7 +97,7 @@ namespace NecroNet.Toolkit
 		}
 
 		/// <summary>
-		/// Throws an <see cref="ArgumentNullException"/> with specified parameter name and specified formatted message.
+		/// Throws an <see cref="ArgumentNullException"/> with the specified parameter name and the specified formatted message.
 		/// </summary>
 		/// <param name="paramName">The name of the parameter that caused current exception.</param>
 		/// <param name="message">A composite format string.</param>
@@ -109,7 +109,7 @@ namespace NecroNet.Toolkit
 		}
 
 		/// <summary>
-		/// Throws an <see cref="ArgumentNullException"/> with parameter name parsed from specified expression.
+		/// Throws an <see cref="ArgumentNullException"/> with parameter name parsed from the specified expression.
 		/// </summary>
 		/// <param name="paramNameSelector">An expression with path to the parameter that caused current exception.</param>
 		[JetBrains.Annotations.TerminatesProgram]
@@ -119,7 +119,7 @@ namespace NecroNet.Toolkit
 		}
 
 		/// <summary>
-		/// Throws an <see cref="ArgumentNullException"/> with parameter name parsed from specified expression and specified formatted message.
+		/// Throws an <see cref="ArgumentNullException"/> with parameter name parsed from the specified expression and the specified formatted message.
 		/// </summary>
 		/// <param name="paramNameSelector">An expression with path to the parameter that caused current exception.</param>
 		/// <param name="message">A composite format string.</param>
@@ -140,7 +140,7 @@ namespace NecroNet.Toolkit
 		}
 
 		/// <summary>
-		/// Throws an <see cref="ArgumentOutOfRangeException"/> with specified parameter name.
+		/// Throws an <see cref="ArgumentOutOfRangeException"/> with the specified parameter name.
 		/// </summary>
 		/// <param name="paramName">The name of the parameter that caused current exception.</param>
 		[JetBrains.Annotations.TerminatesProgram]
@@ -150,7 +150,7 @@ namespace NecroNet.Toolkit
 		}
 
 		/// <summary>
-		/// Throws an <see cref="ArgumentOutOfRangeException"/> with specified parameter name and specified formatted message.
+		/// Throws an <see cref="ArgumentOutOfRangeException"/> with the specified parameter name and the specified formatted message.
 		/// </summary>
 		/// <param name="paramName">The name of the parameter that caused current exception.</param>
 		/// <param name="message">A composite format string.</param>
@@ -162,7 +162,7 @@ namespace NecroNet.Toolkit
 		}
 
 		/// <summary>
-		/// Throws an <see cref="ArgumentOutOfRangeException"/> with specified parameter name, specified actual value and specified formatted message.
+		/// Throws an <see cref="ArgumentOutOfRangeException"/> with the specified parameter name, the specified actual value and the specified formatted message.
 		/// </summary>
 		/// <param name="paramName">The name of the parameter that caused current exception.</param>
 		/// <param name="actualValue">The value of the parameter that caused current exception.</param>
@@ -175,7 +175,7 @@ namespace NecroNet.Toolkit
 		}
 
 		/// <summary>
-		/// Throws an <see cref="ArgumentOutOfRangeException"/> with parameter name parsed from specified expression.
+		/// Throws an <see cref="ArgumentOutOfRangeException"/> with parameter name parsed from the specified expression.
 		/// </summary>
 		/// <param name="paramNameSelector">An expression with path to the parameter that caused current exception.</param>
 		[JetBrains.Annotations.TerminatesProgram]
@@ -185,7 +185,7 @@ namespace NecroNet.Toolkit
 		}
 
 		/// <summary>
-		/// Throws an <see cref="ArgumentOutOfRangeException"/> with parameter name and value parsed from specified expression and specified formatted message.
+		/// Throws an <see cref="ArgumentOutOfRangeException"/> with parameter name and value parsed from the specified expression and the specified formatted message.
 		/// </summary>
 		/// <param name="paramSelector">An expression with path to the parameter that caused current exception.</param>
 		/// <param name="message">A composite format string.</param>

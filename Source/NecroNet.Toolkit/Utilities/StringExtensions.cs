@@ -7,7 +7,7 @@ namespace NecroNet.Toolkit
 	public static class StringExtensions
 	{
 		/// <summary>
-		/// Converts string to 'slug', used in web page urls. Removes all symbols, converts to lowercase and replaces white spaces with specified delimiter.
+		/// Converts string to 'slug', used in web page urls. Removes all symbols, converts to lowercase and replaces white spaces with the specified delimiter.
 		/// </summary>
 		public static string ToSlug(this string s, char delimiter)
 		{
@@ -54,7 +54,7 @@ namespace NecroNet.Toolkit
 		}
 
 		/// <summary>
-		/// Converts a set of strings to csv format, delimited by specified delimiter.
+		/// Converts a set of strings to csv format, delimited by the specified delimiter.
 		/// </summary>
 		public static string ToCsv(this IEnumerable<string> source, string delimiter)
 		{

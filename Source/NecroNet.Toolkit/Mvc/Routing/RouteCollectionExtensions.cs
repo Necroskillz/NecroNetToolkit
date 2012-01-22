@@ -12,7 +12,7 @@ namespace NecroNet.Toolkit.Mvc
 		/// <param name="name">The name of the route.</param>
 		/// <param name="url">The URL pattern for the route.</param>
 		/// <param name="defaults">The values to use if URL doesn't contain all parameters.</param>
-		/// <param name="constraints">A regular expression that specified valid values for a URL parameter.</param>
+		/// <param name="constraints">A regular expression that the specified valid values for a URL parameter.</param>
 		/// <param name="namespaces">Namespace that uniquely identifies the controller to use.</param>
 		public static LowercaseRoute MapLowercaseRoute(this RouteCollection routes, string name, string url, object defaults = null, object constraints = null, string[] namespaces = null)
 		{

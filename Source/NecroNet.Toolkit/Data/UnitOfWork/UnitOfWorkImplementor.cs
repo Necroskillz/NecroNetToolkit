@@ -5,7 +5,7 @@ using NecroNet.Toolkit.Resources;
 
 namespace NecroNet.Toolkit.Data
 {
-	public class UnitOfWorkImplementor : IUnitOfWorkImplementor
+	internal class UnitOfWorkImplementor : IUnitOfWorkImplementor
 	{
 		private readonly IObjectContext _context;
 		private readonly IUnitOfWorkFactory _factory;
