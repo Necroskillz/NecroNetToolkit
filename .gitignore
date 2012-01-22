@@ -4,6 +4,6 @@ obj
 build
 dist
 *.suo
-*resharper*
+*.resharper.*
 *.user
 *.cache
