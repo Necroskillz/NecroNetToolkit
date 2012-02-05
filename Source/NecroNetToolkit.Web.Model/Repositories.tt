@@ -33,7 +33,6 @@ using <#= ns #>;
 
 namespace <#= DefaultNamespace #>
 {
-<# if(!OmitEdmx) { #>
 <# foreach (ObjectContextInfo contextInfo in ObjectContextInfos) { #>
 	public abstract partial class <#= contextInfo.TypeName #>RepositoryBase<TEntity> : Edm<#= IsPOCO ? "POCO" : string.Empty #>RepositoryBase<<#= contextInfo.TypeName #>, TEntity>
 		where TEntity : class
@@ -77,7 +76,6 @@ namespace <#= DefaultNamespace #>
 	}
 <# } #>
 
-<# } #>
 <# } #>
 
 <# foreach (ObjectContextInfo contextInfo in CodeFirstInfos) { #>
@@ -216,7 +214,11 @@ void Prepare()
 	
 	var project = GetProjectContainingT4File(Dte);
 	DefaultNamespace = project.Properties.Item("DefaultNamespace").Value.ToString();
-	FindEdmx(project.ProjectItems);
+	
+	if(!OmitEdmx)
+	{
+		FindEdmx(project.ProjectItems);
+	}
 	
 	ObjectContextInfos = GetEntityNames();
 	CodeFirstInfos = new List<ObjectContextInfo>();
@@ -286,7 +288,7 @@ private List<EntitySetInfo> FindDbSets(CodeClass c)
 		if(element is CodeProperty)
 		{
 			var property = (CodeProperty)element;
-			if(property.Type.CodeType.Name == "DbSet");
+			if(property.Type.CodeType.Name == "DbSet")
 			{
 				var info = new EntitySetInfo();
 				var propertyTypeName = property.Type.AsString;

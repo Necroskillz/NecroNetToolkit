@@ -18,8 +18,7 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 
 		private static HybridDictionary GetWebDictionary()
 		{
-			var fieldInfo = typeof(LocalDataStore).GetField("StoreKey",
-																	  BindingFlags.NonPublic | BindingFlags.Static);
+			var fieldInfo = typeof(LocalDataStore).GetField("StoreKey", BindingFlags.NonPublic | BindingFlags.Static);
 			var storeKey = fieldInfo.GetValue(Local.Data);
 			var dictionary = HttpContext.Current.Items[storeKey] as HybridDictionary;
 			return dictionary;
@@ -27,10 +26,18 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 
 		private static HybridDictionary GetLocalDictionary()
 		{
-			var fieldInfo = typeof(LocalDataStore).GetField("_localStore",
-																	  BindingFlags.NonPublic | BindingFlags.Static);
+			var fieldInfo = typeof(LocalDataStore).GetField("_localStore", BindingFlags.NonPublic | BindingFlags.Static);
 			var dictionary = fieldInfo.GetValue(null) as HybridDictionary;
 			return dictionary;
+		}
+
+		[TearDown]
+		public void TearDown()
+		{
+			var local = GetLocalDictionary();
+			if (local != null) local.Clear();
+
+			HttpContext.Current = null;
 		}
 
 		[Test]
@@ -92,6 +99,15 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 		}
 
 		[Test]
+		public void LocalData_Get_ShouldReturnStoredValue()
+		{
+			Local.Data.Set(Key, Obj);
+
+			Assert.That(Local.Data.Get<object>(Key), Is.EqualTo(Obj));
+			Assert.That(Local.Data.Get(Key), Is.EqualTo(Obj));
+		}
+
+		[Test]
 		public void LocalData_Clear_ShouldRemoveAllDataFromTheHashtable()
 		{
 			Local.Data.Set(Key, Obj);
@@ -103,7 +119,7 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 		}
 
 		[Test]
-		public void LocalData_ChangeContext_ShouldChangeImplementationOfLocalData()
+		public void LocalData_ChangeDataStore_ShouldChangeImplementationOfLocalData()
 		{
 			Local.ChangeDataStore(new FakeLocalDataStore());
 

@@ -18,14 +18,15 @@ namespace NecroNetToolkit.Web.Test.Filters
 			if(!filterContext.IsChildAction)
 			{
 				_unitOfWorkManager.Start<AllDealsEntities>();
-				_unitOfWorkManager.Start<DoplatkyEntities>();
 			}
 		}
 
 		public override void OnResultExecuted(ResultExecutedContext filterContext)
 		{
-			_unitOfWorkManager.GetCurrent<AllDealsEntities>().Dispose();
-			_unitOfWorkManager.GetCurrent<DoplatkyEntities>().Dispose();
+			if(!filterContext.IsChildAction)
+			{
+				_unitOfWorkManager.GetCurrent<AllDealsEntities>().Dispose();
+			}
 		}
 	}
 }

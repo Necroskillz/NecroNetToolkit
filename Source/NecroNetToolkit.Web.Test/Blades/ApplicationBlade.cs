@@ -10,7 +10,6 @@ namespace NecroNetToolkit.Web.Test.Blades
 		public override void Spin(IRotorContext context)
 		{
 			UnitOfWork.Register<AllDealsEntities, AllDealsEntitiesFactory>();
-			UnitOfWork.Register<DoplatkyEntities, DoplatkyEntitiesFactory>();
 		}
 	}
 }

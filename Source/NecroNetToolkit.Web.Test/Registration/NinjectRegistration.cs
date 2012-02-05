@@ -13,6 +13,7 @@ namespace NecroNetToolkit.Web.Test.Registration
 		public override void Register(IKernel kernel)
 		{
 			kernel.Bind<IUnitOfWorkManager>().To<UnitOfWorkManager>().InSingletonScope();
+			kernel.Bind<ITransactionFactory>().To<TransactionFactory>().InSingletonScope();
 
 			kernel.Load<TestNinjectModule>();
 

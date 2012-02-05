@@ -81,13 +81,14 @@
     <Compile Include="Helpers\Movie.cs" />
     <Compile Include="Helpers\MovieTestDataProvider.cs" />
     <Compile Include="Helpers\TestPersonRepository.cs" />
+    <Compile Include="HttpTests\CachedDataTests.cs" />
     <Compile Include="MailTests\MailBotTests.cs" />
     <Compile Include="MvcTests\SelectHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UtilityTests\CookiesDataTests.cs" />
+    <Compile Include="HttpTests\CookiesDataTests.cs" />
     <Compile Include="UtilityTests\DynamicLinqTests.cs" />
-    <Compile Include="UtilityTests\LocalDataTests.cs" />
-    <Compile Include="UtilityTests\SessionDataTest.cs" />
+    <Compile Include="HttpTests\LocalDataTests.cs" />
+    <Compile Include="HttpTests\SessionDataTest.cs" />
     <Compile Include="UtilityTests\SlugTests.cs" />
     <Compile Include="UtilityTests\SortedPagedListTests.cs" />
     <Compile Include="UtilityTests\StringExtensionsTests.cs" />

@@ -34,5 +34,6 @@ namespace NecroNetToolkit.Web.Model
         public DbSet<MetaCategory> MetaCategories { get; set; }
         public DbSet<Server> Servers { get; set; }
         public DbSet<State> States { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

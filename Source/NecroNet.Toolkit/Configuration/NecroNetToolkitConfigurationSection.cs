@@ -11,11 +11,11 @@ namespace NecroNet.Toolkit.Configuration
 			set { this["mail"] = value; }
 		}
 
-		[ConfigurationProperty("unitOfWork", IsRequired = false)]
-		public NecroNetToolkitUnitOfWorkConfigurationElement UnitOfWork
+		[ConfigurationProperty("transaction", IsRequired = false)]
+		public NecroNetToolkitTransactionConfigurationElement Transaction
 		{
-			get { return (NecroNetToolkitUnitOfWorkConfigurationElement)this["unitOfWork"]; }
-			set { this["unitOfWork"] = value; }
+			get { return (NecroNetToolkitTransactionConfigurationElement)this["transaction"]; }
+			set { this["transaction"] = value; }
 		}
 
 		[ConfigurationProperty("selectListManager", IsRequired = false)]
@@ -23,6 +23,13 @@ namespace NecroNet.Toolkit.Configuration
 		{
 			get { return (NecroNetToolkitSelectListManagerConfigurationElement)this["selectListManager"]; }
 			set { this["selectListManager"] = value; }
+		}
+
+		[ConfigurationProperty("http", IsRequired = false)]
+		public NecroNetToolkitHttpConfigurationElement Http
+		{
+			get { return (NecroNetToolkitHttpConfigurationElement)this["http"]; }
+			set { this["http"] = value; }
 		}
 	}
 }

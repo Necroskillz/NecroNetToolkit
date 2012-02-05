@@ -15,7 +15,8 @@ namespace NecroNetToolkit.Web.Model
     {
         public IObjectContext CreateObjectContext()
         {
-            return new AllDealsEntities();
+			var e = new AllDealsEntities();
+        	return e;
         }
     }
 }

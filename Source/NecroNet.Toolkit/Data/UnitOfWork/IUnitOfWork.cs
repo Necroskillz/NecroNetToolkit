@@ -10,11 +10,6 @@ namespace NecroNet.Toolkit.Data
 		/// </summary>
 		void Flush();
 
-		/// <summary>
-		/// Begins a transaction by creating a transaction scope.
-		/// </summary>
-		ITransaction BeginTransaction(IsolationLevel? isolationLevel = null);
-
         /// <summary>
         /// Gets underlying object context.
         /// Under normal circumstances you should not use this. If you do, make sure to abstract it away if you want your code to be unit testable.

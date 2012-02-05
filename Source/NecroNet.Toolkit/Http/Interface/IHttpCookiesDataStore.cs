@@ -25,7 +25,7 @@ namespace NecroNet.Toolkit.Http
 		/// <param name="key">The key whose value to store.</param>
 		/// <param name="value">The value to store.</param>
 		/// <param name="expires">The date on which the value expires.</param>
-		void Set(string key, string value, DateTime expires);
+		void Set(string key, string value, DateTime? expires = null);
 
 		/// <summary>
 		/// Retrieves a <see cref="HttpCookie"/> associated with the specified key from the data store. If the value is not present, returns <c>null</c>.

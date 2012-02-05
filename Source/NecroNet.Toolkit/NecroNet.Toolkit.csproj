@@ -104,6 +104,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -116,10 +117,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Http\NecroNetToolkitHttpConfigurationElement.cs" />
     <Compile Include="Configuration\NecroNetToolkitConfigurationManager.cs" />
     <Compile Include="Configuration\NecroNetToolkitConfigurationSection.cs" />
     <Compile Include="Configuration\SelectListManager\NecroNetToolkitSelectListManagerConfigurationElement.cs" />
     <Compile Include="Data\Repositories\Infrastructure\IQueryFactory.cs" />
+    <Compile Include="Data\Transactions\ITransaction.cs" />
+    <Compile Include="Data\Transactions\ITransactionFactory.cs" />
+    <Compile Include="Data\Transactions\TransactionFactory.cs" />
+    <Compile Include="Data\Transactions\TransactionScopeTransaction.cs" />
     <Compile Include="Data\UnitOfWork\IUnitOfWorkManager.cs" />
     <Compile Include="Data\UnitOfWork\UnitOfWorkManager.cs" />
     <Compile Include="Http\DataProviders\CacheDataStore.cs" />
@@ -143,10 +149,7 @@
     <Compile Include="Data\Repositories\Edm\POCO\EdmRepositoryBase.cs" />
     <Compile Include="Data\Repositories\Memory\MemoryEntityOperator.cs" />
     <Compile Include="Data\Repositories\Memory\MemoryRepository.cs" />
-    <Compile Include="Configuration\UnitOfWork\NecroNetToolkitUnitOfWorkConfigurationElement.cs" />
-    <Compile Include="Configuration\UnitOfWork\TransactionElement.cs" />
-    <Compile Include="Data\UnitOfWork\DatabaseTransaction.cs" />
-    <Compile Include="Data\UnitOfWork\ITransaction.cs" />
+    <Compile Include="Configuration\Transactions\NecroNetToolkitTransactionConfigurationElement.cs" />
     <Compile Include="Internals\Dynamic.cs" />
     <Compile Include="Data\ObjectContextExtensions.cs" />
     <Compile Include="Data\Repositories\CodeFirst\CodeFirstRepositoryBase.cs" />

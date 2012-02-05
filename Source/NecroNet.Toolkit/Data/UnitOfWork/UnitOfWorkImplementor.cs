@@ -29,11 +29,6 @@ namespace NecroNet.Toolkit.Data
 			_context.SaveChanges();
 		}
 
-		public ITransaction BeginTransaction(IsolationLevel? isolationLevel)
-		{
-			return new DatabaseTransaction(_context.Connection, isolationLevel);
-		}
-
 	    public IObjectContext Context
 	    {
 	        get

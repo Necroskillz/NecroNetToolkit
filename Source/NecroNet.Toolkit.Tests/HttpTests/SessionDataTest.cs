@@ -32,17 +32,21 @@ namespace NecroNet.Toolkit.Tests.UtilityTests
 			var sessionContainer = new HttpSessionStateContainer("id", new SessionStateItemCollection(),
 																	new HttpStaticObjectsCollection(), 10, true,
 																	HttpCookieMode.AutoDetect, SessionStateMode.InProc, false);
-			httpContext.Items["AspSession"] =
-				typeof (HttpSessionState).GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, CallingConventions.Standard,
+			httpContext.Items["AspSession"] = typeof (HttpSessionState).GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, CallingConventions.Standard,
 															new[] {typeof (HttpSessionStateContainer)}, null).Invoke(new object[]{ sessionContainer});
 
 			HttpContext.Current = httpContext;
 		}
 
+		[TearDown]
+		public void TearDown()
+		{
+			HttpContext.Current = null;
+		}
+
 		private static HybridDictionary GetSessionDictionary()
 		{
-			var fieldInfo = typeof(SessionDataStore).GetField("StoreKey",
-																		  BindingFlags.NonPublic | BindingFlags.Static);
+			var fieldInfo = typeof(SessionDataStore).GetField("StoreKey", BindingFlags.NonPublic | BindingFlags.Static);
 			var storeKey = (string)fieldInfo.GetValue(Local.Data);
 			var store = HttpContext.Current.Session[storeKey] as HybridDictionary;
 			return store;

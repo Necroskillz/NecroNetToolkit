@@ -2,6 +2,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using System.Web;
+using NecroNet.Toolkit.Configuration;
 
 namespace NecroNet.Toolkit.Http
 {
@@ -39,14 +40,14 @@ namespace NecroNet.Toolkit.Http
 			return cookie == null ? null : cookie.Value;
 		}
 
-		public void Set(string key, string value, DateTime expires)
+		public void Set(string key, string value, DateTime? expires)
 		{
 			var cookie = new HttpCookie(key)
 			             	{
-			             		Expires = DateTime.Now.Add(TimeSpan.FromDays(365)),
+			             		Expires = expires ?? DateTime.Now.AddDays(NecroNetToolkitConfigurationManager.GetOption(c => c.Http.DefaultCookieExpiry, 365)),
 			             		Value = value
 			             	};
-
+			
 			OutgoingCookies.Set(cookie);
 		}
 
@@ -57,7 +58,7 @@ namespace NecroNet.Toolkit.Http
 
 		public void SetCookie(HttpCookie cookie)
 		{
-			IncommingCookies.Set(cookie);
+			OutgoingCookies.Set(cookie);
 		}
 	}
 }

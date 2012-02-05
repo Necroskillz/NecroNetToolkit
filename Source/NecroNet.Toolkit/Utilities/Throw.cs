@@ -19,7 +19,7 @@ namespace NecroNet.Toolkit
 		}
 
 		/// <summary>
-		/// Throw an exception of the specified type with the specified formatted message.
+		/// Throws an exception of the specified type with the specified formatted message.
 		/// </summary>
 		/// <typeparam name="TException">The type of exception to throw.</typeparam>
 		/// <param name="message">A composite format string.</param>
