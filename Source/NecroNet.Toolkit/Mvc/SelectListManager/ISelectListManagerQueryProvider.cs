@@ -3,9 +3,9 @@
 namespace NecroNet.Toolkit.Data
 {
 	/// <summary>
-	/// Acts like a provider of <see cref="IQueryable{T}"/> for other parts of the toolkit.
+	/// Acts like a provider of <see cref="IQueryable{T}"/> for select list manager.
 	/// </summary>
-	public interface IQueryFactory
+	public interface ISelectListManagerQueryProvider
 	{
 		/// <summary>
 		/// Gets an <see cref="IQueryable"/> of the specified entity type.

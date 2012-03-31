@@ -1,0 +1,1180 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NecroNet.Toolkit</name>
+    </assembly>
+    <members>
+        <member name="T:NecroNet.Toolkit.Http.Local">
+            <summary>
+            Helper class for storing and retrieving data from http items (<c>HttpContext.Current.Items</c>).
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.Local.ChangeDataStore(NecroNet.Toolkit.Http.IHttpGeneralDataStore)">
+            <summary>
+            Changes current data provider. Can be used for test to provide stub implementation.
+            </summary>
+            <param name="dataStore">The data provider implementation to use.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.Local.ResetDataStore">
+            <summary>
+            Resets the current data provider back to <see cref="T:NecroNet.Toolkit.Http.LocalDataStore"/>.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Http.Local.Data">
+            <summary>
+            Accesses data through current data provider (default is <see cref="T:NecroNet.Toolkit.Http.LocalDataStore"/>).
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IUnitOfWork.Flush">
+            <summary>
+            Persists all updates to the data source.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Data.IUnitOfWork.Context">
+            <summary>
+            Gets underlying object context.
+            Under normal circumstances you should not use this. If you do, make sure to abstract it away if you want your code to be unit testable.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.IHttpDataStore.Clear">
+            <summary>
+            Removes all entries from the data store.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.IHttpCookiesDataStore.Contains(System.String)">
+            <summary>
+            Determines whether the data store contains a specific key.
+            </summary>
+            <param name="key">The key to locate.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.IHttpCookiesDataStore.Get(System.String)">
+            <summary>
+            Retrieves a value associated with the specified key from the data store. If the value is not present, returns <c>null</c>.
+            </summary>
+            <param name="key">The key whose value to retrieve.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.IHttpCookiesDataStore.Set(System.String,System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Stores the specified value with the specified expiry date and associates it with the specified key.
+            </summary>
+            <param name="key">The key whose value to store.</param>
+            <param name="value">The value to store.</param>
+            <param name="expires">The date on which the value expires.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.IHttpCookiesDataStore.GetCookie(System.String)">
+            <summary>
+            Retrieves a <see cref="T:System.Web.HttpCookie"/> associated with the specified key from the data store. If the value is not present, returns <c>null</c>.
+            </summary>
+            <param name="key">The key whose <see cref="T:System.Web.HttpCookie"/> to retrieve.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.IHttpCookiesDataStore.SetCookie(System.Web.HttpCookie)">
+            <summary>
+            Stores the specified <see cref="T:System.Web.HttpCookie"/> and associates it with the specified key.
+            </summary>
+            <param name="cookie"></param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IUnitOfWorkManager.Start">
+            <summary>
+            Starts default unit of work.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IUnitOfWorkManager.Start``1">
+            <summary>
+            Starts a unit of work of the specified type.
+            </summary>
+            <typeparam name="TObjectContext">The type of the object context.</typeparam>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IUnitOfWorkManager.IsStarted">
+            <summary>
+            Gets whether default unit of work has been started, and have not yet been disposed.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IUnitOfWorkManager.IsStarted``1">
+            <summary>
+            Gets whether a unit of work of the specified type has been started, and have not yet been disposed.
+            </summary>
+            <typeparam name="TObjectContext">The type of the object context.</typeparam>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IUnitOfWorkManager.GetCurrent">
+            <summary>
+            Gets currently active default unit of work.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IUnitOfWorkManager.GetCurrent``1">
+            <summary>
+            Gets currently active unit of work of the specified type.
+            </summary>
+            <typeparam name="TObjectContext">The type of the object context.</typeparam>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.ITransactionFactory.BeginTransaction(System.Nullable{System.Transactions.TransactionScopeOption},System.Nullable{System.Transactions.IsolationLevel},System.Nullable{System.Int32})">
+            <summary>
+            Makes a code block transactional.
+            </summary>
+            <param name="scopeOption">An instance of the <see cref="T:System.Transactions.TransactionScopeOption"/> enumeration that describes the transaction requirements associated with this transaction scope.</param>
+            <param name="isolationLevel">the isolation level of the transaction.</param>
+            <param name="timeout">The timeout period for the transaction.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.ISelectListManager.GetItems``1(System.String,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.IQueryable{``0})">
+            <summary>
+            Gets a select list for items of the specified type with the specified selected value, filtered by the specified predicate, using the configuration associated with the specified key.
+            </summary>
+            <typeparam name="T">The type of items to generate the select list from.</typeparam>
+            <param name="key">The key that was used to register <see cref="T:NecroNet.Toolkit.Mvc.SelectListManager"/> cofiguration.</param>
+            <param name="selectedValue">The value that is currently selected in the list.</param>
+            <param name="predicate">The predicate to filter the collection.</param>
+            <param name="customQuery">A query to use instead of one provided by query provider or from cache.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.ISelectListManager.GetItems``1(System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.IQueryable{``0})">
+            <summary>
+            Gets a select list for items of the specified type with the specified selected value, filtered by the specified predicate.
+            </summary>
+            <typeparam name="T">The type of items to generate the select list from.</typeparam>
+            <param name="selectedValue">The value that is currently selected in the list.</param>
+            <param name="predicate">The predicate to filter the collection.</param>
+            <param name="customQuery">A query to use instead of one provided by query provider or from cache.</param>
+        </member>
+        <member name="T:NecroNet.Toolkit.SortDirection">
+            <summary>
+            Represents sort direction options for <see cref="T:NecroNet.Toolkit.SortedPagedList`1"/>.
+            </summary>
+        </member>
+        <member name="F:NecroNet.Toolkit.SortDirection.Asc">
+            <summary>
+            Ascending sort direction.
+            </summary>
+        </member>
+        <member name="F:NecroNet.Toolkit.SortDirection.Desc">
+            <summary>
+            Descending sort direction.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetEnumerable">
+            <summary>
+            Gets collection of entities as emumerable.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetEnumerable(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets collection of entities filtered by the specified predicate as emumerable.
+            </summary>
+            <param name="predicate">Predicate used to filter the collection.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetEnumerable``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean)">
+            <summary>
+            Gets collection of entities ordered by the specified key in the specified direction as emumerable.
+            </summary>
+            <typeparam name="TKey">Type of property used for ordering</typeparam>
+            <param name="keySelector">Selector of property used for ordering.</param>
+            <param name="ascending">Sort order, true for ascending, false for descending.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetEnumerable``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean)">
+            <summary>
+            Gets collection of entities filtered by the specified predicate, ordered by the specified key in the specified direction as emumerable.
+            </summary>
+            <typeparam name="TKey">Type of property used for ordering</typeparam>
+            <param name="predicate">Predicate used to filter the collection.</param>
+            <param name="keySelector">Selector of property used for ordering.</param>
+            <param name="ascending">Sort order, true for ascending, false for descending.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetQueryable">
+            <summary>
+            Gets query of entities.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetList">
+            <summary>
+            Gets a list of entities.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets a list of entities filtered by the specified predicate.
+            </summary>
+            <param name="predicate">Predicate used to filter the collection.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetPage``1(System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean)">
+            <summary>
+            Gets a paged list of entities ordered by the specified key in the specified direction.
+            </summary>
+            <typeparam name="TKey">Type of property used for ordering</typeparam>
+            <param name="pageNumber">Number of current page.</param>
+            <param name="pageSize">The amount of items on a page.</param>
+            <param name="orderBySelector">Selector of property used for ordering.</param>
+            <param name="ascending">Sort order, true for ascending, false for descending.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetPage``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Boolean)">
+            <summary>
+            Gets a paged list of entities filtered by the specified predicate, ordered by the specified key in the specified direction.
+            </summary>
+            <typeparam name="TKey">Type of property used for ordering</typeparam>
+            <param name="predicate">Predicate used to filter the collection.</param>
+            <param name="pageNumber">Number of current page.</param>
+            <param name="pageSize">The amount of items on a page.</param>
+            <param name="orderBySelector">Selector of property used for ordering.</param>
+            <param name="ascending">Sort order, true for ascending, false for descending.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetSortedPagedList(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Gets sorted, paged list of entities.
+            </summary>
+            <param name="pageNumber">Number of current page.</param>
+            <param name="pageSize">The amount of items on a page.</param>
+            <param name="sortKey">Name of the property to sort by.</param>
+            <param name="sortDirection">Sort direction (use constants in <see cref="T:NecroNet.Toolkit.SortDirection"/>).</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.GetSortedPagedList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Gets sorted, paged list of entities filtered by the specified predicate.
+            </summary>
+            <param name="pageNumber">Predicate used to filter the collection.</param>
+            <param name="index">Number of current page.</param>
+            <param name="pageSize">The amount of items on a page.</param>
+            <param name="sortKey">Name of the property to sort by.</param>
+            <param name="sortDirection">Sort direction (use constants in <see cref="T:NecroNet.Toolkit.SortDirection"/>).</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Get(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets a single entity that matches the specified predicate.
+            </summary>
+            <param name="predicate">Predicate indentifying the entity.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Add(`0)">
+            <summary>
+            Adds the specified entity to the repository.
+            </summary>
+            <param name="entity">The entity to be added.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Remove(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Removes single entity that matches the specified predicate from the repository.
+            </summary>
+            <param name="predicate">Predicate indentifying the entity.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Remove(`0)">
+            <summary>
+            Removes the specified entity from the repository.
+            </summary>
+            <param name="entity">The entity to be removed.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.RemoveRange(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Removes all entities that match the specified predicate from the repository.
+            </summary>
+            <param name="predicate">Predicate indentifying the entities.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Count(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets the count of all entitites that match the specified predicate in the repository.
+            </summary>
+            <param name="predicate">Predicate indentifying the entities.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Count">
+            <summary>
+            Gets the count of all entitites in the repository.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.WithInclude``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Registers an include (eager load) of the specified property for the next query.
+            </summary>
+            <typeparam name="TProperty">Type of property to include</typeparam>
+            <param name="includeSelector">Selector of property to include.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.WithInclude(System.String)">
+            <summary>
+            Registers an include (eager load) of the specified property for the next query.
+            </summary>
+            <param name="include">Name of property to include.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Clear">
+            <summary>
+            Removes all entities from the repository.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepository`1.Update(`0)">
+            <summary>
+            Marks the specified property as updated. (this method may not be supported by all types of repository, e.g. if entities are tracked by the context automatically)
+            </summary>
+            <param name="entity">The updated entity.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.Html.InputExtensions.RadioGroupFor``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Collections.Generic.IEnumerable{System.Web.Mvc.SelectListItem})">
+            <summary>
+            Render a group of radio buttons.
+            </summary>
+            <param name="helper"></param>
+            <param name="expression">An expression that identifies the object that contais the properties to render.</param>
+            <param name="items">A select list of items to render radio buttons for.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.Html.InputExtensions.RenderHiddenFields(System.Web.Mvc.HtmlHelper,System.Object)">
+            <summary>
+            Renders a hidden field for each value. Uses a property name as an id.
+            </summary>
+            <param name="helper"></param>
+            <param name="values">The key value pairs in form of an anonymous object used to render the fields.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.Html.InputExtensions.TextBoxFor``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Object,System.Object)">
+            <summary>
+            Returns a text input element for each property in the object the is represented by the specified expression with the specified value, using the specified html attributes. 
+            </summary>
+            <param name="helper"></param>
+            <param name="expression">An expression that identifies the object that contais the properties to render.</param>
+            <param name="value">The value to set to the element.</param>
+            <param name="htmlAttributes">An object that contains the HTML attributes to set for the element.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.Html.InputExtensions.HiddenFor``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Object,System.Object)">
+            <summary>
+            Returns a hidden input element for each property in the object the is represented by the specified expression with the specified value, using the specified html attributes. 
+            </summary>
+            <param name="helper"></param>
+            <param name="expression">An expression that identifies the object that contais the properties to render.</param>
+            <param name="value">The value to set to the element.</param>
+            <param name="htmlAttributes">An object that contains the HTML attributes to set for the element.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.Html.InputExtensions.Submit(System.Web.Mvc.HtmlHelper,System.String,System.Object)">
+            <summary>
+            Return a submit button with the specified text and no name, using the specified html attributes.
+            </summary>
+            <param name="helper"></param>
+            <param name="text">The text value of the button.</param>
+            <param name="htmlAttributes">An object that contains the HTML attributes to set for the element.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.Html.InputExtensions.Submit(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>
+            Return a submit button with the specified text and no name.
+            </summary>
+            <param name="helper"></param>
+            <param name="text">The text value of the button.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.IHttpGeneralDataStore.Contains(System.Object)">
+            <summary>
+            Determines whether the data store contains a specific key.
+            </summary>
+            <param name="key">The key to locate.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.IHttpGeneralDataStore.Get``1(System.Object)">
+            <summary>
+            Retrieves strongly typed value associated with the specified key from the data store. If the value is not present, returns <c>default(T)</c>.
+            </summary>
+            <typeparam name="T">The type of the item to get.</typeparam>
+            <param name="key">The key whose value to retrieve.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.IHttpGeneralDataStore.Get(System.Object)">
+            <summary>
+            Retrieves a value associated with the specified key from the data store. If the value is not present, returns <c>null</c>.
+            </summary>
+            <param name="key">The key whose value to retrieve.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.IHttpGeneralDataStore.Set(System.Object,System.Object)">
+            <summary>
+            Stores the specified value and associates it with the specified key.
+            </summary>
+            <param name="key">The key whose value to store.</param>
+            <param name="value">The value to store.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.ObjectContextExtensions.AsActual``1(NecroNet.Toolkit.Data.IObjectContext)">
+            <summary>
+            Returns actual unwrapped object context.
+            </summary>
+            <typeparam name="TObjectContext">Type of object context to return</typeparam>
+            <param name="context">The wrapped object context.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.ObjectContextExtensions.FullTextSearch``1(System.Linq.IQueryable{``0},System.String,System.Boolean,System.String[])">
+            <summary>
+            Searches in all string properties for the specifed search key.
+            It is also able to search for several words. If the searchKey is for example 'John Travolta' then
+            with exactMatch set to false all records which contain either 'John' or 'Travolta' in some string property
+            are returned.
+            </summary>
+            <param name="query">Base query for the search.</param>
+            <param name="searchKey">Search term.</param>
+            <param name="exactMatch">Specifies if only the whole word or every single word should be searched.</param>
+            <param name="searchProperties">Properties to check for matches.</param>
+            <returns>Query that matchesthe specified search parameters.</returns>
+        </member>
+        <member name="T:NecroNet.Toolkit.Http.Cookies">
+            <summary>
+            Helper class for storing and retrieving data from http cookies (<c>HttpContext.Current.Request/Response.Cookies</c>).
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.Cookies.ChangeDataStore(NecroNet.Toolkit.Http.IHttpCookiesDataStore)">
+            <summary>
+            Changes current data provider. Can be used for test to provide stub implementation.
+            </summary>
+            <param name="dataStore">The data provider implementation to use.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.Cookies.ResetDataStore">
+            <summary>
+            Resets the current data provider back to <see cref="T:NecroNet.Toolkit.Http.CookiesDataStore"/>.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Http.Cookies.Data">
+            <summary>
+            Accesses data through current data provider (default is <see cref="T:NecroNet.Toolkit.Http.CookiesDataStore"/>).
+            </summary>
+        </member>
+        <member name="T:NecroNet.Toolkit.Resources.Res">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_ConfigurationManager_SectionNotFound">
+            <summary>
+              Looks up a localized string similar to Configuration section &apos;necroNetToolkit&apos; was not found..
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_Repository_InvalidEntitySetName">
+            <summary>
+              Looks up a localized string similar to Invalid entity set name..
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_Repository_InvalidEntitySetNameAttributeSetup">
+            <summary>
+              Looks up a localized string similar to Invalid EntitySetName attribute setup..
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_SelectListManager_AlreadyRegistered">
+            <summary>
+              Looks up a localized string similar to Select list with key &apos;{0}&apos; has already been registered..
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_SelectListManager_NotRegistered">
+            <summary>
+              Looks up a localized string similar to Select list with key &apos;{0}&apos; has not been registered..
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_SortedPagedList_PageNumber">
+            <summary>
+              Looks up a localized string similar to Page number can&apos;t be less than 1..
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_SortedPagedList_PageSize">
+            <summary>
+              Looks up a localized string similar to Page size can&apos;t be less than 1..
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_SortedPagedList_SortDirection">
+            <summary>
+              Looks up a localized string similar to Sort direction must be either SortDir.Asc or SortDir.Desc..
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_SortedPagedList_SortKey">
+            <summary>
+              Looks up a localized string similar to Sort key cannot be null or empty..
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_UnitOfWork_AlreadyRegistered">
+            <summary>
+              Looks up a localized string similar to UnitOfWork for type &apos;{0}&apos; was already registered..
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_UnitOfWork_DefaultNotRegistered">
+            <summary>
+              Looks up a localized string similar to Default UnitOfWork factory was not registered. Make sure you called UnitOfWork.RegisterDefault() method before using default UnitOfWork..
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_UnitOfWork_Disposed">
+            <summary>
+              Looks up a localized string similar to This unit of work and it&apos;s object context has already been disposed..
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_UnitOfWork_NotInUnitOfWork">
+            <summary>
+              Looks up a localized string similar to You are not in a unit of work of type &apos;{0}&apos;..
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_UnitOfWork_NotRegistered">
+            <summary>
+              Looks up a localized string similar to UnitOfWork factory for type &apos;{0}&apos; was not registered. Make sure you called UnitOfWork.Register() method before using UnitOfWork..
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_UnitOfWork_RegisterMoreThanOneDefault">
+            <summary>
+              Looks up a localized string similar to You cannot register more then one default unit of work..
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Resources.Res.ExceptionMessage_UnitOfWork_StartSecondAtTheSameTime">
+            <summary>
+              Looks up a localized string similar to You cannot start more than one unit of work of the same type at the same time..
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.RssResult`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.String,System.String,System.Func{`0,System.String},System.Func{`0,System.Web.Mvc.UrlHelper,System.String},System.Func{`0,System.Web.Mvc.UrlHelper,System.String},System.Func{`0,System.DateTime},System.Func{`0,System.Web.Mvc.UrlHelper,System.String},System.Func{`0,System.DateTime})">
+            <summary>
+            Creates an <see cref="T:System.Web.Mvc.ActionResult"/> that represents RSS feed.
+            </summary>
+            <param name="items">Collection of items that the feed is based on.</param>
+            <param name="title">The title of the feed.</param>
+            <param name="description">The description of the feed.</param>
+            <param name="getItemTitle">Delegate used to get the title of an item.</param>
+            <param name="getItemUrl">Delegate used to get the url (ID) of an item.</param>
+            <param name="getItemContent">Delegate used to get the content of an item.</param>
+            <param name="getItemPublished">Delegate used to get the date an item was published.</param>
+            <param name="getItemSummary">Delegate used to get the summary of an item. If null, the content is used instead.</param>
+            <param name="getItemUpdated">Delegate used to get the date an item was updated. If null, the publish date it used instead.</param>
+        </member>
+        <member name="P:NecroNet.Toolkit.Mvc.RssResult`1.Items">
+            <summary>
+            Collection of items that the feed is based on.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Mvc.RssResult`1.Title">
+            <summary>
+            The title of the feed.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Mvc.RssResult`1.Description">
+            <summary>
+            The description of the feed.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Mvc.RssResult`1.GetItemTitle">
+            <summary>
+            Delegate used to get the title of an item.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Mvc.RssResult`1.GetItemUrl">
+            <summary>
+            Delegate used to get the url (ID) of an item.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Mvc.RssResult`1.GetItemContent">
+            <summary>
+            Delegate used to get the content of an item.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Mvc.RssResult`1.GetItemSummary">
+            <summary>
+            Delegate used to get the summary of an item.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Mvc.RssResult`1.GetItemPusblished">
+            <summary>
+            Delegate used to get the date an item was published.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Mvc.RssResult`1.GetItemUpdated">
+            <summary>
+            Delegate used to get the date an item was updated.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.ITransaction.Complete">
+            <summary>
+            Indicates that all operations within the scope are completed successfully.
+            </summary>
+        </member>
+        <member name="T:NecroNet.Toolkit.Http.Cached">
+            <summary>
+            Helper class for storing and retrieving data from asp.net cache (<c>HttpContext.Current.Cache</c>).
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.Cached.ChangeDataStore(NecroNet.Toolkit.Http.IHttpCacheDataStore)">
+            <summary>
+            Changes current data provider. Can be used for test to provide stub implementation.
+            </summary>
+            <param name="dataStore">The data provider implementation to use.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.Cached.ResetDataStore">
+            <summary>
+            Resets the current data provider back to <see cref="T:NecroNet.Toolkit.Http.CacheDataStore"/>.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Http.Cached.Data">
+            <summary>
+            Accesses data through current data provider (default is <see cref="T:NecroNet.Toolkit.Http.CacheDataStore"/>).
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Slug.Generate(System.String)">
+            <summary>
+            Generates a 'slug' from string. Slugs are used for nice web page url parameters. e.g: 'NecroNet Toolkit is awesome!!' becomes 'necronet-toolkit-is-awesome'.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Slug.Generate(System.String,System.Int32)">
+            <summary>
+            Generates a 'slug' from string and appends the specified id. Slugs are used for nice web page url parameters. e.g: 'NecroNet Toolkit is awesome!!' becomes 'necronet-toolkit-is-awesome-&lt;id&gt;'.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.Html.LabelExtensions.SimpleLabelFor``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Generates simple label (&lt;label&gt; withour the 'for' attribute).
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.Html.LabelExtensions.SimpleLabel(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>
+            Generates simple label (&lt;label&gt; withour the 'for' attribute).
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.SelectListManager.Register``2(System.String,System.Func{``0,System.String},System.Func{``0,System.Object},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Boolean,System.String,NecroNet.Toolkit.Mvc.SelectListOptimalization,System.Boolean)">
+            <summary>
+            Registers a select list configuration with the <see cref="T:NecroNet.Toolkit.Mvc.SelectListManager"/>.
+            </summary>
+            <typeparam name="T">The type of items to generate select list from.</typeparam>
+            <typeparam name="TOrderByProperty">The type of property to order by.</typeparam>
+            <param name="key">The key to associate with this specific registration. Use to differentiate between configurations for the same item type.</param>
+            <param name="textSelector">A delegate that selects the text displayed on the drop down list.</param>
+            <param name="valueSelector">A delegate that selects underlying value for the drop down list.</param>
+            <param name="orderBySelector">A selector of property used for ordering.</param>
+            <param name="predicate">A predicate used to filter the collection.</param>
+            <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
+            <param name="nullLineText">The text of the empty line.</param>
+            <param name="optimalization">A stategy by which the select list is optimized.</param>
+            <param name="noCache">True means the collection won't be cached.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.SelectListManager.Register``2(System.Func{``0,System.String},System.Func{``0,System.Object},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Boolean,System.String,NecroNet.Toolkit.Mvc.SelectListOptimalization,System.Boolean)">
+            <summary>
+            Registers a select list configuration with the <see cref="T:NecroNet.Toolkit.Mvc.SelectListManager"/>.
+            </summary>
+            <typeparam name="T">The type of items to generate select list from.</typeparam>
+            <typeparam name="TOrderByProperty">The type of property to order by.</typeparam>
+            <param name="textSelector">A delegate that selects the text displayed on the drop down list.</param>
+            <param name="valueSelector">A delegate that selects underlying value for the drop down list.</param>
+            <param name="orderBySelector">A selector of property used for ordering.</param>
+            <param name="predicate">A predicate used to filter the collection.</param>
+            <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
+            <param name="nullLineText">The text of the empty line.</param>
+            <param name="optimalization">A stategy by which the select list is optimized.</param>
+            <param name="noCache">True means the collection won't be cached.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.SelectListManager.Register``1(System.String,System.Func{``0,System.String},System.Func{``0,System.Object},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Boolean,System.String,NecroNet.Toolkit.Mvc.SelectListOptimalization,System.Boolean)">
+            <summary>
+            Registers a select list configuration with the <see cref="T:NecroNet.Toolkit.Mvc.SelectListManager"/>.
+            </summary>
+            <typeparam name="T">The type of items to generate select list from.</typeparam>
+            <param name="key">The key to associate with this specific registration. Use to differentiate between configurations for the same item type.</param>
+            <param name="textSelector">A delegate that selects the text displayed on the drop down list.</param>
+            <param name="valueSelector">A delegate that selects underlying value for the drop down list.</param>
+            <param name="predicate">A predicate used to filter the collection.</param>
+            <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
+            <param name="nullLineText">The text of the empty line.</param>
+            <param name="optimalization">A stategy by which the select list is optimized.</param>
+            <param name="noCache">True means the collection won't be cached.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.SelectListManager.Register``1(System.Func{``0,System.String},System.Func{``0,System.Object},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Boolean,System.String,NecroNet.Toolkit.Mvc.SelectListOptimalization,System.Boolean)">
+            <summary>
+            Registers a select list configuration with the <see cref="T:NecroNet.Toolkit.Mvc.SelectListManager"/>.
+            </summary>
+            <typeparam name="T">The type of items to generate select list from.</typeparam>
+            <param name="textSelector">A delegate that selects the text displayed on the drop down list.</param>
+            <param name="valueSelector">A delegate that selects underlying value for the drop down list.</param>
+            <param name="predicate">A predicate used to filter the collection.</param>
+            <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
+            <param name="nullLineText">The text of the empty line.</param>
+            <param name="optimalization">A stategy by which the select list is optimized.</param>
+            <param name="noCache">True means the collection won't be cached.</param>
+        </member>
+        <member name="T:JetBrains.Annotations.TerminatesProgramAttribute">
+            <summary>
+            Indicates that the marked method unconditionally terminates control flow execution.
+            For example, it could unconditionally throw exception.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.SelectHelper.ToSelectItemList``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String},System.Func{``0,System.Object},System.Boolean,System.String)">
+            <summary>
+            Converts an enumerable of items to list of <see cref="T:System.Web.Mvc.SelectListItem"/> that can be used for drop down lists.
+            </summary>
+            <typeparam name="T">The type of items</typeparam>
+            <param name="data">The data source.</param>
+            <param name="textSelector">A delegate that selects the text displayed on the drop down list.</param>
+            <param name="valueSelector">A delegate that selects underlying value for the drop down list.</param>
+            <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
+            <param name="nullLineText">The text of the empty line. If null, uses value from web.config. If web.config value is not set, uses "--".</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.SelectHelper.ToSelectItemList``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String},System.Func{``0,System.Object},System.Object,System.Boolean,System.String)">
+            <summary>
+            Converts an enumerable of items to list of <see cref="T:System.Web.Mvc.SelectListItem"/> with the specified selected value that can be used for drop down lists.
+            </summary>
+            <typeparam name="T">The type of items</typeparam>
+            <param name="data">The data source.</param>
+            <param name="textSelector">A delegate that selects the text displayed on the drop down list.</param>
+            <param name="valueSelector">A delegate that selects underlying value for the drop down list.</param>
+            <param name="selectedValue">The value that is selected.</param>
+            <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
+            <param name="nullLineText">The text of the empty line. If null, uses value from web.config. If web.config value is not set, uses "--".</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mail.IMailBot.SendMail(System.Net.Mail.MailMessage,System.Boolean)">
+            <summary>
+            Sends a custom email message.
+            </summary>
+            <param name="message">The message to send.</param>
+            <param name="loadConfigValues">Whether to overwrite message attributes with values from web.config.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mail.IMailBot.SendHtmlMail(System.String,System.String,System.String,System.Object)">
+            <summary>
+            Sends an email with html body and the specified subject to a single recipient.
+            Body is rendered by using asp.net mvc view and a model.
+            </summary>
+            <param name="to">The address of the recipient.</param>
+            <param name="subject">The subject of the email message.</param>
+            <param name="templateViewName">The name of partial view used to render email body.</param>
+            <param name="model">The model for the specified view.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mail.IMailBot.SendMassHtmlMail(System.Collections.Generic.IEnumerable{System.String},System.String,System.String,System.Object)">
+            <summary>
+            Sends an email with html body and the specified subject to a multiple recipients.
+            Body is rendered by using asp.net mvc view and a model.
+            </summary>
+            <param name="to">The address of the recipient.</param>
+            <param name="subject">The subject of the email message.</param>
+            <param name="templateViewName">The name of partial view used to render email body.</param>
+            <param name="model">The model for the specified view.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mail.IMailBot.SendTextMail(System.String,System.String,System.String)">
+            <summary>
+            Sends an email with text body and the specified subject to a single recipient.
+            </summary>
+            <param name="to">The address of the recipient.</param>
+            <param name="subject">The subject of the email message.</param>
+            <param name="body">Text representing the email body.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mail.IMailBot.SendMassTextMail(System.Collections.Generic.IEnumerable{System.String},System.String,System.String)">
+            <summary>
+            Sends an email with text body and the specified subject to a multiple recipients.
+            </summary>
+            <param name="to">The address of the recipient.</param>
+            <param name="subject">The subject of the email message.</param>
+            <param name="body">Text representing the email body.</param>
+        </member>
+        <member name="E:NecroNet.Toolkit.Mail.IMailBot.SendingCompleted">
+            <summary>
+            Event that fires when sending of a single email is completed. Fires once for every email.
+            </summary>
+        </member>
+        <member name="T:NecroNet.Toolkit.Mvc.Handle404Attribute">
+            <summary>
+            Represents an attribute that is used to handle a <see cref="T:NecroNet.Toolkit.Mvc.Http404Exception"/> thrown by an action method. Returns view named 404 by default, and sets the reponse status code to 404.
+            </summary>
+        </member>
+        <member name="T:NecroNet.Toolkit.Data.IObjectContext">
+            <summary>
+            Interface that needs to be implemented by object context to work with the toolkit.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.Html.HtmlHelperExtensions.ContentOrDifferentContent(System.Web.Mvc.HtmlHelper,System.Boolean,System.Func{System.Web.Mvc.MvcHtmlString},System.Func{System.Web.Mvc.MvcHtmlString})">
+            <summary>
+            Renders the content specified by <paramref name="contentGetter"/> if <paramref name="condition"/> is true; otherwise renders content specified by <paramref name="differentContentGetter"/>.
+            </summary>
+            <param name="helper"></param>
+            <param name="condition">The condition used to decide what to render.</param>
+            <param name="contentGetter">The delegate to get content if <paramref name="condition"/> is true.</param>
+            <param name="differentContentGetter">The delegate to get content if <paramref name="condition"/> is false.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.Html.HtmlHelperExtensions.ContentOrText(System.Web.Mvc.HtmlHelper,System.Boolean,System.Func{System.Web.Mvc.MvcHtmlString},System.String)">
+            <summary>
+            Renders the content specified by <paramref name="contentGetter"/> if <paramref name="condition"/> is true; otherwise renders the specified text.
+            </summary>
+            <param name="helper"></param>
+            <param name="condition">The condition used to decide what to render.</param>
+            <param name="contentGetter">The delegate to get content if <paramref name="condition"/> is true.</param>
+            <param name="text">Text to render if <paramref name="condition"/> is false.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.Html.HtmlHelperExtensions.ContentOrNothing(System.Web.Mvc.HtmlHelper,System.Boolean,System.Func{System.Web.Mvc.MvcHtmlString})">
+            <summary>
+            Renders the content specified by <paramref name="contentGetter"/> if <paramref name="condition"/> is true; otherwise renders nothing.
+            </summary>
+            <param name="helper"></param>
+            <param name="condition">The condition used to decide what to render.</param>
+            <param name="contentGetter">The delegate to get content if <paramref name="condition"/> is true.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.Html.HtmlHelperExtensions.ContentOrDifferentContent(System.Web.Mvc.HtmlHelper,System.Boolean,System.Func{System.Object,System.Web.WebPages.HelperResult},System.Func{System.Object,System.Web.WebPages.HelperResult})">
+            <summary>
+            Renders the content specified by <paramref name="content"/> if <paramref name="condition"/> is true; otherwise renders content specified by <paramref name="differentContent"/>.
+            </summary>
+            <param name="helper"></param>
+            <param name="condition">The condition used to decide what to render.</param>
+            <param name="content">Razor to render if <paramref name="condition"/> is true.</param>
+            <param name="differentContent">Razor to render if <paramref name="condition"/> is false.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.Html.HtmlHelperExtensions.ContentOrText(System.Web.Mvc.HtmlHelper,System.Boolean,System.Func{System.Object,System.Web.WebPages.HelperResult},System.String)">
+            <summary>
+            Renders the content specified by <paramref name="content"/> if <paramref name="condition"/> is true; otherwise renders the specified text.
+            </summary>
+            <param name="helper"></param>
+            <param name="condition">The condition used to decide what to render.</param>
+            <param name="content">Razor to render if <paramref name="condition"/> is true.</param>
+            <param name="text">Text to render if <paramref name="condition"/> is false.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.Html.HtmlHelperExtensions.ContentOrNothing(System.Web.Mvc.HtmlHelper,System.Boolean,System.Func{System.Object,System.Web.WebPages.HelperResult})">
+            <summary>
+            Renders the content specified by <paramref name="content"/> if <paramref name="condition"/> is true; otherwise renders nothing.
+            </summary>
+            <param name="helper"></param>
+            <param name="condition">The condition used to decide what to render.</param>
+            <param name="content">Razor to render if <paramref name="condition"/> is true.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.Html.HtmlHelperExtensions.WrapIn(System.Web.Mvc.HtmlHelper,System.String,System.Web.Mvc.MvcHtmlString,System.Object)">
+            <summary>
+            Wraps the specified <see cref="T:System.Web.Mvc.MvcHtmlString"/> in a html tag specified by <paramref name="tagName"/>. Allows to specify html attributes for the 'wrapper' tag. Renders nothing if specified <see cref="T:System.Web.Mvc.MvcHtmlString"/> is empty.
+            </summary>
+            <param name="helper"></param>
+            <param name="tagName">The name of the wrapper tag.</param>
+            <param name="what">What to wrap.</param>
+            <param name="wrapperHtmlAttributes">Html attributes of the wrapper tag.</param>
+        </member>
+        <member name="T:NecroNet.Toolkit.Http.Session">
+            <summary>
+            Helper class for storing and retrieving data from http session (<c>HttpContext.Current.Session</c>).
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.Session.ChangeDataStore(NecroNet.Toolkit.Http.IHttpGeneralDataStore)">
+            <summary>
+            Changes current data provider. Can be used for test to provide stub implementation.
+            </summary>
+            <param name="dataStore">The data provider implementation to use.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.Session.ResetDataStore">
+            <summary>
+            Resets the current data provider back to <see cref="T:NecroNet.Toolkit.Http.SessionDataStore"/>.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.Http.Session.Data">
+            <summary>
+            Accesses data through current data provider (default is <see cref="T:NecroNet.Toolkit.Http.SessionDataStore"/>).
+            </summary>
+        </member>
+        <member name="T:NecroNet.Toolkit.Mvc.NoCacheAttribute">
+            <summary>
+            Disables all caching for an action method.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.New``1">
+            <summary>
+            Throws an excepion of the specified type.
+            </summary>
+            <typeparam name="TException">The type of exception to throw.</typeparam>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.New``1(System.String,System.Object[])">
+            <summary>
+            Throws an exception of the specified type with the specified formatted message.
+            </summary>
+            <typeparam name="TException">The type of exception to throw.</typeparam>
+            <param name="message">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.NewArgumentException">
+            <summary>
+            Throws an <see cref="T:System.ArgumentException"/>.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.NewArgumentException(System.String,System.Object[])">
+            <summary>
+            Throws an <see cref="T:System.ArgumentException"/> with the specified formatted message.
+            </summary>
+            <param name="message">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.NewArgumentException(System.String,System.String,System.Object[])">
+            <summary>
+            Throws an <see cref="T:System.ArgumentException"/> with the specified parameter name and the specified formatted message.
+            </summary>
+            <param name="paramName">The name of the parameter that caused current exception.</param>
+            <param name="message">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.NewArgumentException(System.Linq.Expressions.Expression{System.Func{System.Object}},System.String,System.Object[])">
+            <summary>
+            Throws an <see cref="T:System.ArgumentException"/> with parameter name parsed from the specified expression and the specified formatted message.
+            </summary>
+            <param name="paramNameSelector">An expression with path to the parameter that caused current exception.</param>
+            <param name="message">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.NewArgumentNullException">
+            <summary>
+            Throws an <see cref="T:System.ArgumentNullException"/>.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.NewArgumentNullException(System.String)">
+            <summary>
+            Throws an <see cref="T:System.ArgumentNullException"/> with the specified parameter name.
+            </summary>
+            <param name="paramName">The name of the parameter that caused current exception.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.NewArgumentNullException(System.String,System.String,System.Object[])">
+            <summary>
+            Throws an <see cref="T:System.ArgumentNullException"/> with the specified parameter name and the specified formatted message.
+            </summary>
+            <param name="paramName">The name of the parameter that caused current exception.</param>
+            <param name="message">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.NewArgumentNullException(System.Linq.Expressions.Expression{System.Func{System.Object}})">
+            <summary>
+            Throws an <see cref="T:System.ArgumentNullException"/> with parameter name parsed from the specified expression.
+            </summary>
+            <param name="paramNameSelector">An expression with path to the parameter that caused current exception.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.NewArgumentNullException(System.Linq.Expressions.Expression{System.Func{System.Object}},System.String,System.Object[])">
+            <summary>
+            Throws an <see cref="T:System.ArgumentNullException"/> with parameter name parsed from the specified expression and the specified formatted message.
+            </summary>
+            <param name="paramNameSelector">An expression with path to the parameter that caused current exception.</param>
+            <param name="message">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.NewArgumentOutOfRangeException">
+            <summary>
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/>
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.NewArgumentOutOfRangeException(System.String)">
+            <summary>
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> with the specified parameter name.
+            </summary>
+            <param name="paramName">The name of the parameter that caused current exception.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.NewArgumentOutOfRangeException(System.String,System.String,System.Object[])">
+            <summary>
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> with the specified parameter name and the specified formatted message.
+            </summary>
+            <param name="paramName">The name of the parameter that caused current exception.</param>
+            <param name="message">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.NewArgumentOutOfRangeException(System.String,System.Object,System.String,System.Object[])">
+            <summary>
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> with the specified parameter name, the specified actual value and the specified formatted message.
+            </summary>
+            <param name="paramName">The name of the parameter that caused current exception.</param>
+            <param name="actualValue">The value of the parameter that caused current exception.</param>
+            <param name="message">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.NewArgumentOutOfRangeException(System.Linq.Expressions.Expression{System.Func{System.Object}})">
+            <summary>
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> with parameter name parsed from the specified expression.
+            </summary>
+            <param name="paramNameSelector">An expression with path to the parameter that caused current exception.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Throw.NewArgumentOutOfRangeException(System.Linq.Expressions.Expression{System.Func{System.Object}},System.String,System.Object[])">
+            <summary>
+            Throws an <see cref="T:System.ArgumentOutOfRangeException"/> with parameter name and value parsed from the specified expression and the specified formatted message.
+            </summary>
+            <param name="paramSelector">An expression with path to the parameter that caused current exception.</param>
+            <param name="message">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.StringExtensions.ToSlug(System.String,System.Char)">
+            <summary>
+            Converts string to 'slug', used in web page urls. Removes all symbols, converts to lowercase and replaces white spaces with the specified delimiter.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.StringExtensions.ToCsv(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Converts a set of strings to csv format, delimited by the specified delimiter.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.StringExtensions.IsNumeric(System.String)">
+            <summary>
+            Determines whether this string is a number (i.e. can be converted to double)
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.IHttpCacheDataStore.Contains(System.String)">
+            <summary>
+            Determines whether the data store contains a specific key.
+            </summary>
+            <param name="key">The key to locate.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.IHttpCacheDataStore.Get``1(System.String)">
+            <summary>
+            Retrieves strongly typed value associated with the specified key from the data store. If the value is not present, returns <c>default(T)</c>.
+            </summary>
+            <typeparam name="T">The type of the item to get.</typeparam>
+            <param name="key">The key whose value to retrieve.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.IHttpCacheDataStore.Get(System.String)">
+            <summary>
+            Retrieves a value associated with the specified key from the data store. If the value is not present, returns <c>null</c>.
+            </summary>
+            <param name="key">The key whose value to retrieve.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Http.IHttpCacheDataStore.Set(System.String,System.Object,System.Nullable{System.DateTime},System.Nullable{System.TimeSpan},System.Web.Caching.CacheItemPriority,System.Web.Caching.CacheItemRemovedCallback)">
+            <summary>
+            Stores the specified value and associates it with the specified key. Allows to specify absolute or sliding expiration, cache priority and remove callback.
+            </summary>
+            <param name="key">The key whose value to store.</param>
+            <param name="value">The value to store.</param>
+            <param name="absoluteExpiration">The time at which the inserted object expires and is removed from the cache. To avoid possible issues with local time such as changes from standard time to daylight saving time, use <see cref="P:System.DateTime.UtcNow"/> rather than <see cref="P:System.DateTime.Now"/> for this parameter value. If you are using absolute expiration, the <paramref name="slidingExpiration"/> parameter must be <see cref="F:System.Web.Caching.Cache.NoSlidingExpiration"/>.</param>
+            <param name="slidingExpiration">The interval between the time the inserted object was last accessed and the time at which that object expires. If this value is the equivalent of 20 minutes, the object will expire and be removed from the cache 20 minutes after it was last accessed. If you are using sliding expiration, the <paramref name="absoluteExpiration"/> parameter must be <see cref="F:System.Web.Caching.Cache.NoAbsoluteExpiration"/>.</param>
+            <param name="cacheItemPriority">The cost of the object relative to other items stored in the cache, as expressed by the <see cref="T:System.Web.Caching.CacheItemPriority"/> enumeration. This value is used by the cache when it evicts objects; objects with a lower cost are removed from the cache before objects with a higher cost.</param>
+            <param name="removedCallback">A delegate that, if provided, will be called when an object is removed from the cache. You can use this to notify applications when their objects are deleted from the cache.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="key"/> or <paramref name="value"/> parameter is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">You set the <paramref name="slidingExpiration"/> parameter to less than TimeSpan.Zero or the equivalent of more than one year.</exception>
+            <exception cref="T:System.ArgumentException">The <paramref name="absoluteExpiration"/> and <paramref name="slidingExpiration"/> parameters are both set for the item you are trying to add to the Cache.</exception>
+        </member>
+        <member name="T:NecroNet.Toolkit.Mvc.Http404Exception">
+            <summary>
+            Exception used to indicate that a resource was not found on the server and the reponse should be 404 - Not Found.
+            </summary>
+        </member>
+        <member name="T:NecroNet.Toolkit.ISortedPagedList`1">
+            <summary>
+            Represent a paged list, that is sorted.
+            </summary>
+            <typeparam name="T">Type of list items.</typeparam>
+        </member>
+        <member name="P:NecroNet.Toolkit.ISortedPagedList`1.SortKey">
+            <summary>
+            The name of the property so sort by.
+            </summary>
+        </member>
+        <member name="P:NecroNet.Toolkit.ISortedPagedList`1.SortDirection">
+            <summary>
+            The direction to sort by. One of constants from <see cref="P:NecroNet.Toolkit.ISortedPagedList`1.SortDirection"/>.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.SortedPagedList`1.#ctor(System.Linq.IQueryable{`0},System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:NecroNet.Toolkit.SortedPagedList`1"/>.
+            </summary>
+            <param name="source">The source query items from.</param>
+            <param name="pageNumber">The number of current page.</param>
+            <param name="pageSize">The number of items on one page.</param>
+            <param name="sortKey">The name of property to sort by.</param>
+            <param name="sortDirection">The direction to sort by. (Possible values are SortDirection.Asc and SortDirection.Desc).</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.SortedPagedList`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Int32,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:NecroNet.Toolkit.SortedPagedList`1"/> class with already divided subset and information about it's superset. This is usefull for mapping a <see cref="T:NecroNet.Toolkit.SortedPagedList`1"/> to another <see cref="T:NecroNet.Toolkit.SortedPagedList`1"/>.
+            </summary>
+            <param name="subset">A single subset this instance should represent.</param>
+            <param name="pageNumber">The number of current page.</param>
+            <param name="pageSize">The number of items on one page.</param>
+            <param name="totalItemCount">The total number of items in the superset.</param>
+            <param name="sortKey">The name of property to sort by.</param>
+            <param name="sortDirection">The direction to sort by. (Possible values are SortDirection.Asc and SortDirection.Desc).</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.UnitOfWork.Register``1(System.Type)">
+            <summary>
+            Registers unit of work for the specified type of object context with factory type that can create object context (<see cref="T:NecroNet.Toolkit.Data.IObjectContextFactory"/>).
+            </summary>
+            <typeparam name="TObjectContext">The type of object context created by the factory and used by unit of work.</typeparam>
+            <param name="objectContextFactoryType">Type of <see cref="T:NecroNet.Toolkit.Data.IObjectContextFactory"/> used for creating object contexts.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.UnitOfWork.Register``2">
+            <summary>
+            Registers unit of work for the specified type of object context with factory type that can create object context (<see cref="T:NecroNet.Toolkit.Data.IObjectContextFactory"/>).
+            </summary>
+            <typeparam name="TObjectContext">The type of object context created by the factory and used by unit of work.</typeparam>
+            <typeparam name="TObjectContextFactory">The type of <see cref="T:NecroNet.Toolkit.Data.IObjectContextFactory"/> used for creating object contexts.</typeparam>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.UnitOfWork.RegisterDefault``1(System.Type)">
+            <summary>
+            Registers default unit of work for the specified type of object context with factory type that can create object context (<see cref="T:NecroNet.Toolkit.Data.IObjectContextFactory"/>).
+            </summary>
+            <typeparam name="TObjectContext">The type of object context created by the factory and used by unit of work.</typeparam>
+            <param name="objectContextFactoryType">The type of <see cref="T:NecroNet.Toolkit.Data.IObjectContextFactory"/> used for creating object contexts.</param>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.UnitOfWork.RegisterDefault``2">
+            <summary>
+            Registers default unit of work for the specified type of object context with factory type that can create object context (<see cref="T:NecroNet.Toolkit.Data.IObjectContextFactory"/>).
+            </summary>
+            <typeparam name="TObjectContext">The type of object context created by the factory and used by unit of work.</typeparam>
+            <typeparam name="TObjectContextFactory">The type of <see cref="T:NecroNet.Toolkit.Data.IObjectContextFactory"/> used for creating object contexts.</typeparam>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.UnitOfWork.GetCurrent``1">
+            <summary>
+            Gets currently active unit of work of the specified type.
+            </summary>
+            <typeparam name="TObjectContext">The type of the object context.</typeparam>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.UnitOfWork.GetCurrent">
+            <summary>
+            Gets currently active default unit of work.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.UnitOfWork.IsStarted``1">
+            <summary>
+            Gets whether a unit of work of the specified type has been started, and has not yet been disposed.
+            </summary>
+            <typeparam name="TObjectContext">The type of the object context.</typeparam>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.UnitOfWork.IsStarted">
+            <summary>
+            Gets whether the default unit of work has been started, and has not yet been disposed.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.UnitOfWork.Start``1">
+            <summary>
+            Starts a unit of work of the specified type.
+            </summary>
+            <typeparam name="TObjectContext">The type of object context.</typeparam>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.UnitOfWork.Start">
+            <summary>
+            Starts the default unit of work.
+            </summary>
+        </member>
+        <member name="T:NecroNet.Toolkit.Data.IObjectContextFactory">
+            <summary>
+            Defines a method for creating object context.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IObjectContextFactory.CreateObjectContext">
+            <summary>
+            Creates a object context.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Mvc.RouteCollectionExtensions.MapLowercaseRoute(System.Web.Routing.RouteCollection,System.String,System.String,System.Object,System.Object,System.String[])">
+            <summary>
+            Adds a route to the end of the route collection. Route acts as 'lowercase' route - that means all urls generated by MVC framework base on this route will be in lowercase.
+            </summary>
+            <param name="routes">The route collection to add route to.</param>
+            <param name="name">The name of the route.</param>
+            <param name="url">The URL pattern for the route.</param>
+            <param name="defaults">The values to use if URL doesn't contain all parameters.</param>
+            <param name="constraints">A regular expression that the specified valid values for a URL parameter.</param>
+            <param name="namespaces">Namespace that uniquely identifies the controller to use.</param>
+        </member>
+        <member name="F:NecroNet.Toolkit.Mvc.SelectListOptimalization.None">
+            <summary>
+            Do not optimize (default).
+            </summary>
+        </member>
+        <member name="F:NecroNet.Toolkit.Mvc.SelectListOptimalization.DeleteNullLineIfSelectListHasOneItemAndNullLine">
+            <summary>
+            If there are two items in the result select list, and one of them is null line, delete the null line.
+            </summary>
+        </member>
+        <member name="F:NecroNet.Toolkit.Mvc.SelectListOptimalization.PreselectIfSelectListHasOneItemAndNullLine">
+            <summary>
+            If there are two items in the result select list, and one of them is null line, set the item after null line as selected.
+            </summary>
+        </member>
+        <member name="F:NecroNet.Toolkit.Mvc.SelectListOptimalization.AlwaysPreselectFirstItem">
+            <summary>
+            Always set the first item after null line as selected.
+            </summary>
+        </member>
+        <member name="T:NecroNet.Toolkit.Data.IRepositoryFactory">
+            <summary>
+            Interface for a factory to get repositories through IoC container.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.IRepositoryFactory.GetRepository``1">
+            <summary>
+            Gets a repository of the specified type.
+            </summary>
+            <typeparam name="TEntity">The type of the repository.</typeparam>
+        </member>
+        <member name="T:NecroNet.Toolkit.Data.ISelectListManagerQueryProvider">
+            <summary>
+            Acts like a provider of <see cref="T:System.Linq.IQueryable`1"/> for select list manager.
+            </summary>
+        </member>
+        <member name="M:NecroNet.Toolkit.Data.ISelectListManagerQueryProvider.GetQuery``1">
+            <summary>
+            Gets an <see cref="T:System.Linq.IQueryable"/> of the specified entity type.
+            </summary>
+            <typeparam name="TEntity">The type of entitie to get query for.</typeparam>
+        </member>
+    </members>
+</doc>

@@ -33,16 +33,28 @@ using <#= ns #>;
 
 namespace <#= DefaultNamespace #>
 {
-<# if(!OmitEdmx) { #>
 <# foreach (ObjectContextInfo contextInfo in ObjectContextInfos) { #>
 	public abstract partial class <#= contextInfo.TypeName #>RepositoryBase<TEntity> : Edm<#= IsPOCO ? "POCO" : string.Empty #>RepositoryBase<<#= contextInfo.TypeName #>, TEntity>
 		where TEntity : class
 	{
+<# if (IoCType != IoCFrameworkType.None) { #>
+		private readonly IUnitOfWorkManager _unitOfWorkManager;
+		
+		protected <#= contextInfo.TypeName #>RepositoryBase(IUnitOfWorkManager unitOfWorkManager)
+		{
+			_unitOfWorkManager = unitOfWorkManager;
+		}
+		
+<# } #>
 		protected override <#= contextInfo.TypeName #> ObjectContext
 		{
 			get
 			{
-				return (<#= contextInfo.TypeName #>)UnitOfWork.CurrentContext;
+<# if(IoCType == IoCFrameworkType.None) { #>
+				return UnitOfWork.GetCurrent<<#= contextInfo.TypeName #>>().Context.AsActual<<#= contextInfo.TypeName #>>();
+<# } else { #>
+				return _unitOfWorkManager.GetCurrent<<#= contextInfo.TypeName #>>().Context.AsActual<<#= contextInfo.TypeName #>>();
+<# } #>
 			}
 		}
 	}
@@ -56,20 +68,38 @@ namespace <#= DefaultNamespace #>
 	[EntitySetName("<#= entitySetInfo.SetName #>")]
 	public partial class <#= entitySetInfo.TypeName #>Repository : <#= contextInfo.TypeName #>RepositoryBase<<#= entitySetInfo.TypeName #>>, I<#= entitySetInfo.TypeName #>Repository
 	{
+<# if (IoCType != IoCFrameworkType.None) { #>
+		public <#= entitySetInfo.TypeName #>Repository(IUnitOfWorkManager unitOfWorkManager) : base(unitOfWorkManager)
+		{
+		}
+<# } #>
 	}
 <# } #>
-<# } #>
+
 <# } #>
 
 <# foreach (ObjectContextInfo contextInfo in CodeFirstInfos) { #>
 	public abstract partial class <#= contextInfo.TypeName #>RepositoryBase<TEntity> : CodeFirstRepositoryBase<<#= contextInfo.TypeName #>, TEntity>
 		where TEntity : class
 	{
+<# if (IoCType != IoCFrameworkType.None) { #>
+		private readonly IUnitOfWorkManager _unitOfWorkManager;
+		
+		protected <#= contextInfo.TypeName #>RepositoryBase(IUnitOfWorkManager unitOfWorkManager)
+		{
+			_unitOfWorkManager = unitOfWorkManager;
+		}
+		
+<# } #>
 		protected override <#= contextInfo.TypeName #> DbContext
 		{
 			get
 			{
-				return (<#= contextInfo.TypeName #>)UnitOfWork.CurrentContext;
+<# if(IoCType == IoCFrameworkType.None) { #>
+				return UnitOfWork.GetCurrent<<#= contextInfo.TypeName #>>().Context.AsActual<<#= contextInfo.TypeName #>>();
+<# } else { #>
+				return _unitOfWorkManager.GetCurrent<<#= contextInfo.TypeName #>>().Context.AsActual<<#= contextInfo.TypeName #>>();
+<# } #>
 			}
 		}
 	}
@@ -82,12 +112,87 @@ namespace <#= DefaultNamespace #>
 	
 	public partial class <#= entitySetInfo.TypeName #>Repository : <#= contextInfo.TypeName #>RepositoryBase<<#= entitySetInfo.TypeName #>>, I<#= entitySetInfo.TypeName #>Repository
 	{
+<# if (IoCType != IoCFrameworkType.None) { #>
+		public <#= entitySetInfo.TypeName #>Repository(IUnitOfWorkManager unitOfWorkManager) : base(unitOfWorkManager)
+		{
+		}
+<# } #>
 	}
+<# } #>
+
+<# } #>
+<# if(IoCType != IoCFrameworkType.None) { #>
+	// Dependency injection configuration
+<# var allObjectContextInfos = CodeFirstInfos.Union(ObjectContextInfos); #>
+<# switch (IoCType) {
+	case IoCFrameworkType.Ninject: #>
+	public class <#= IoCId #>NinjectModule : global::Ninject.Modules.NinjectModule
+	{
+		public override void Load()
+		{
+<# foreach (ObjectContextInfo contextInfo in allObjectContextInfos) { #>
+			// <#= contextInfo.TypeName #>
+<# foreach (EntitySetInfo entitySetInfo in contextInfo.EntitySets) { #>
+			Kernel.Bind<I<#= entitySetInfo.TypeName #>Repository>().To<<#= entitySetInfo.TypeName #>Repository>().InSingletonScope();
+			Kernel.Bind<IRepository<<#= entitySetInfo.TypeName #>>>().To<<#= entitySetInfo.TypeName #>Repository>().InSingletonScope();
+<# } #>
+<# } #>
+		}
+	}
+<# break; 
+	case IoCFrameworkType.Unity: #>
+	public class <#= IoCId #>UnityExtension : global::Microsoft.Practices.Unity.UnityContainerExtension
+	{
+		protected override void Initialize()
+		{
+<# foreach (ObjectContextInfo contextInfo in allObjectContextInfos) { #>
+			// <#= contextInfo.TypeName #>
+<# foreach (EntitySetInfo entitySetInfo in contextInfo.EntitySets) { #>
+			Container.RegisterType<I<#= entitySetInfo.TypeName #>Repository, <#= entitySetInfo.TypeName #>Repository>(new ContainerControlledLifetimeManager());
+			Container.RegisterType<IRepository<<#= entitySetInfo.TypeName #>>, <#= entitySetInfo.TypeName #>Repository>(new ContainerControlledLifetimeManager());
+<# } #>
+<# } #>
+		}
+	}
+<# break; 
+	case IoCFrameworkType.StructureMap: #>
+	public class <#= IoCId #>StructureMapRegistry : global::StructureMap.Configuration.DSL.Registry
+	{
+		public <#= IoCId #>StructureMapRegistry()
+		{
+<# foreach (ObjectContextInfo contextInfo in allObjectContextInfos) { #>
+			// <#= contextInfo.TypeName #>
+<# foreach (EntitySetInfo entitySetInfo in contextInfo.EntitySets) { #>
+			ForSingletonOf<I<#= entitySetInfo.TypeName #>Repository>().Use<<#= entitySetInfo.TypeName #>Repository>();
+			ForSingletonOf<IRepository<<#= entitySetInfo.TypeName #>>>().Use<<#= entitySetInfo.TypeName #>Repository>();
+<# } #>
+<# } #>
+		}
+	}
+<# break;
+	case IoCFrameworkType.Windsor: #>
+	public class <#= IoCId #>WindsorInstaller : global::Castle.MicroKernel.Registration.IWindsorInstaller
+	{
+		public void Install(global::Castle.Windsor.IWindsorContainer container, global::Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore store)
+		{
+			container.Register(global::Castle.MicroKernel.Registration.Classes.FromThisAssembly().BasedOn(typeof (IRepository<>)).WithService.AllInterfaces().LifestyleSingleton());
+		}
+	}
+<# break; #>
 <# } #>
 <# } #>
 }
-	
+
 <#+
+enum IoCFrameworkType
+{
+	None,
+	Ninject,
+	Unity,
+	StructureMap,
+	Windsor
+}
+
 static DTE Dte;
 static List<string> Edmx;
 static List<ObjectContextInfo> CodeFirstInfos;
@@ -95,6 +200,8 @@ static List<string> Namespaces;
 static string DefaultNamespace;
 static List<ObjectContextInfo> ObjectContextInfos;
 static string CurrentNamespace;
+static IoCFrameworkType IoCType;
+static string IoCId;
 
 void Prepare()
 {
@@ -107,12 +214,20 @@ void Prepare()
 	
 	var project = GetProjectContainingT4File(Dte);
 	DefaultNamespace = project.Properties.Item("DefaultNamespace").Value.ToString();
-	FindEdmx(project.ProjectItems);
+	
+	if(!OmitEdmx)
+	{
+		FindEdmx(project.ProjectItems);
+	}
 	
 	ObjectContextInfos = GetEntityNames();
 	CodeFirstInfos = new List<ObjectContextInfo>();
 	
 	FindDbContext(project.ProjectItems);
+	
+	var ioc = IoC.Split('|');
+	IoCType = (IoCFrameworkType)System.Enum.Parse(typeof(IoCFrameworkType), ioc[0], true);
+	IoCId = ioc[1];
 }
 
 void FindDbContext(ProjectItems projectItems)
@@ -173,7 +288,7 @@ private List<EntitySetInfo> FindDbSets(CodeClass c)
 		if(element is CodeProperty)
 		{
 			var property = (CodeProperty)element;
-			if(property.Type.CodeType.Name == "DbSet");
+			if(property.Type.CodeType.Name == "DbSet")
 			{
 				var info = new EntitySetInfo();
 				var propertyTypeName = property.Type.AsString;

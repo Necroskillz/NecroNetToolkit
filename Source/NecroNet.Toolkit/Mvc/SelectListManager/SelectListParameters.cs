@@ -5,13 +5,13 @@ namespace NecroNet.Toolkit.Mvc
 {
 	internal class SelectListParameters<T, TOrderByProperty>
 	{
-		public SelectListParameters(Func<T, string> textSelector, Func<T, object> valueSelector, Expression<Func<T, TOrderByProperty>> orderBySelector, Expression<Func<T, bool>> predicate, bool nullLine, string nullLineText, bool noCache)
-			: this(textSelector, valueSelector, predicate, nullLine, nullLineText, noCache)
+		public SelectListParameters(Func<T, string> textSelector, Func<T, object> valueSelector, Expression<Func<T, TOrderByProperty>> orderBySelector, Expression<Func<T, bool>> predicate, bool nullLine, string nullLineText, SelectListOptimalization optimalization, bool noCache)
+			: this(textSelector, valueSelector, predicate, nullLine, nullLineText, optimalization, noCache)
 		{
 			OrderBySelector = orderBySelector;
 		}
 
-		public SelectListParameters(Func<T, string> textSelector, Func<T, object> valueSelector, Expression<Func<T, bool>> predicate, bool nullLine, string nullLineText, bool noCache)
+		public SelectListParameters(Func<T, string> textSelector, Func<T, object> valueSelector, Expression<Func<T, bool>> predicate, bool nullLine, string nullLineText, SelectListOptimalization optimalization, bool noCache)
 		{
 			TextSelector = textSelector;
 			ValueSelector = valueSelector;
@@ -28,5 +28,6 @@ namespace NecroNet.Toolkit.Mvc
 		public bool NullLine { get; set; }
 		public bool ForceNoCache { get; set; }
 		public string NullLineText { get; set; }
+		public SelectListOptimalization Optimalization { get; set; }
 	}
 }

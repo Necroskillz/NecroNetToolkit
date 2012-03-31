@@ -37,8 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
+    <DocumentationFile>bin\Debug\NecroNet.Toolkit.XML</DocumentationFile>
     <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
     <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
     <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
@@ -80,8 +79,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
+    <DocumentationFile>bin\Release\NecroNet.Toolkit.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -90,13 +88,13 @@
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\EntityFramework.4.2.0.0\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="PagedList, Version=1.10.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+    <Reference Include="PagedList, Version=1.14.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\PagedList.1.10\lib\net40\PagedList.dll</HintPath>
+      <HintPath>..\packages\PagedList.1.14\lib\net40\PagedList.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -121,7 +119,8 @@
     <Compile Include="Configuration\NecroNetToolkitConfigurationManager.cs" />
     <Compile Include="Configuration\NecroNetToolkitConfigurationSection.cs" />
     <Compile Include="Configuration\SelectListManager\NecroNetToolkitSelectListManagerConfigurationElement.cs" />
-    <Compile Include="Data\Repositories\Infrastructure\IQueryFactory.cs" />
+    <Compile Include="Mvc\SelectListManager\ISelectListManagerQueryProvider.cs" />
+    <Compile Include="Data\Repositories\Infrastructure\IRepositoryFactory.cs" />
     <Compile Include="Data\Transactions\ITransaction.cs" />
     <Compile Include="Data\Transactions\ITransactionFactory.cs" />
     <Compile Include="Data\Transactions\TransactionFactory.cs" />
@@ -136,12 +135,15 @@
     <Compile Include="Mvc\Html\HtmlHelperExtensions.cs" />
     <Compile Include="Mvc\SelectListManager\ISelectListManager.cs" />
     <Compile Include="Mvc\SelectListManager\SelectListManager.cs" />
+    <Compile Include="Mvc\SelectListManager\SelectListOptimalization.cs" />
     <Compile Include="Mvc\SelectListManager\SelectListParameters.cs" />
     <Compile Include="Resources\Res.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Res.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\EnumerableExtensions.cs" />
+    <Compile Include="Utilities\LoopContinuation.cs" />
     <Compile Include="Utilities\Throw.cs" />
     <Compile Include="Http\Access\Cached.cs" />
     <Compile Include="Http\Access\Cookies.cs" />
@@ -241,7 +243,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetPath) ..\..\..\..\NuGet\lib</PostBuildEvent>
+    <PostBuildEvent>copy $(TargetPath) ..\..\..\..\NuGet\Core\lib\net40</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

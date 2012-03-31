@@ -14,13 +14,13 @@ namespace NecroNet.Toolkit.Mvc
 {
 	public class SelectListManager : ISelectListManager
 	{
-		private readonly IQueryFactory _queryFactory;
+		private readonly ISelectListManagerQueryProvider _queryProvider;
 
 		private static readonly Dictionary<string, dynamic> SelectListSettings = new Dictionary<string, dynamic>();
 
-		public SelectListManager(IQueryFactory queryFactory)
+		public SelectListManager(ISelectListManagerQueryProvider queryProvider)
 		{
-			_queryFactory = queryFactory;
+			_queryProvider = queryProvider;
 		}
 
 		private static bool CheckKey(string key)
@@ -40,14 +40,15 @@ namespace NecroNet.Toolkit.Mvc
 		/// <param name="predicate">A predicate used to filter the collection.</param>
 		/// <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
 		/// <param name="nullLineText">The text of the empty line.</param>
+		/// <param name="optimalization">A stategy by which the select list is optimized.</param>
 		/// <param name="noCache">True means the collection won't be cached.</param>
 		public static void Register<T, TOrderByProperty>(string key, Func<T, string> textSelector,
 														 Func<T, object> valueSelector,
 														 Expression<Func<T, TOrderByProperty>> orderBySelector,
 														 Expression<Func<T, bool>> predicate = null,
-														 bool nullLine = false, string nullLineText = "--", bool noCache = false)
+														 bool nullLine = false, string nullLineText = null, SelectListOptimalization optimalization = SelectListOptimalization.None, bool noCache = false)
 		{
-			var selectParams = new SelectListParameters<T, TOrderByProperty>(textSelector, valueSelector, orderBySelector, predicate, nullLine, nullLineText, noCache);
+			var selectParams = new SelectListParameters<T, TOrderByProperty>(textSelector, valueSelector, orderBySelector, predicate, nullLine, nullLineText, optimalization, noCache);
 			var fullKey = GetKey<T>(key);
 
 			if(CheckKey(fullKey))
@@ -69,14 +70,15 @@ namespace NecroNet.Toolkit.Mvc
 		/// <param name="predicate">A predicate used to filter the collection.</param>
 		/// <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
 		/// <param name="nullLineText">The text of the empty line.</param>
+		/// <param name="optimalization">A stategy by which the select list is optimized.</param>
 		/// <param name="noCache">True means the collection won't be cached.</param>
 		public static void Register<T, TOrderByProperty>(Func<T, string> textSelector,
 														 Func<T, object> valueSelector,
 														 Expression<Func<T, TOrderByProperty>> orderBySelector,
 														 Expression<Func<T, bool>> predicate = null,
-														 bool nullLine = false, string nullLineText = "--", bool noCache = false)
+														 bool nullLine = false, string nullLineText = null, SelectListOptimalization optimalization = SelectListOptimalization.None, bool noCache = false)
 		{
-			Register(null, textSelector, valueSelector, orderBySelector, predicate, nullLine, nullLineText, noCache);
+			Register(null, textSelector, valueSelector, orderBySelector, predicate, nullLine, nullLineText, optimalization, noCache);
 		}
 
 		/// <summary>
@@ -89,13 +91,14 @@ namespace NecroNet.Toolkit.Mvc
 		/// <param name="predicate">A predicate used to filter the collection.</param>
 		/// <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
 		/// <param name="nullLineText">The text of the empty line.</param>
+		/// <param name="optimalization">A stategy by which the select list is optimized.</param>
 		/// <param name="noCache">True means the collection won't be cached.</param>
 		public static void Register<T>(string key, Func<T, string> textSelector,
 									   Func<T, object> valueSelector,
 									   Expression<Func<T, bool>> predicate = null,
-									   bool nullLine = false, string nullLineText = "--", bool noCache = false)
+									   bool nullLine = false, string nullLineText = null, SelectListOptimalization optimalization = SelectListOptimalization.None, bool noCache = false)
 		{
-			var selectParams = new SelectListParameters<T, object>(textSelector, valueSelector, predicate, nullLine, nullLineText, noCache);
+			var selectParams = new SelectListParameters<T, object>(textSelector, valueSelector, predicate, nullLine, nullLineText, optimalization, noCache);
 			var fullKey = GetKey<T>(key);
 
 			if(CheckKey(key))
@@ -115,13 +118,14 @@ namespace NecroNet.Toolkit.Mvc
 		/// <param name="predicate">A predicate used to filter the collection.</param>
 		/// <param name="nullLine">Whether to insert an empty line (meaning no value selected).</param>
 		/// <param name="nullLineText">The text of the empty line.</param>
+		/// <param name="optimalization">A stategy by which the select list is optimized.</param>
 		/// <param name="noCache">True means the collection won't be cached.</param>
 		public static void Register<T>(Func<T, string> textSelector,
 									   Func<T, object> valueSelector,
 									   Expression<Func<T, bool>> predicate = null,
-									   bool nullLine = false, string nullLineText = "--", bool noCache = false)
+									   bool nullLine = false, string nullLineText = null, SelectListOptimalization optimalization = SelectListOptimalization.None, bool noCache = false)
 		{
-			Register(null, textSelector, valueSelector, predicate, nullLine, nullLineText, noCache);
+			Register(null, textSelector, valueSelector, predicate, nullLine, nullLineText, optimalization, noCache);
 		}
 
 		private static string GetKey<T>(string key = null)
@@ -151,7 +155,7 @@ namespace NecroNet.Toolkit.Mvc
 			{
 				if(selectParams.ForceNoCache)
 				{
-					query = _queryFactory.GetQuery<T>();
+					query = _queryProvider.GetQuery<T>();
 
 					query = ProcessQuery(query, selectParams);
 				}
@@ -164,7 +168,7 @@ namespace NecroNet.Toolkit.Mvc
 					}
 					else
 					{
-						query = _queryFactory.GetQuery<T>();
+						query = _queryProvider.GetQuery<T>();
 
 						query = ProcessQuery(query, selectParams);
 
@@ -186,16 +190,38 @@ namespace NecroNet.Toolkit.Mvc
 				query.ToSelectItemList(selectParams.TextSelector, selectParams.ValueSelector, selectedValue, selectParams.NullLine, selectParams.NullLineText) :
 				query.ToSelectItemList(selectParams.TextSelector, selectParams.ValueSelector, selectParams.NullLine, selectParams.NullLineText);
 
-			// dont display null line if select list contains only 1 item
-			if (selectParams.NullLine && selectList.Count == 2)
+			var optimalization = selectParams.Optimalization;
+
+			Func<bool> optimalizationCondition = () => false;
+			Action optimalizationAction = () => { };
+
+			switch (optimalization)
 			{
-				selectList.RemoveAt(0);
+				case SelectListOptimalization.None:
+					break;
+				case SelectListOptimalization.DeleteNullLineIfSelectListHasOneItemAndNullLine:
+					optimalizationCondition = () => selectParams.NullLine && selectList.Count == 2;
+					optimalizationAction = () => selectList.RemoveAt(0);
+					break;
+				case SelectListOptimalization.PreselectIfSelectListHasOneItemAndNullLine:
+					optimalizationCondition = () => selectParams.NullLine && selectList.Count == 2;
+					optimalizationAction = () => selectList[1].Selected = true;
+					break;
+				case SelectListOptimalization.AlwaysPreselectFirstItem:
+					optimalizationCondition = () => selectParams.NullLine && selectList.Count >= 2;
+					optimalizationAction = () => selectList[1].Selected = true;
+					break;
+			}
+
+			if (optimalizationCondition())
+			{
+				optimalizationAction();
 			}
 
 			return selectList;
 		}
 
-		protected IList<SelectListItem> CompileSelectList<T>(string key = null, IQueryable<T> query = null, object selectedValue = null, Expression<Func<T, bool>> predicate = null)
+		private IList<SelectListItem> CompileSelectList<T>(string key, IQueryable<T> query, object selectedValue, Expression<Func<T, bool>> predicate)
 		{
 			var fullKey = GetKey<T>(key);
 
@@ -209,14 +235,14 @@ namespace NecroNet.Toolkit.Mvc
 			return CompileSelectList(fullKey, query, selectParams, selectedValue, predicate);
 		}
 
-		public IList<SelectListItem> GetItems<T>(string key, object selectedValue = null, Expression<Func<T, bool>> predicate = null)
+		public IList<SelectListItem> GetItems<T>(string key, object selectedValue, Expression<Func<T, bool>> predicate, IQueryable<T> customQuery)
 		{
-			return CompileSelectList(key, selectedValue: selectedValue, predicate: predicate);
+			return CompileSelectList(key, customQuery, selectedValue, predicate);
 		}
 
-		public IList<SelectListItem> GetItems<T>(object selectedValue = null, Expression<Func<T, bool>> predicate = null)
+		public IList<SelectListItem> GetItems<T>(object selectedValue, Expression<Func<T, bool>> predicate, IQueryable<T> customQuery)
 		{
-			return GetItems(null, selectedValue, predicate);
+			return GetItems(null, selectedValue, predicate, customQuery);
 		}
 	}
 }

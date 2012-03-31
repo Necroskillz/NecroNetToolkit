@@ -47,8 +47,9 @@
     <Reference Include="nunit.mocks, Version=2.5.9.10348, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.2.5.9.10348\lib\nunit.mocks.dll</HintPath>
     </Reference>
-    <Reference Include="PagedList">
-      <HintPath>..\packages\PagedList.1.10\lib\net40\PagedList.dll</HintPath>
+    <Reference Include="PagedList, Version=1.14.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PagedList.1.14\lib\net40\PagedList.dll</HintPath>
     </Reference>
     <Reference Include="pnunit.framework, Version=1.0.4000.25744, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.2.5.9.10348\lib\pnunit.framework.dll</HintPath>

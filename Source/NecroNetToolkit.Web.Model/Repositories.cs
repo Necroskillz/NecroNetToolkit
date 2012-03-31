@@ -4,12 +4,10 @@
 // to the .tt file (i.e. the T4 template) and save it to regenerate this file.
 
 using NecroNet.Toolkit.Data;
-using NecroNetToolkit.Web.Model;
 
 namespace NecroNetToolkit.Web.Model
 {
-
-	public abstract partial class AllDealsEntitiesRepositoryBase<TEntity> : CodeFirstRepositoryBase<AllDealsEntities, TEntity>
+	public abstract partial class AllDealsEntitiesRepositoryBase<TEntity> : EdmRepositoryBase<AllDealsEntities, TEntity>
 		where TEntity : class
 	{
 		private readonly IUnitOfWorkManager _unitOfWorkManager;
@@ -19,7 +17,7 @@ namespace NecroNetToolkit.Web.Model
 			_unitOfWorkManager = unitOfWorkManager;
 		}
 		
-		protected override AllDealsEntities DbContext
+		protected override AllDealsEntities ObjectContext
 		{
 			get
 			{
@@ -28,11 +26,12 @@ namespace NecroNetToolkit.Web.Model
 		}
 	}
 
-	// Type Name : ActualDeal
+	// Entity Set : ActualDeals | Type Name : ActualDeal
 	public partial interface IActualDealRepository : IRepository<ActualDeal>
 	{
 	}
 	
+	[EntitySetName("ActualDeals")]
 	public partial class ActualDealRepository : AllDealsEntitiesRepositoryBase<ActualDeal>, IActualDealRepository
 	{
 		public ActualDealRepository(IUnitOfWorkManager unitOfWorkManager) : base(unitOfWorkManager)
@@ -40,11 +39,12 @@ namespace NecroNetToolkit.Web.Model
 		}
 	}
 
-	// Type Name : Category
+	// Entity Set : Categories | Type Name : Category
 	public partial interface ICategoryRepository : IRepository<Category>
 	{
 	}
 	
+	[EntitySetName("Categories")]
 	public partial class CategoryRepository : AllDealsEntitiesRepositoryBase<Category>, ICategoryRepository
 	{
 		public CategoryRepository(IUnitOfWorkManager unitOfWorkManager) : base(unitOfWorkManager)
@@ -52,11 +52,12 @@ namespace NecroNetToolkit.Web.Model
 		}
 	}
 
-	// Type Name : City
+	// Entity Set : Cities | Type Name : City
 	public partial interface ICityRepository : IRepository<City>
 	{
 	}
 	
+	[EntitySetName("Cities")]
 	public partial class CityRepository : AllDealsEntitiesRepositoryBase<City>, ICityRepository
 	{
 		public CityRepository(IUnitOfWorkManager unitOfWorkManager) : base(unitOfWorkManager)
@@ -64,11 +65,12 @@ namespace NecroNetToolkit.Web.Model
 		}
 	}
 
-	// Type Name : HistoryDeal
+	// Entity Set : HistoryDeals | Type Name : HistoryDeal
 	public partial interface IHistoryDealRepository : IRepository<HistoryDeal>
 	{
 	}
 	
+	[EntitySetName("HistoryDeals")]
 	public partial class HistoryDealRepository : AllDealsEntitiesRepositoryBase<HistoryDeal>, IHistoryDealRepository
 	{
 		public HistoryDealRepository(IUnitOfWorkManager unitOfWorkManager) : base(unitOfWorkManager)
@@ -76,11 +78,12 @@ namespace NecroNetToolkit.Web.Model
 		}
 	}
 
-	// Type Name : Index
+	// Entity Set : Indexes | Type Name : Index
 	public partial interface IIndexRepository : IRepository<Index>
 	{
 	}
 	
+	[EntitySetName("Indexes")]
 	public partial class IndexRepository : AllDealsEntitiesRepositoryBase<Index>, IIndexRepository
 	{
 		public IndexRepository(IUnitOfWorkManager unitOfWorkManager) : base(unitOfWorkManager)
@@ -88,11 +91,12 @@ namespace NecroNetToolkit.Web.Model
 		}
 	}
 
-	// Type Name : Log
+	// Entity Set : Logs | Type Name : Log
 	public partial interface ILogRepository : IRepository<Log>
 	{
 	}
 	
+	[EntitySetName("Logs")]
 	public partial class LogRepository : AllDealsEntitiesRepositoryBase<Log>, ILogRepository
 	{
 		public LogRepository(IUnitOfWorkManager unitOfWorkManager) : base(unitOfWorkManager)
@@ -100,11 +104,12 @@ namespace NecroNetToolkit.Web.Model
 		}
 	}
 
-	// Type Name : MetaCategory
+	// Entity Set : MetaCategories | Type Name : MetaCategory
 	public partial interface IMetaCategoryRepository : IRepository<MetaCategory>
 	{
 	}
 	
+	[EntitySetName("MetaCategories")]
 	public partial class MetaCategoryRepository : AllDealsEntitiesRepositoryBase<MetaCategory>, IMetaCategoryRepository
 	{
 		public MetaCategoryRepository(IUnitOfWorkManager unitOfWorkManager) : base(unitOfWorkManager)
@@ -112,11 +117,12 @@ namespace NecroNetToolkit.Web.Model
 		}
 	}
 
-	// Type Name : Server
+	// Entity Set : Servers | Type Name : Server
 	public partial interface IServerRepository : IRepository<Server>
 	{
 	}
 	
+	[EntitySetName("Servers")]
 	public partial class ServerRepository : AllDealsEntitiesRepositoryBase<Server>, IServerRepository
 	{
 		public ServerRepository(IUnitOfWorkManager unitOfWorkManager) : base(unitOfWorkManager)
@@ -124,11 +130,12 @@ namespace NecroNetToolkit.Web.Model
 		}
 	}
 
-	// Type Name : State
+	// Entity Set : States | Type Name : State
 	public partial interface IStateRepository : IRepository<State>
 	{
 	}
 	
+	[EntitySetName("States")]
 	public partial class StateRepository : AllDealsEntitiesRepositoryBase<State>, IStateRepository
 	{
 		public StateRepository(IUnitOfWorkManager unitOfWorkManager) : base(unitOfWorkManager)
@@ -136,17 +143,19 @@ namespace NecroNetToolkit.Web.Model
 		}
 	}
 
-	// Type Name : sysdiagram
+	// Entity Set : sysdiagrams | Type Name : sysdiagram
 	public partial interface IsysdiagramRepository : IRepository<sysdiagram>
 	{
 	}
 	
+	[EntitySetName("sysdiagrams")]
 	public partial class sysdiagramRepository : AllDealsEntitiesRepositoryBase<sysdiagram>, IsysdiagramRepository
 	{
 		public sysdiagramRepository(IUnitOfWorkManager unitOfWorkManager) : base(unitOfWorkManager)
 		{
 		}
 	}
+
 
 	// Dependency injection configuration
 	public class TestNinjectModule : global::Ninject.Modules.NinjectModule

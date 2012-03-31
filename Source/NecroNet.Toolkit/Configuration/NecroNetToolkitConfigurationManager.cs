@@ -28,7 +28,14 @@ namespace NecroNet.Toolkit.Configuration
 				return defaultValue;
 			}
 
-			return optionGetter(Configuration);
+			var value = optionGetter(Configuration);
+
+			if(value == null)
+			{
+				return defaultValue;
+			}
+
+			return value;
 		}
 	}
 }
