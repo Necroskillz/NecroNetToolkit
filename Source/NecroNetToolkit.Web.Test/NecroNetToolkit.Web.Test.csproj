@@ -82,6 +82,7 @@
     <Compile Include="Blades\ApplicationBlade.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Filters\UnitOfWorkAttribute.cs" />
     <Compile Include="Models\x.cs" />
     <Compile Include="Registration\FilterRegistry.cs" />

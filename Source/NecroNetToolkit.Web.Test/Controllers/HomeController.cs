@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
+using NecroNet.Toolkit;
 using NecroNet.Toolkit.Data;
 using NecroNetToolkit.Web.Model;
 
@@ -24,8 +26,14 @@ namespace NecroNetToolkit.Web.Test.Controllers
 
 		public ActionResult Index()
 		{
-			var city = _cityRepository.Get(c => c.ID == 1);
-			var city1 = _cityRepository.Get(c => c.ID == 1);
+			var city = _cityRepository.GetQueryable().FirstOrDefault(c => c.ID == 1);
+			return View();
+		}
+
+		[HttpPost]
+		public ActionResult Index(IndexViewModel model, int id, object bleh)
+		{
+			
 
 			return View();
 		}

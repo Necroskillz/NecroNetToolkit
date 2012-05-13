@@ -2,7 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>NecroNetToolkit</id>
+<<<<<<< HEAD:NuGet/Core/NecroNetToolkit.nuspec
     <version>1.0.0-beta1</version>
+=======
+    <version>0.2.5.5</version>
+
+>>>>>>> 8fbfe89a8a4b7297f59cc4e82f4a98973f0c64a2:NuGet/NecroNetToolkit.nuspec
     <authors>Necros</authors>
     <owners>Necros</owners>
     <licenseUrl>http://creativecommons.org/licenses/by/3.0/</licenseUrl>
