@@ -165,4 +165,13 @@
   <data name="ExceptionMessage_UnitOfWork_StartSecondAtTheSameTime" xml:space="preserve">
     <value>You cannot start more than one unit of work of the same type at the same time.</value>
   </data>
+	<data name="UnitOfWork_NoDbContextForEntity">
+		<value xml:space="preserve">Couldn't find DbContext type for this entity type.</value>
+	</data>
+	<data name="EntityToContextNavigator_TypeIsNotIEntityToContextMap">
+		<value xml:space="preserve">The type does not implement IEntityToContextMap</value>
+	</data>
+	<data name="DbContextBuilder_TypeIsNotIDbContextFactory">
+		<value xml:space="preserve">The type does not implement IDbContextFactory</value>
+	</data>
 </root>

@@ -95,9 +95,9 @@
     <Compile Include="UtilityTests\StringExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NecroNet.Toolkit\NecroNet.Toolkit.csproj">
+    <ProjectReference Include="..\NecroNet.Toolkit\NecroNet.Toolkit.Core.csproj">
       <Project>{8F3540C7-8881-42A4-AE8C-83AFD12647E7}</Project>
-      <Name>NecroNet.Toolkit</Name>
+      <Name>NecroNet.Toolkit.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
