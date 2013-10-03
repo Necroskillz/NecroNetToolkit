@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NecroNet.Toolkit.WebTest", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NecroNet.Toolkit.Web", "NecroNet.Toolkit.Web\NecroNet.Toolkit.Web.csproj", "{5B08854F-D264-4913-9C4B-4E0C76DC370D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NecroNet.Toolkit.SelectListManager", "NecroNet.Toolkit.SelectListManager\NecroNet.Toolkit.SelectListManager.csproj", "{2386C532-9032-4C71-AF94-1451D45944FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,16 @@ Global
 		{5B08854F-D264-4913-9C4B-4E0C76DC370D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5B08854F-D264-4913-9C4B-4E0C76DC370D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5B08854F-D264-4913-9C4B-4E0C76DC370D}.Release|x86.ActiveCfg = Release|Any CPU
+		{2386C532-9032-4C71-AF94-1451D45944FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2386C532-9032-4C71-AF94-1451D45944FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2386C532-9032-4C71-AF94-1451D45944FD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2386C532-9032-4C71-AF94-1451D45944FD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2386C532-9032-4C71-AF94-1451D45944FD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2386C532-9032-4C71-AF94-1451D45944FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2386C532-9032-4C71-AF94-1451D45944FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2386C532-9032-4C71-AF94-1451D45944FD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2386C532-9032-4C71-AF94-1451D45944FD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2386C532-9032-4C71-AF94-1451D45944FD}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

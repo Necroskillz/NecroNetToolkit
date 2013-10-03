@@ -110,6 +110,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.3\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
@@ -123,11 +126,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SelectListManagerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\SelectListDataProvider.cs" />
     <Compile Include="Models\TestContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -227,6 +232,10 @@
     <ProjectReference Include="..\NecroNet.Toolkit.Entity\NecroNet.Toolkit.Entity.csproj">
       <Project>{e2b58d4b-7149-4c16-b02b-c8e09b135cc8}</Project>
       <Name>NecroNet.Toolkit.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NecroNet.Toolkit.SelectListManager\NecroNet.Toolkit.SelectListManager.csproj">
+      <Project>{2386C532-9032-4C71-AF94-1451D45944FD}</Project>
+      <Name>NecroNet.Toolkit.SelectListManager</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

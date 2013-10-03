@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using NecroNet.Toolkit.Entity;
+using NecroNet.Toolkit.Mvc;
 using NecroNet.Toolkit.WebTest.Models;
 
 namespace NecroNet.Toolkit.WebTest.Controllers
@@ -14,9 +15,10 @@ namespace NecroNet.Toolkit.WebTest.Controllers
 		{
 			using (var uow = new UnitOfWork())
 			{
-				uow.GetRepository<Test1>().Get(1);
+				ISelectListManager s = new SelectListManager();
+				var items = s.GetItems<Test1>();
 
-				uow.Save();
+				items.Select(x => x);
 			}
 			return View();
 		}

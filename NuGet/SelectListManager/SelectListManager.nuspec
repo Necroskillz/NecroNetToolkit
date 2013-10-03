@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>SelectListManager</id>
+    <version>2.0.0</version>
+    <authors>Necros</authors>
+    <owners>Necros</owners>
+    <licenseUrl>http://creativecommons.org/licenses/by/3.0/</licenseUrl>
+    <projectUrl>https://github.com/Necroskillz/NecroNetToolkit</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Helper library used to easily manage select lists in ASP.NET MVC. Supports caching, ordering, filtering, empty first line, choosing text and value and various optimalizations. Works with any data access method that uses POCOs.</description>
+    <tags>ASP.NET MVC MVC4 SelectList</tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+</package>
